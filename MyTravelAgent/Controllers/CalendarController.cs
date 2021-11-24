@@ -15,7 +15,7 @@ namespace MyTravelAgent.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
-       // List<Order> ordersList = new List<Order>;
+       
         IOrderBL orderBL;
         // GET: api/<EventsController>
         public EventsController(IOrderBL orderBL)
