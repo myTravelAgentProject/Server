@@ -10,12 +10,18 @@ using System.Threading.Tasks;
 
 namespace MyTravelAgent.Controllers
 {
-    IOrderBL orderBl;
+    
     [Route("api/[controller]")]
     [ApiController]
     public class EventsController : ControllerBase
     {
+       // List<Order> ordersList = new List<Order>;
+        IOrderBL orderBL;
         // GET: api/<EventsController>
+        public EventsController(IOrderBL orderBL)
+        {
+            this.orderBL = orderBL;
+        }
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -29,18 +35,18 @@ namespace MyTravelAgent.Controllers
             DateTime beginingOfMonth = new DateTime(year, month, 01);
             int days = DateTime.DaysInMonth(year, month);
             DateTime endOfMonth = new DateTime(year,month,days);
-            return await null;
+            return await orderBL.getEventsForCalender(beginingOfMonth, endOfMonth);
         }
 
         //all events in week
-        [HttpGet("{date}")]
-        public List<Order> Get(DateTime date)
-        {
-            DateTime beginingOfMonth = new DateTime(year, month, 01);
-            int days = DateTime.DaysInMonth(year, month);
-            DateTime endOfMonth = new DateTime(year, month, days);
-            return null;
-        }
+        //[HttpGet("{date}")]
+        //public List<Order> Get(DateTime date)
+        //{
+        //    DateTime beginingOfMonth = new DateTime(year, month, 01);
+        //    int days = DateTime.DaysInMonth(year, month);
+        //    DateTime endOfMonth = new DateTime(year, month, days);
+        //    return null;
+        //}
 
         // POST api/<EventsController>
         [HttpPost]
