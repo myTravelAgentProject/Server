@@ -17,11 +17,12 @@ namespace MyTravelAgent.Controllers
     {
        
         IOrderBL orderBL;
-        // GET: api/<EventsController>
         public EventsController(IOrderBL orderBL)
         {
             this.orderBL = orderBL;
         }
+
+        // GET: api/<EventsController>
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -30,7 +31,7 @@ namespace MyTravelAgent.Controllers
 
         // all events in month
         [HttpGet("{year/month}")]
-        public async Task< List<Order> >Get(int year, int month)
+        public async Task<List<Order>>Get(int year, int month)
         {
             DateTime beginingOfMonth = new DateTime(year, month, 01);
             int days = DateTime.DaysInMonth(year, month);
@@ -39,14 +40,14 @@ namespace MyTravelAgent.Controllers
         }
 
         //all events in week
-        //[HttpGet("{date}")]
-        //public List<Order> Get(DateTime date)
-        //{
-        //    DateTime beginingOfMonth = new DateTime(year, month, 01);
-        //    int days = DateTime.DaysInMonth(year, month);
-        //    DateTime endOfMonth = new DateTime(year, month, days);
-        //    return null;
-        //}
+        [HttpGet("{date}")]
+        public async Task<List<Order>> Get(DateTime date)
+        {
+            int dayOfWeek = (int)date.DayOfWeek;
+            DateTime beginingOfWeek = date.AddDays(-dayOfWeek+1);
+            DateTime endOfWeek = beginingOfWeek.AddDays(6);
+            return await orderBL.getEventsForCalender(beginingOfWeek, endOfWeek);
+        }
 
         // POST api/<EventsController>
         [HttpPost]
