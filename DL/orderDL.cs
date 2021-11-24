@@ -9,7 +9,9 @@ namespace DL
     {
         public async Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate)
         {
-            throw new NotImplementedException();
+            List<Order> eventsForCalender = new List<Order>();
+           
+            return eventsForCalender;
         }
     }
 }
