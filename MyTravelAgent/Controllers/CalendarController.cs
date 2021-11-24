@@ -1,4 +1,5 @@
-﻿using Entity;
+﻿using BL;
+using Entity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyTravelAgent.Controllers
 {
+    IOrderBL orderBl;
     [Route("api/[controller]")]
     [ApiController]
     public class EventsController : ControllerBase
@@ -22,12 +24,12 @@ namespace MyTravelAgent.Controllers
 
         // all events in month
         [HttpGet("{year/month}")]
-        public List<Order> Get(int year, int month)
+        public async Task< List<Order> >Get(int year, int month)
         {
             DateTime beginingOfMonth = new DateTime(year, month, 01);
             int days = DateTime.DaysInMonth(year, month);
             DateTime endOfMonth = new DateTime(year,month,days);
-            return null;
+            return await null;
         }
 
         //all events in week
