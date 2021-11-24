@@ -9,6 +9,6 @@ namespace BL
 {
    public interface IOrderBL
     {
-        public Task<List<Order>> getEventsForCalendar(DateTime startDate, DateTime endDate);
+        public Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate);
     }
 }
