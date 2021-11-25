@@ -31,6 +31,7 @@ namespace MyTravelAgent
         {
             services.AddScoped<IOrderBL, orderBL>();
             services.AddScoped<IOrderDL, orderDL>();
+       
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -57,10 +58,10 @@ namespace MyTravelAgent
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
         }
     }
 }
