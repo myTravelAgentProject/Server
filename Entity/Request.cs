@@ -7,7 +7,7 @@ namespace Entity
 {
     public partial class Request
     {
-        public int RequestId { get; set; }
+        public int Id { get; set; }
         public int CustomerId { get; set; }
         public int? Price { get; set; }
         public string Area { get; set; }
