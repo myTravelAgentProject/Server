@@ -17,7 +17,10 @@ namespace DL
         }
 
         public async Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate)
-        {
+        { 
+        //    List<Order> OrdersForCalendar = from o in Order
+        //                                    where o.CheckInDate  between startDate and endDate
+        //                                    select *;
             return await myTravelAgentContext.Orders.Where(order => order.CheckInDate >= startDate && order.CheckInDate <= endDate).ToListAsync();
         }
     }

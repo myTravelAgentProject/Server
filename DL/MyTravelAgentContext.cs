@@ -168,7 +168,7 @@ namespace DL
 
             modelBuilder.Entity<Order>(entity =>
             {
-                entity.Property(e => e.OrderId).HasColumnName("ORDER_ID");
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.BookingDate)
                     .HasColumnType("datetime")
@@ -233,7 +233,7 @@ namespace DL
 
             modelBuilder.Entity<Request>(entity =>
             {
-                entity.Property(e => e.RequestId).HasColumnName("REQUEST_ID");
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Area)
                     .HasMaxLength(50)
