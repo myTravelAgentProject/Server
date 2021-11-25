@@ -31,6 +31,7 @@ namespace MyTravelAgent
         {
             services.AddScoped<IOrderBL, orderBL>();
             services.AddScoped<IOrderDL, orderDL>();
+       
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

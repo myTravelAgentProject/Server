@@ -24,13 +24,13 @@ namespace MyTravelAgent.Controllers
 
         // GET: api/<EventsController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public void Get()
         {
-            return new string[] { "value1", "value2" };
+            Console.WriteLine("hi");
         }
 
         // all events in month
-        [HttpGet("{year/month}")]
+        [HttpGet("{year}/{month}")]
         public async Task<List<Order>>Get(int year, int month)
         {
             DateTime beginingOfMonth = new DateTime(year, month, 01);
