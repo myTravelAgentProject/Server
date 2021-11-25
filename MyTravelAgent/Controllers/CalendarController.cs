@@ -31,7 +31,7 @@ namespace MyTravelAgent.Controllers
 
         // all events in month
         [HttpGet("{year}/{month}")]
-        public async Task<List<Order>>Get(int year, int month)
+        public async Task<List<OrderForCalendar>> Get(int year, int month)
         {
             DateTime beginingOfMonth = new DateTime(year, month, 01);
             int days = DateTime.DaysInMonth(year, month);
@@ -41,7 +41,7 @@ namespace MyTravelAgent.Controllers
 
         //all events in week
         [HttpGet("{date}")]
-        public async Task<List<Order>> Get(DateTime date)
+        public async Task<List<OrderForCalendar>> Get(DateTime date)
         {
             int dayOfWeek = (int)date.DayOfWeek;
             DateTime beginingOfWeek = date.AddDays(-dayOfWeek+1);

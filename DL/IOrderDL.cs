@@ -9,7 +9,7 @@ namespace DL
 {
     public interface IOrderDL
     {
-           public Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate);
+           public Task<List<OrderForCalendar>> getEventsForCalender(DateTime startDate, DateTime endDate);
        
     }
 }

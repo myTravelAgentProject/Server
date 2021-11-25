@@ -16,10 +16,34 @@ namespace DL
             this.myTravelAgentContext = myTravelAgentContext;
         }
 
-        public async Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate)
-        { 
-            return await myTravelAgentContext.Orders
-                .Where(order => order.CheckInDate >= startDate && order.CheckInDate <= endDate).ToListAsync();
+        public async Task<List<OrderForCalendar>> getEventsForCalender(DateTime startDate, DateTime endDate)
+        {
+            List<OrderForCalendar> ordersToShow = new List<OrderForCalendar>();
+            var orderListToShow = await myTravelAgentContext.Orders.Join(myTravelAgentContext.Customers, order => order.CustomerId, customer => customer.Id, (order, customer) => new {
+                order.Id,customer.FirstName,customer.LastName,order.HotelId,order.CheckInDate,
+                order.CheckOutDate,order.EarlyCheckIn,order.LateCheckOut })
+                .Join(myTravelAgentContext.Hotels, newOrder => newOrder.HotelId, hotel => hotel.Id, (newOrder, hotel) => new {
+                newOrder.Id,newOrder.FirstName,newOrder.LastName,hotel.Name,newOrder.CheckInDate,newOrder.CheckOutDate,newOrder.EarlyCheckIn,newOrder.LateCheckOut})
+                            .Where(order => order.CheckInDate >= startDate && order.CheckInDate <= endDate)
+                            .ToListAsync();
+
+            orderListToShow.ForEach(order =>
+            {
+                OrderForCalendar ofc = new OrderForCalendar {
+                
+                orderId = order.Id,
+                customerName = order.FirstName + " " + order.LastName,
+                hotelName = order.Name,
+                checkInDate = order.CheckInDate,
+                checkOutDate = order.CheckOutDate,
+                earlyCheckIn = order.EarlyCheckIn,
+                lateCheckOut = order.LateCheckOut
+            };
+                ordersToShow.Add(ofc);
+            });
+            return  ordersToShow;
+            //return await myTravelAgentContext.Orders
+            //    .Where(order => order.CheckInDate >= startDate && order.CheckInDate <= endDate).ToListAsync();
         }
     }
 }

@@ -14,16 +14,8 @@ namespace BL
             this.orderDL = orderDL;
         }
 
-     public async  Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate)
-        {
-            List<Order> orders = await orderDL.getEventsForCalender(startDate, endDate);
-            List<OrderForCalendar> ordersToShow = new List<OrderForCalendar>();
-            orders.ForEach(order =>
-            {
-               
-
-            });
-            
+     public async  Task<List<OrderForCalendar>> getEventsForCalender(DateTime startDate, DateTime endDate)
+        {             
             return await orderDL.getEventsForCalender(startDate, endDate);
         }
     }
