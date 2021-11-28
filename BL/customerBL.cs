@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    class customerBL : ICustomerBL
+    public class customerBL : ICustomerBL
     {
         ICustomerDL customerDL;
         public customerBL(ICustomerDL customerDL)

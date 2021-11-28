@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace DL
 {
-    class customerDL: ICustomerDL
+    public class customerDL: ICustomerDL
     {
         public async Task<List<Customer>> getAllCustomers()
         {
-
-            return await ;
+            return null;
         }
     }
 }

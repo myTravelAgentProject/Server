@@ -15,7 +15,7 @@ namespace MyTravelAgent.Controllers
     public class CustomerController : ControllerBase
     {
         ICustomerBL customerBL;
-        public EventsController(ICustomerBL customerBL)
+        public CustomerController(ICustomerBL customerBL)
         {
             this.customerBL = customerBL;
         }

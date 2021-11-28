@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    interface ICustomerBL
+    public interface ICustomerBL
     {
-        public async Task<List<Customer>> getAllCustomers();
+        public Task<List<Customer>> getAllCustomers();
         
     }
 }

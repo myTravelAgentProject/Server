@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace DL
 {
-    interface ICustomerDL
+    public interface ICustomerDL
     {
-        public async Task<List<Customer>> getAllCustomers();
+        public Task<List<Customer>> getAllCustomers();
     }
 }
