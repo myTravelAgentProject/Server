@@ -27,6 +27,15 @@ namespace DL
                             .Where(order => order.CheckInDate >= startDate && order.CheckInDate <= endDate)
                             .ToListAsync();
 
+            var orderListToShow1 = (from o in myTravelAgentContext.Orders
+                                    join c in myTravelAgentContext.Customers on o.CustomerId equals c.Id
+                                    //  join h in myTravelAgentContext.Hotels on o.HotelId equals h.Id
+                                    where o.CheckInDate >= startDate && o.CheckInDate <= endDate
+                                    select new OrderForCalendar {
+                                        //hotelName=h.Name
+                                        hotelName = o.Hotel.Name
+                                    }).ToList();
+
             orderListToShow.ForEach(order =>
             {
                 OrderForCalendar ofc = new OrderForCalendar {

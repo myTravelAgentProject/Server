@@ -48,13 +48,12 @@ namespace DL
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(10)
-                    .HasColumnName("NAME")
-                    .IsFixedLength(true);
+                    .HasMaxLength(50)
+                    .HasColumnName("NAME");
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasMaxLength(10)
+                    .HasMaxLength(15)
                     .HasColumnName("PASSWORD")
                     .IsFixedLength(true);
             });
@@ -64,28 +63,24 @@ namespace DL
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Address)
-                    .HasMaxLength(10)
-                    .HasColumnName("ADDRESS")
-                    .IsFixedLength(true);
+                    .HasMaxLength(50)
+                    .HasColumnName("ADDRESS");
 
                 entity.Property(e => e.EmailAddress)
-                    .HasMaxLength(10)
-                    .HasColumnName("EMAIL_ADDRESS")
-                    .IsFixedLength(true);
+                    .HasMaxLength(50)
+                    .HasColumnName("EMAIL_ADDRESS");
 
                 entity.Property(e => e.FirstName)
                     .IsRequired()
-                    .HasMaxLength(10)
-                    .HasColumnName("FIRST_NAME")
-                    .IsFixedLength(true);
+                    .HasMaxLength(50)
+                    .HasColumnName("FIRST_NAME");
 
                 entity.Property(e => e.HighFloor).HasColumnName("HIGH_FLOOR");
 
                 entity.Property(e => e.LastName)
                     .IsRequired()
-                    .HasMaxLength(10)
-                    .HasColumnName("LAST_NAME")
-                    .IsFixedLength(true);
+                    .HasMaxLength(50)
+                    .HasColumnName("LAST_NAME");
 
                 entity.Property(e => e.MultipleRooms).HasColumnName("MULTIPLE_ROOMS");
 
@@ -129,20 +124,17 @@ namespace DL
 
                 entity.Property(e => e.Address)
                     .IsRequired()
-                    .HasMaxLength(10)
-                    .HasColumnName("ADDRESS")
-                    .IsFixedLength(true);
+                    .HasMaxLength(50)
+                    .HasColumnName("ADDRESS");
 
                 entity.Property(e => e.EmailAddress)
-                    .HasMaxLength(10)
-                    .HasColumnName("EMAIL_ADDRESS")
-                    .IsFixedLength(true);
+                    .HasMaxLength(50)
+                    .HasColumnName("EMAIL_ADDRESS");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(10)
-                    .HasColumnName("NAME")
-                    .IsFixedLength(true);
+                    .HasMaxLength(50)
+                    .HasColumnName("NAME");
             });
 
             modelBuilder.Entity<Message>(entity =>
