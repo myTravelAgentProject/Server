@@ -10,25 +10,25 @@ namespace DL
 {
     public class orderDL : IOrderDL
     {
-        MyTravelAgentContext myTravelAgentContext;
-        public orderDL(MyTravelAgentContext myTravelAgentContext)
+        MyTravelAgentDBContext myTravelAgentDBContext;
+        public orderDL(MyTravelAgentDBContext myTravelAgentDBContext)
         {
-            this.myTravelAgentContext = myTravelAgentContext;
+            this.myTravelAgentDBContext = myTravelAgentDBContext;
         }
 
         public async Task<List<OrderForCalendar>> getEventsForCalender(DateTime startDate, DateTime endDate)
         {
             List<OrderForCalendar> ordersToShow = new List<OrderForCalendar>();
-            var orderListToShow = await myTravelAgentContext.Orders.Join(myTravelAgentContext.Customers, order => order.CustomerId, customer => customer.Id, (order, customer) => new {
+            var orderListToShow = await myTravelAgentDBContext.Orders.Join(myTravelAgentDBContext.Customers, order => order.CustomerId, customer => customer.Id, (order, customer) => new {
                 order.Id,customer.FirstName,customer.LastName,order.HotelId,order.CheckInDate,
                 order.CheckOutDate,order.EarlyCheckIn,order.LateCheckOut })
-                .Join(myTravelAgentContext.Hotels, newOrder => newOrder.HotelId, hotel => hotel.Id, (newOrder, hotel) => new {
+                .Join(myTravelAgentDBContext.Hotels, newOrder => newOrder.HotelId, hotel => hotel.Id, (newOrder, hotel) => new {
                 newOrder.Id,newOrder.FirstName,newOrder.LastName,hotel.Name,newOrder.CheckInDate,newOrder.CheckOutDate,newOrder.EarlyCheckIn,newOrder.LateCheckOut})
                             .Where(order => order.CheckInDate >= startDate && order.CheckInDate <= endDate)
                             .ToListAsync();
 
-            var orderListToShow1 = (from o in myTravelAgentContext.Orders
-                                    join c in myTravelAgentContext.Customers on o.CustomerId equals c.Id
+            var orderListToShow1 = (from o in myTravelAgentDBContext.Orders
+                                    join c in myTravelAgentDBContext.Customers on o.CustomerId equals c.Id
                                     //  join h in myTravelAgentContext.Hotels on o.HotelId equals h.Id
                                     where o.CheckInDate >= startDate && o.CheckInDate <= endDate
                                     select new OrderForCalendar {

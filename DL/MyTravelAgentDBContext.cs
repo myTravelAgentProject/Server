@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace DL
 {
-    public partial class MyTravelAgentContext : DbContext
+    public partial class MyTravelAgentDBContext : DbContext
     {
-        public MyTravelAgentContext()
+        public MyTravelAgentDBContext()
         {
         }
 
-        public MyTravelAgentContext(DbContextOptions<MyTravelAgentContext> options)
+        public MyTravelAgentDBContext(DbContextOptions<MyTravelAgentDBContext> options)
             : base(options)
         {
         }
@@ -32,7 +32,7 @@ namespace DL
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=srv2\\PUPILS;Database=MyTravelAgent;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-LIH23BI\\SQLEXPRESS;Database=MyTravelAgentDB;Trusted_Connection=True;");
             }
         }
 
@@ -48,12 +48,13 @@ namespace DL
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("NAME");
+                    .HasMaxLength(10)
+                    .HasColumnName("NAME")
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasMaxLength(15)
+                    .HasMaxLength(10)
                     .HasColumnName("PASSWORD")
                     .IsFixedLength(true);
             });
@@ -63,24 +64,28 @@ namespace DL
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Address)
-                    .HasMaxLength(50)
-                    .HasColumnName("ADDRESS");
+                    .HasMaxLength(10)
+                    .HasColumnName("ADDRESS")
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.EmailAddress)
-                    .HasMaxLength(50)
-                    .HasColumnName("EMAIL_ADDRESS");
+                    .HasMaxLength(10)
+                    .HasColumnName("EMAIL_ADDRESS")
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.FirstName)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("FIRST_NAME");
+                    .HasMaxLength(10)
+                    .HasColumnName("FIRST_NAME")
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.HighFloor).HasColumnName("HIGH_FLOOR");
 
                 entity.Property(e => e.LastName)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("LAST_NAME");
+                    .HasMaxLength(10)
+                    .HasColumnName("LAST_NAME")
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.MultipleRooms).HasColumnName("MULTIPLE_ROOMS");
 
@@ -124,17 +129,20 @@ namespace DL
 
                 entity.Property(e => e.Address)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("ADDRESS");
+                    .HasMaxLength(10)
+                    .HasColumnName("ADDRESS")
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.EmailAddress)
-                    .HasMaxLength(50)
-                    .HasColumnName("EMAIL_ADDRESS");
+                    .HasMaxLength(10)
+                    .HasColumnName("EMAIL_ADDRESS")
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("NAME");
+                    .HasMaxLength(10)
+                    .HasColumnName("NAME")
+                    .IsFixedLength(true);
             });
 
             modelBuilder.Entity<Message>(entity =>

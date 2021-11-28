@@ -35,10 +35,10 @@ namespace MyTravelAgent
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyTravelAgent", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyTravelAgentDB", Version = "v1" });
             });
-            services.AddDbContext<MyTravelAgentContext>(options => options.UseSqlServer(
-               "Server=srv2\\pupils;Database=MyTravelAgent;Trusted_Connection=True;"), ServiceLifetime.Scoped);
+            services.AddDbContext<MyTravelAgentDBContext>(options => options.UseSqlServer(
+               "Server=DESKTOP-LIH23BI\\SQLEXPRESS;Database=MyTravelAgentDB;Trusted_Connection=True;"), ServiceLifetime.Scoped);
 
         }
 

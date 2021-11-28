@@ -10,7 +10,7 @@ namespace Entity
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public string Name { get; set; }
-        public double Age { get; set; }
+        public int Age { get; set; }
 
         public virtual Customer Customer { get; set; }
     }
