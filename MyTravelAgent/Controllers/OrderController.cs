@@ -73,7 +73,7 @@ namespace MyTravelAgent.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-
+            orderBL.deleteOrder(id);
         }
     }
 }

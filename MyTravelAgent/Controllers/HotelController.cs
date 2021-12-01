@@ -27,18 +27,18 @@ namespace MyTravelAgent.Controllers
         }
 
         // GET api/<HotelController>/5
-        [HttpGet("{name}")]
-        public string Get(string name)
-        {
-            return "value";
-        }
+        //[HttpGet("{name}")]
+        //public async Task<List<Hotel>> Get(string name)
+        //{
+        //    return await hotelBL.getHotelByName();
+        //}
 
         //POST api/<HotelController>
-        //[HttpPost]
-        //public async Task<int> Post([FromBody] Hotel newHotel)
-        //{
-        //    return await hotelBL.addNewHotel(newHotel);
-        //}
+        [HttpPost]
+        public async Task<int> Post([FromBody] Hotel newHotel)
+        {
+            return await hotelBL.addNewHotel(newHotel);
+        }
 
         // PUT api/<HotelController>/5
         [HttpPut("{id}")]

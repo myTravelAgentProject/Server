@@ -10,14 +10,14 @@ namespace BL
 {
    public class HotelBL:IHotelBL
     {
-        //IHotelDL hotelDL;
-        //public HotelBL(IHotelDL hotelDL)
-        //{
-        //    this.hotelDL = hotelDL;
-        //}
-        //public  async Task<int> addNewHotel(Hotel newHotel)
-        //{
-        //    return await hotelDL.addNewHotel(newHotel);
-        //}
+        IHotelDL hotelDL;
+        public HotelBL(IHotelDL hotelDL)
+        {
+            this.hotelDL = hotelDL;
+        }
+        public async Task<int> addNewHotel(Hotel newHotel)
+        {
+            return await hotelDL.addNewHotel(newHotel);
+        }
     }
 }

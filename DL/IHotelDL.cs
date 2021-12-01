@@ -9,6 +9,6 @@ namespace DL
 {
     public interface IHotelDL
     {
-     //public Task<int> addNewHotel(Hotel newHotel);
+        public Task<int> addNewHotel(Hotel newHotel);
     }
 }

@@ -19,6 +19,11 @@ namespace BL
             return await orderDL.addNewOrder(newOrder);
         }
 
+        public void deleteOrder(int id)
+        {
+            orderDL.deleteOrder(id);
+        }
+
         public async Task<List<Order>> getAllChanges()
         {
             return await orderDL.getAllChanges();

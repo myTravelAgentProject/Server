@@ -23,6 +23,14 @@ namespace DL
             return newOrder.Id;
         }
 
+        public void deleteOrder(int id)
+        {
+            Order ordertoDelete = myTravelAgentContext.Orders.Find(id);
+            myTravelAgentContext.Orders.Remove(ordertoDelete);
+            myTravelAgentContext.SaveChanges();
+
+        }
+
         public async Task<List<Order>> getAllChanges()
         {
             return await myTravelAgentContext.Orders.Where(o => o.Change == true).ToListAsync();
