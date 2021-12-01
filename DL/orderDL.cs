@@ -16,27 +16,27 @@ namespace DL
             this.myTravelAgentContext = myTravelAgentContext;
         }
 
-        //public async Task<int> addNewOrder(Order newOrder)
-        //{
-        //    await myTravelAgentContext.Orders.AddAsync(newOrder);
-        //    myTravelAgentContext.SaveChanges();
-        //    return newOrder.Id; 
-        //}
+        public async Task<int> addNewOrder(Order newOrder)
+        {
+            await myTravelAgentContext.Orders.AddAsync(newOrder);
+            myTravelAgentContext.SaveChanges();
+            return newOrder.Id;
+        }
 
-        //public async Task<List<Order>> getAllChanges()
-        //{
-        //    return await myTravelAgentContext.Orders.Where(o=>o.Change==true).ToListAsync();
-        //}
+        public async Task<List<Order>> getAllChanges()
+        {
+            return await myTravelAgentContext.Orders.Where(o => o.Change == true).ToListAsync();
+        }
 
-        //public async Task<List<Order>> getByBookingDate(DateTime bookingDate)
-        //{
-        //    return await myTravelAgentContext.Orders.Where(o=>o.BookingDate==bookingDate).ToListAsync();
-        //}
+        public async Task<List<Order>> getByBookingDate(DateTime bookingDate)
+        {
+            return await myTravelAgentContext.Orders.Where(o => o.BookingDate == bookingDate).ToListAsync();
+        }
 
-        //public async Task<List<Order>> getByCustomerId(int id)
-        //{
-        //    return await myTravelAgentContext.Orders.Where(o=>o.CustomerId==id).ToListAsync();
-        //}
+        public async Task<List<Order>> getByCustomerId(int id)
+        {
+            return await myTravelAgentContext.Orders.Where(o => o.CustomerId == id).ToListAsync();
+        }
 
         public async Task<List<OrderForCalendar>> getEventsForCalender(DateTime startDate, DateTime endDate)
         {

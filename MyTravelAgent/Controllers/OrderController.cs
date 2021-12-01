@@ -20,55 +20,60 @@ namespace MyTravelAgent.Controllers
             this.orderBL = orderBL;       
         }
         //// get all the orders that their price had change
-        //[HttpGet]
-        //public async Task<List<Order>> Get()
-        //{
-        //    return await orderBL.getAllChanges();
-        //}
+        [HttpGet]
+        public async Task<List<Order>> Get()
+        {
+            return await orderBL.getAllChanges();
+        }
 
-        //// GET api/<OrderController>/5
-        //[HttpGet("{id}")]
-        //public async Task<Order> Get(int id)
-        //{
-        //    return await orderBL.getOrderById(id) ;
-        //}
-        ////get by customerId
-        //[HttpGet("{id}")]
-        //[Route("[action]/{id}")]
-        //public async Task<List<Order>> getByCustomerId(int id)
-        //{
-        //    return await orderBL.getByCustomerId(id);
-        //}
-        ////get by bookingDate
-        //[HttpGet("{bookingDate}")]
-        //public async Task<List<Order>> Get(DateTime bookingDate)
-        //{
-        //    return await orderBL.getByBookingDate(bookingDate);
-        //}
+        // GET api/<OrderController>/5
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<Order> getOrderById(int id)
+        {
+            return await orderBL.getOrderById(id);
+        }
+
+        //get by customerId
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<List<Order>> getByCustomerId(int id)
+        {
+            return await orderBL.getByCustomerId(id);
+        }
+
+        //get by bookingDate
+        [HttpGet("{bookingDate}")]
+        public async Task<List<Order>> Get(DateTime bookingDate)
+        {
+            return await orderBL.getByBookingDate(bookingDate);
+        }
 
         ////get between two dates
-        //[HttpGet("{start}/{end}")]
-        //public async Task<List<Order>> Get(DateTime start,DateTime end)
-        //{
-        //    return await orderBL.getOrdetsBetweenDates(start,end);
-        //}
+        [HttpGet("{start}/{end}")]
+        public async Task<List<Order>> Get(DateTime start, DateTime end)
+        {
+            return await orderBL.getOrdetsBetweenDates(start, end);
+        }
+
         //// POST api/<OrderController>
-        //[HttpPost]
-        //public async Task<int> Post([FromBody] Order newOrder)
-        //{
-        //    return await orderBL.addNewOrder(newOrder);
-        //}
+        [HttpPost]
+        public async Task<int> Post([FromBody] Order newOrder)
+        {
+            return await orderBL.addNewOrder(newOrder);
+        }
 
         //// PUT api/<OrderController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
 
         //// DELETE api/<OrderController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+
+        }
     }
 }
