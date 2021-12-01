@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -26,9 +27,12 @@ namespace Entity
         public int? NewPrice { get; set; }
         public bool? Change { get; set; }
         public int HotelId { get; set; }
-
+        public string Comments { get; set; }
+        [JsonIgnore]
         public virtual Customer Customer { get; set; }
+        [JsonIgnore]
         public virtual Hotel Hotel { get; set; }
+        [JsonIgnore]
         public virtual Status StatusCodeNavigation { get; set; }
     }
 }
