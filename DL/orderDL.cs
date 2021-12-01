@@ -16,6 +16,28 @@ namespace DL
             this.myTravelAgentContext = myTravelAgentContext;
         }
 
+        //public async Task<int> addNewOrder(Order newOrder)
+        //{
+        //    await myTravelAgentContext.Orders.AddAsync(newOrder);
+        //    myTravelAgentContext.SaveChanges();
+        //    return newOrder.Id; 
+        //}
+
+        //public async Task<List<Order>> getAllChanges()
+        //{
+        //    return await myTravelAgentContext.Orders.Where(o=>o.Change==true).ToListAsync();
+        //}
+
+        //public async Task<List<Order>> getByBookingDate(DateTime bookingDate)
+        //{
+        //    return await myTravelAgentContext.Orders.Where(o=>o.BookingDate==bookingDate).ToListAsync();
+        //}
+
+        //public async Task<List<Order>> getByCustomerId(int id)
+        //{
+        //    return await myTravelAgentContext.Orders.Where(o=>o.CustomerId==id).ToListAsync();
+        //}
+
         public async Task<List<OrderForCalendar>> getEventsForCalender(DateTime startDate, DateTime endDate)
         {
             List<OrderForCalendar> ordersToShow = new List<OrderForCalendar>();
@@ -42,6 +64,16 @@ namespace DL
 
            
             return  ordersToShow;
+        }
+
+        public async Task<Order> getOrderById(int id)
+        {
+            return await myTravelAgentContext.Orders.FindAsync(id);
+        }
+
+        public async Task<List<Order>> getOrdetsBetweenDates(DateTime start, DateTime end)
+        {
+            return await myTravelAgentContext.Orders.Where(o => o.CheckInDate > start && o.CheckInDate < end).ToListAsync();
         }
     }
 }

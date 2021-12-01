@@ -34,11 +34,11 @@ namespace MyTravelAgent.Controllers
         }
 
         //POST api/<HotelController>
-        [HttpPost]
-        public async Task<int> Post([FromBody] Hotel newHotel)
-        {
-            return await hotelBL.addNewHotel(newHotel);
-        }
+        //[HttpPost]
+        //public async Task<int> Post([FromBody] Hotel newHotel)
+        //{
+        //    return await hotelBL.addNewHotel(newHotel);
+        //}
 
         // PUT api/<HotelController>/5
         [HttpPut("{id}")]
