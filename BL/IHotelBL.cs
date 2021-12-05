@@ -10,5 +10,6 @@ namespace BL
     public interface IHotelBL
     {
         public Task<int> addNewHotel(Hotel newHotel);
+        public Task<List<Hotel>> GetHotelsList();
     }
 }

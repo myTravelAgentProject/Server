@@ -20,8 +20,8 @@ namespace MyTravelAgent.Controllers
             this.orderBL = orderBL;       
         }
         //// get all the orders that their price had change
-        [HttpGet]
-        public async Task<List<Order>> Get()
+        [HttpGet ("GetChangePriceOrders")]
+        public async Task<List<Order>> GetChangePriceOrders()
         {
             return await orderBL.getAllChanges();
         }

@@ -21,17 +21,10 @@ namespace MyTravelAgent.Controllers
         }
         // GET: api/<HotelController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IList<Hotel>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await hotelBL.GetHotelsList();
         }
-
-        // GET api/<HotelController>/5
-        //[HttpGet("{name}")]
-        //public async Task<List<Hotel>> Get(string name)
-        //{
-        //    return await hotelBL.getHotelByName();
-        //}
 
         //POST api/<HotelController>
         [HttpPost]

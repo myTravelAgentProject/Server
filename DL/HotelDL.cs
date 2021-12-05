@@ -20,5 +20,10 @@ namespace DL
             myContext.SaveChanges();
             return newHotel.Id;
         }
+
+        public async Task<List<Hotel>> GetHotelsList()
+        {
+            return myContext.Hotels.ToList();
+        }
     }
 }
