@@ -17,5 +17,6 @@ namespace BL
          public Task<List<Order>> getAllChanges();
         public Task<List<Order>> getOrdetsBetweenDates(DateTime start, DateTime end);
         public void deleteOrder(int id);
+        public Task<List<Order>> getOrsersToCheck(DateTime today);
     }
 }

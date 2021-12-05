@@ -226,6 +226,8 @@ namespace DL
 
                 entity.Property(e => e.HotelId).HasColumnName("HOTEL_ID");
 
+                entity.Property(e => e.IsImportant).HasColumnName("IS_IMPORTANT");
+
                 entity.Property(e => e.LateCheckOut).HasColumnName("LATE_CHECK_OUT");
 
                 entity.Property(e => e.MultipleRooms).HasColumnName("MULTIPLE_ROOMS");

@@ -27,6 +27,7 @@ namespace Entity
         public string SwimmingPool { get; set; }
         public string Url { get; set; }
         public string WiFi { get; set; }
+
         [JsonIgnore]
         public virtual ICollection<Order> Orders { get; set; }
     }

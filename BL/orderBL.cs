@@ -29,6 +29,11 @@ namespace BL
             return await orderDL.getAllChanges();
         }
 
+        public async Task<List<Order>> getOrsersToCheck(DateTime today)
+        {
+            return await orderDL.getOrsersToCheck(today);
+        }
+
         public async Task<List<Order>> getByBookingDate(DateTime bookingDate)
         {
             return await orderDL.getByBookingDate(bookingDate);

@@ -37,6 +37,7 @@ namespace MyTravelAgent
             services.AddScoped<IAlertDL,AlertDL>();
             services.AddScoped<IHotelBL, HotelBL>();
             services.AddScoped<IHotelDL, HotelDL>();
+            services.AddScoped<IBookingBL, BookingBL>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

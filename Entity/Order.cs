@@ -28,6 +28,7 @@ namespace Entity
         public bool? Change { get; set; }
         public int HotelId { get; set; }
         public string Comments { get; set; }
+        public bool? IsImportant { get; set; }
         [JsonIgnore]
         public virtual Customer Customer { get; set; }
         [JsonIgnore]
