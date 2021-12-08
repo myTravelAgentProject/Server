@@ -16,6 +16,13 @@ namespace BL
         {
             this.orderBL = orderBL;
         }
+
+        /*(updateOrders) first gets from orderBL all the alerts within two monthes and the importence alerts
+        then, run on the list and for each order:
+            gets from booking.com the up to date price,
+            compare the price with the old price (booking price while booked)
+            and if the new price is cheeper,
+        through orderBL - saves in the orders table the new price and update the feild 'change' of the order*/
         public async Task updateOrders()
         {
             ordersToCheck=await orderBL.getOrsersToCheck(DateTime.Now);

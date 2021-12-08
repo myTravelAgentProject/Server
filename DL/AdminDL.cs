@@ -16,6 +16,16 @@ namespace DL
             this.myContext = myContext;
         }
 
+        /*(get) looks for a admin that his email and password maches to the variables
+        rerurns the object or null*/
+        public async Task<Admin> login(string name, string password)
+        {
+            return await myContext.Admins.SingleOrDefaultAsync(a => a.Name == name && a.Password == password);
+        }
+
+        /*(post) add the new admin to the admin table
+        then, save the changes
+        and return its id (the id accepted from the datebase after insert)*/
         public async Task<int> addNewAdmin(Admin adminToAdd)
         {
             await myContext.Admins.AddAsync(adminToAdd);
@@ -23,11 +33,9 @@ namespace DL
             return  adminToAdd.Id;
         }
 
-        public async Task<Admin> login(string name, string password)
-        {
-            return await myContext.Admins.SingleOrDefaultAsync(a => a.Name == name && a.Password == password);
-        }
-
+        /*(put) finds the admin we want to change,
+          then replace it with the new admin (the object after changes)
+         save the changes*/
         public async Task updateAdmin(int id, Admin adminToUpdate)
         {
             Admin admin = await myContext.Admins.FindAsync(id);

@@ -19,36 +19,14 @@ namespace MyTravelAgent.Controllers
         {
             this.BookingBL = BookingBL;
         }
-        // GET: api/<BookingController>
-        [HttpGet ("updateOrders")]
+
+        /*checks the orders within two months (and the importents orders) if their prices in booking had change
+         then updates the orders with the change*/
+        [HttpGet]
+        [Route("[action]")]
         public  async Task updateOrders()
         {
             await  BookingBL.updateOrders();
         }
-
-        //// GET api/<BookingController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        //// POST api/<BookingController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        //// PUT api/<BookingController>/5
-        //[HttpPut("{id}")]
-        //public async Task Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<BookingController>/5
-        //[HttpDelete("{id}")]
-        //public async Task Delete(int id)
-        //{
-        //}
     }
 }

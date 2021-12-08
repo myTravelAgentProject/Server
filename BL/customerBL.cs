@@ -16,30 +16,34 @@ namespace BL
             this.customerDL = customerDL;
         }
 
-        public async Task<int> addNewCustomer(Customer customerToAdd)
-        {
-            return await customerDL.addNewCustomer(customerToAdd);
-        }
-
-        public async Task deleteCustomer(int id)
-        {
-             await customerDL.deleteCustomer(id);
-        }
-
+        //(get)
         public async Task<List<Customer>> getAllCustomers()
         {
             return await customerDL.getAllCustomers();
         }
 
+        //(get {id})
         public async Task<Customer> getCustomer(int id)
         {
             return await customerDL.getCustomer(id);
         }
 
-        public async Task  updateCustomer(Customer customerToUpdate, int id)
+        //(post)
+        public async Task<int> addNewCustomer(Customer customerToAdd)
         {
-            await customerDL.updateCustomer(customerToUpdate,id);
+            return await customerDL.addNewCustomer(customerToAdd);
         }
 
+        //(put)
+        public async Task updateCustomer(Customer customerToUpdate, int id)
+        {
+            await customerDL.updateCustomer(customerToUpdate, id);
+        }
+
+        //(delete)
+        public async Task deleteCustomer(int id)
+        {
+             await customerDL.deleteCustomer(id);
+        }
     }
 }

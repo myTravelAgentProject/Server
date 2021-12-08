@@ -16,19 +16,22 @@ namespace BL
             this.adminDL = adminDL;
         }
 
+        //(get)
+        public async Task<Admin> login(string name, string password)
+        {
+            return await adminDL.login(name, password);
+        }
+
+        //(post) 
         public async Task<int> addNewAdmin(Admin adminToAdd)
         {
             return await adminDL.addNewAdmin(adminToAdd);
         }
 
-        public async Task<Admin> login(string name, string password)
-        {
-            return await adminDL.login(name,password);
-        }
-
+        //(put)
         public async Task updateAdmin(int id, Admin adminToUpdate)
         {
-            await adminDL.updateAdmin(id,adminToUpdate);
+            await adminDL.updateAdmin(id, adminToUpdate);
         }
     }
 }

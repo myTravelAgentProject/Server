@@ -19,39 +19,26 @@ namespace MyTravelAgent.Controllers
         {
             this.adminBL = adminBL;
         }
-        // GET: api/<AdminController>
+        //checks if has a admin with this email and password
+        //returns the correct admin or null
         [HttpGet("{name}/{password}")]
         public async Task<Admin> Get(string name,string password)
         {
             return await adminBL.login(name, password);
         }
 
-        // GET api/<AdminController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        // POST api/<AdminController>
+        //insert a new admin (can be called only after sign in to the site)
         [HttpPost]
         public async Task<int> Post([FromBody] Admin adminToAdd)
         {
             return await adminBL.addNewAdmin(adminToAdd);
         }
 
-        // PUT api/<AdminController>/5
+        //apdates the details of the current admin (can be only after login)
         [HttpPut("{id}")]
         public async Task Put(int id, [FromBody] Admin adminToUpdate)
         {
             await adminBL.updateAdmin(id,adminToUpdate);
         }
-
-        //// DELETE api/<AdminController>/5
-        //[HttpDelete("{id}")]
-        //public async Task Delete(int id)
-        //{
-            
-        //}
     }
 }

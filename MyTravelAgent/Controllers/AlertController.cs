@@ -20,35 +20,29 @@ namespace MyTravelAgent.Controllers
         {
             this.alertBL = alertBL;
         }
-        // GET: api/<AlertController>
+
+        //returns all the relevants alerts that their date passed
         [HttpGet]
         public async Task<List<Alert>> Get(DateTime today)
         {
             return await alertBL.getRelevantAlerts(today);
         }
 
-        //// GET api/<AlertController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        // POST api/<AlertController>
+        //add new alert
         [HttpPost]
         public async Task<int> Post([FromBody] Alert newAlert)
         {
             return await alertBL.insertAlert(newAlert);
         }
 
-        // PUT api/<AlertController>/5
+        //update the date of the alert according to the id
         [HttpPut("{id}")]
         public async Task Put(int id, [FromBody] Alert alertToUpdate)
         {
             await alertBL.updateAlert(id,alertToUpdate);
         }
 
-        // DELETE api/<AlertController>/5
+        //delete alert (the message alert have be done)
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {

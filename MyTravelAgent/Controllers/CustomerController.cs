@@ -19,35 +19,36 @@ namespace MyTravelAgent.Controllers
         {
             this.customerBL = customerBL;
         }
-        // GET: api/<CustomerController>
+
+        //returns a list of all the customers
         [HttpGet]
         public async Task<List<Customer>> Get()
         {
             return await customerBL.getAllCustomers();
         }
 
-        // GET api/<CustomerController>/5
+        //returns a single customer according to his id
         [HttpGet("{id}")]
         public async Task<Customer> Get(int id)
         {
             return await customerBL.getCustomer(id); 
         }
 
-        // POST api/<CustomerController>
+        //add a new customer
         [HttpPost]
         public async Task<int> Post([FromBody] Customer customerToAdd)
         {
             return await customerBL.addNewCustomer(customerToAdd);
         }
 
-        //PUT api/<CustomerController>/5
+        //update a customer
         [HttpPut("{id}")]
         public async Task Put(int id,[FromBody]Customer customerToUpdate)
         {
             await customerBL.updateCustomer(customerToUpdate,id);
         }
 
-        // DELETE api/<CustomerController>/5
+        //delete a customer
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {

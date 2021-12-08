@@ -9,11 +9,16 @@ namespace DL
 {
     public interface IAlertDL
     {
+        //(get)
         public Task<List<Alert>> getRelevantAlerts(DateTime date);
+        //(post)
         public Task<int> insertAlert(Alert newAlert);
+        //(put)
         public Task updateAlert(int id, Alert alertToUpdate);
-        public Task<List<Alert>> getAlertsForCalender(DateTime start, DateTime end);
+        //(delete)
         public Task deleteAlert(int id);
+        //(getAlerts)(from calendar controller)
+        public Task<List<Alert>> getAlertsForCalender(DateTime start, DateTime end);
 
     }
 }

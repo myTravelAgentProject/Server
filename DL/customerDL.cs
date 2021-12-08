@@ -14,29 +14,42 @@ namespace DL
         {
             this.myTravelAgentContext = myTravelAgentContext;
         }
+
+        //(get) returns a list of all the customers
         public async Task<List<Customer>> getAllCustomers()
         { 
             return myTravelAgentContext.Customers.ToList();
         }
 
+        //(get {id}) returns a customer according to the id
         public async Task<Customer> getCustomer(int id)
         {
             return await myTravelAgentContext.Customers.FindAsync(id);
         }
 
+        /*(post) adds the new customer to the table,
+         save the changes
+        returns the id of the new customer from the db*/
+        public async Task<int> addNewCustomer(Customer customerToAdd)
+        {
+            await myTravelAgentContext.Customers.AddAsync(customerToAdd);
+            myTravelAgentContext.SaveChanges();
+            return customerToAdd.Id;
+        }
+
+        /*(put) finds the customer we want to change (according to the id),
+         replace the customer with the new cuatomer (with the changes)
+        save the changes*/
         public async Task updateCustomer(Customer customerToUpdate, int id)
         {
             Customer customer = await myTravelAgentContext.Customers.FindAsync(id);
             myTravelAgentContext.Entry(customer).CurrentValues.SetValues(customerToUpdate);
             await myTravelAgentContext.SaveChangesAsync();
         }
-        public async Task<int> addNewCustomer(Customer customerToAdd)
-        { 
-            myTravelAgentContext.Customers.AddAsync(customerToAdd);
-            myTravelAgentContext.SaveChanges();
-            return customerToAdd.Id;
-        }
 
+        /*(delete) finds the customer according to the id,
+         remove the customrt that found,
+        save the changes*/
         public async Task deleteCustomer(int id)
         {
             Customer toDelete = await myTravelAgentContext.Customers.FindAsync(id);

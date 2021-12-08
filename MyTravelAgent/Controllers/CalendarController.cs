@@ -23,15 +23,12 @@ namespace MyTravelAgent.Controllers
             this.alertBL = alertBL;
             this.orderBL = orderBL;
         }
-        // GET: api/<EventsController>
-        //[HttpGet]
-        //public void Get()
-        //{
-        //    Console.WriteLine("hi");
-        //}
 
-        // all events in month
-        [HttpGet("[action]/{year}/{month}")]
+        /*calculate the first and the last dates in the month,
+         goes to orderBL and gets a list of all the orders between those two dates
+        returns the list*/
+        [HttpGet]
+        [Route("[action]/{year}/{month}")]
         public async Task<List<OrderForCalendar>> getOrders( int year, int month)
         { 
             DateTime beginingOfMonth = new DateTime(year, month, 01);
@@ -41,8 +38,11 @@ namespace MyTravelAgent.Controllers
            
         }
 
-        //all events in week
-        [HttpGet("[action]/{date}")]
+        /*calculate the first and the last dates in the week,
+         goes to orderBL and gets a list of all the orders between those two dates
+        returns the list*/
+        [HttpGet]
+        [Route("[action]/{date}")]
         public async Task<List<OrderForCalendar>> getOrders(DateTime date)
         {
             int dayOfWeek = (int)date.DayOfWeek;
@@ -51,12 +51,9 @@ namespace MyTravelAgent.Controllers
             return await orderBL.getEventsForCalender(beginingOfWeek, endOfWeek);
         }
 
-        //// POST api/<EventsController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-        // all alerts in month
+        /*calculate the first and the last dates in the month,
+         goes to alertBL and gets a list of all the alerts between those two dates
+        returns the list*/
         [HttpGet]
         [Route("[action]/{year}/{month}")]
         public async Task<List<Alert>> getAlerts(int year, int month)
@@ -67,7 +64,9 @@ namespace MyTravelAgent.Controllers
             return await alertBL.getAlertsForCalender(beginingOfMonth, endOfMonth);
         }
 
-        //all events in week
+        /*calculate the first and the last dates in the week,
+         goes to alertBL and gets a list of all the alerts between those two dates
+        returns the list*/
         [HttpGet]
         [Route("[action]/{date}")]
         public async Task<List<Alert>> getAlerts(DateTime date)
@@ -77,17 +76,5 @@ namespace MyTravelAgent.Controllers
             DateTime endOfWeek = beginingOfWeek.AddDays(6);
             return await alertBL.getAlertsForCalender(beginingOfWeek, endOfWeek);
         }
-
-        //// PUT api/<EventsController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<EventsController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

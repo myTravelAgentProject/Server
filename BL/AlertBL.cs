@@ -16,29 +16,34 @@ namespace BL
             this.alertDL = alertDL;
         }
 
-        public async Task deleteAlert(int id)
-        {
-           await alertDL.deleteAlert(id);
-        }
-
-        public async Task<List<Alert>> getAlertsForCalender(DateTime start, DateTime end)
-        {
-            return await alertDL.getAlertsForCalender(start, end);
-        }
-
-
+        //(get)
         public async Task<List<Alert>> getRelevantAlerts(DateTime date)
         {
             return await alertDL.getRelevantAlerts(date);
         }
+
+        //(post)
         public async Task<int> insertAlert(Alert newAlert)
         {
             return await alertDL.insertAlert(newAlert);
         }
 
+        //(put)
         public async Task updateAlert(int id, Alert alertToUpdate)
         {
-          await alertDL.updateAlert(id,alertToUpdate);
+            await alertDL.updateAlert(id, alertToUpdate);
+        }
+
+        //(delete)
+        public async Task deleteAlert(int id)
+        {
+           await alertDL.deleteAlert(id);
+        }
+
+        //(getAlerts)(from calendar controller)
+        public async Task<List<Alert>> getAlertsForCalender(DateTime start, DateTime end)
+        {
+            return await alertDL.getAlertsForCalender(start, end);
         }
     }
 }
