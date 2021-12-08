@@ -65,15 +65,16 @@ namespace MyTravelAgent.Controllers
 
         //// PUT api/<OrderController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task Put(int id, [FromBody] Order orderToUpdate)
         {
+            await orderBL.updateOrder(orderToUpdate,id);
         }
 
         //// DELETE api/<OrderController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            orderBL.deleteOrder(id);
+            await orderBL.deleteOrder(id);
         }
     }
 }

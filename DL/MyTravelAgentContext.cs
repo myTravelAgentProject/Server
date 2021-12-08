@@ -32,7 +32,7 @@ namespace DL
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-R5RADSP;Database=MyTravelAgent;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=srv2\\PUPILS;Database=MyTravelAgent;Trusted_Connection=True;");
             }
         }
 
@@ -216,7 +216,9 @@ namespace DL
                     .HasColumnType("text")
                     .HasColumnName("COMMENTS");
 
-                entity.Property(e => e.CostPrice).HasColumnName("COST_PRICE");
+                entity.Property(e => e.CostPrice)
+                    .HasColumnType("money")
+                    .HasColumnName("COST_PRICE");
 
                 entity.Property(e => e.CustomerId).HasColumnName("CUSTOMER_ID");
 
@@ -226,13 +228,19 @@ namespace DL
 
                 entity.Property(e => e.HotelId).HasColumnName("HOTEL_ID");
 
+                entity.Property(e => e.HotelPrice)
+                    .HasColumnType("money")
+                    .HasColumnName("HOTEL_PRICE");
+
                 entity.Property(e => e.IsImportant).HasColumnName("IS_IMPORTANT");
 
                 entity.Property(e => e.LateCheckOut).HasColumnName("LATE_CHECK_OUT");
 
                 entity.Property(e => e.MultipleRooms).HasColumnName("MULTIPLE_ROOMS");
 
-                entity.Property(e => e.NewPrice).HasColumnName("NEW_PRICE");
+                entity.Property(e => e.NewPrice)
+                    .HasColumnType("money")
+                    .HasColumnName("NEW_PRICE");
 
                 entity.Property(e => e.NumOfAdults).HasColumnName("NUM_OF_ADULTS");
 
@@ -242,7 +250,9 @@ namespace DL
 
                 entity.Property(e => e.StatusCode).HasColumnName("STATUS_CODE");
 
-                entity.Property(e => e.TotalPrice).HasColumnName("TOTAL_PRICE");
+                entity.Property(e => e.TotalPrice)
+                    .HasColumnType("money")
+                    .HasColumnName("TOTAL_PRICE");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Orders)
@@ -254,7 +264,7 @@ namespace DL
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.HotelId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Orders_Hotels22");
+                    .HasConstraintName("FK_Orders_Hotels");
 
                 entity.HasOne(d => d.StatusCodeNavigation)
                     .WithMany(p => p.Orders)

@@ -14,6 +14,7 @@ namespace Entity
         public string Area { get; set; }
         public DateTime? ArriveDate { get; set; }
         public DateTime? LeavingDate { get; set; }
+
         [JsonIgnore]
         public virtual Customer Customer { get; set; }
     }

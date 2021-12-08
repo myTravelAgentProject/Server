@@ -32,16 +32,17 @@ namespace DL
             return newAlert.Id;
         }
 
-        public void updateAlert(Alert alertToUpdate)
+        public async Task updateAlert(int id,Alert alertToUpdate)
         {
-
-            //להשלים!!!!!
+            Alert alert = await myContext.Alerts.FindAsync(id);
+            myContext.Entry(alert).CurrentValues.SetValues(alertToUpdate);
+            await myContext.SaveChangesAsync();
         }
-        public void deleteAlert(int id)
+        public async Task deleteAlert(int id)
         {
-          Alert alertToDelete = myContext.Alerts.Find(id);
+          Alert alertToDelete = await myContext.Alerts.FindAsync(id);
             myContext.Alerts.Remove(alertToDelete);
-            myContext.SaveChanges();
+            await myContext.SaveChangesAsync();
         }
     }
 }

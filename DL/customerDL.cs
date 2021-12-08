@@ -24,13 +24,9 @@ namespace DL
             return await myTravelAgentContext.Customers.FindAsync(id);
         }
 
-        public async void updateCustomer(Customer customerToUpdate, int id)
+        public async Task updateCustomer(Customer customerToUpdate, int id)
         {
-            Customer customer = myTravelAgentContext.Customers.Find(id);
-            if (customer == null)
-            {
-                throw new Exception("no customer with id " + customerToUpdate.Id);
-            }
+            Customer customer = await myTravelAgentContext.Customers.FindAsync(id);
             myTravelAgentContext.Entry(customer).CurrentValues.SetValues(customerToUpdate);
             await myTravelAgentContext.SaveChangesAsync();
         }
@@ -41,11 +37,11 @@ namespace DL
             return customerToAdd.Id;
         }
 
-        public void deleteCustomer(int id)
+        public async Task deleteCustomer(int id)
         {
-            Customer toDelete = myTravelAgentContext.Customers.Find(id);
+            Customer toDelete = await myTravelAgentContext.Customers.FindAsync(id);
             myTravelAgentContext.Customers.Remove(toDelete);
-            myTravelAgentContext.SaveChanges();
+            await myTravelAgentContext.SaveChangesAsync();
         }
     }
 }

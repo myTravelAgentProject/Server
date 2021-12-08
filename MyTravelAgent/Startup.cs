@@ -38,13 +38,15 @@ namespace MyTravelAgent
             services.AddScoped<IHotelBL, HotelBL>();
             services.AddScoped<IHotelDL, HotelDL>();
             services.AddScoped<IBookingBL, BookingBL>();
+            services.AddScoped<IAdminBL, AdminBL>();
+            services.AddScoped<IAdminDL,AdminDL>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyTravelAgent", Version = "v1" });
             });
             services.AddDbContext<MyTravelAgentContext>(options => options.UseSqlServer(
-               "Server=DESKTOP-R5RADSP;Database=MyTravelAgent;Trusted_Connection=True;"), ServiceLifetime.Scoped);
+               "Server=srv2\\PUPILS;Database=MyTravelAgent;Trusted_Connection=True;"), ServiceLifetime.Scoped);
 
         }
 

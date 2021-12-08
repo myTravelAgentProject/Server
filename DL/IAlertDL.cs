@@ -11,9 +11,9 @@ namespace DL
     {
         public Task<List<Alert>> getRelevantAlerts(DateTime date);
         public Task<int> insertAlert(Alert newAlert);
-        public void updateAlert(Alert alertToUpdate);
+        public Task updateAlert(int id, Alert alertToUpdate);
         public Task<List<Alert>> getAlertsForCalender(DateTime start, DateTime end);
-        public void deleteAlert(int id);
+        public Task deleteAlert(int id);
 
     }
 }

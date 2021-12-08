@@ -19,9 +19,9 @@ namespace BL
             return await orderDL.addNewOrder(newOrder);
         }
 
-        public void deleteOrder(int id)
+        public async Task deleteOrder(int id)
         {
-            orderDL.deleteOrder(id);
+           await orderDL.deleteOrder(id);
         }
 
         public async Task<List<Order>> getAllChanges()
@@ -57,6 +57,11 @@ namespace BL
         public async Task<List<Order>> getOrdetsBetweenDates(DateTime start, DateTime end)
         {
             return await orderDL.getOrdetsBetweenDates(start, end);
+        }
+
+        public async Task updateOrder(Order orderToUpdate, int id)
+        {
+            await orderDL.updateOrder(orderToUpdate,id);
         }
     }
 

@@ -21,9 +21,9 @@ namespace BL
             return await customerDL.addNewCustomer(customerToAdd);
         }
 
-        public void deleteCustomer(int id)
+        public async Task deleteCustomer(int id)
         {
-            customerDL.deleteCustomer(id);
+             await customerDL.deleteCustomer(id);
         }
 
         public async Task<List<Customer>> getAllCustomers()
@@ -36,9 +36,9 @@ namespace BL
             return await customerDL.getCustomer(id);
         }
 
-        public void  updateCustomer(Customer customerToUpdate, int id)
+        public async Task  updateCustomer(Customer customerToUpdate, int id)
         {
-            customerDL.updateCustomer(customerToUpdate,id);
+            await customerDL.updateCustomer(customerToUpdate,id);
         }
 
     }

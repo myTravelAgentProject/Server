@@ -20,6 +20,11 @@ namespace BL
             return await hotelDL.addNewHotel(newHotel);
         }
 
+        public async Task deleteHotel(int id)
+        {
+           await hotelDL.deleteHotel(id);
+        }
+
         public async Task<List<Hotel>> GetHotelsList()
         {
            return await hotelDL.GetHotelsList() ;

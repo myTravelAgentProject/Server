@@ -11,8 +11,8 @@ namespace DL
     {
         public Task<List<Customer>> getAllCustomers();
         public Task<Customer> getCustomer(int id);
-        public void updateCustomer(Customer customerToUpdate, int id);
+        public Task updateCustomer(Customer customerToUpdate, int id);
         public Task<int> addNewCustomer(Customer customerToAdd);
-        public void deleteCustomer(int id);
+        public Task deleteCustomer(int id);
     }
 }

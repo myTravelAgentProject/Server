@@ -16,7 +16,8 @@ namespace DL
         public Task<List<Order>> getByBookingDate(DateTime bookingDate);
         public Task<List<Order>> getAllChanges();
         public Task<List<Order>> getOrdetsBetweenDates(DateTime start, DateTime end);
-        public void deleteOrder(int id);
+        public Task deleteOrder(int id);
         public Task<List<Order>> getOrsersToCheck(DateTime today);
+        public Task updateOrder(Order orderToUpdate, int id);
     }
 }

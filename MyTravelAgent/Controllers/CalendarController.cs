@@ -51,11 +51,11 @@ namespace MyTravelAgent.Controllers
             return await orderBL.getEventsForCalender(beginingOfWeek, endOfWeek);
         }
 
-        // POST api/<EventsController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        //// POST api/<EventsController>
+        //[HttpPost]
+        //public void Post([FromBody] string value)
+        //{
+        //}
         // all alerts in month
         [HttpGet]
         [Route("[action]/{year}/{month}")]
@@ -78,16 +78,16 @@ namespace MyTravelAgent.Controllers
             return await alertBL.getAlertsForCalender(beginingOfWeek, endOfWeek);
         }
 
-        // PUT api/<EventsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //// PUT api/<EventsController>/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
-        // DELETE api/<EventsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //// DELETE api/<EventsController>/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

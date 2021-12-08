@@ -26,7 +26,7 @@ namespace MyTravelAgent.Controllers
         {
             return await alertBL.getRelevantAlerts(today);
         }
-       
+
         //// GET api/<AlertController>/5
         //[HttpGet("{id}")]
         //public string Get(int id)
@@ -42,17 +42,17 @@ namespace MyTravelAgent.Controllers
         }
 
         // PUT api/<AlertController>/5
-        [HttpPut]
-        public void Put( [FromBody] Alert alertToUpdate)
+        [HttpPut("{id}")]
+        public async Task Put(int id, [FromBody] Alert alertToUpdate)
         {
-            alertBL.updateAlert(alertToUpdate);
+            await alertBL.updateAlert(id,alertToUpdate);
         }
 
         // DELETE api/<AlertController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            alertBL.deleteAlert(id);
+            await alertBL.deleteAlert(id);
         }
     }
 }

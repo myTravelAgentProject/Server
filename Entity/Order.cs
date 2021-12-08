@@ -18,17 +18,19 @@ namespace Entity
         public bool SeprateBeds { get; set; }
         public bool MultipleRooms { get; set; }
         public int? FloorHeight { get; set; }
-        public int TotalPrice { get; set; }
-        public int CostPrice { get; set; }
+        public decimal TotalPrice { get; set; }
+        public decimal CostPrice { get; set; }
         public int? BookingId { get; set; }
         public int NumOfAdults { get; set; }
         public int? NumOfKids { get; set; }
         public int StatusCode { get; set; }
-        public int? NewPrice { get; set; }
+        public decimal? NewPrice { get; set; }
         public bool? Change { get; set; }
         public int HotelId { get; set; }
         public string Comments { get; set; }
         public bool? IsImportant { get; set; }
+        public decimal HotelPrice { get; set; }
+
         [JsonIgnore]
         public virtual Customer Customer { get; set; }
         [JsonIgnore]

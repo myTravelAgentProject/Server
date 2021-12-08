@@ -12,6 +12,7 @@ namespace Entity
         public int CustomerId { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
+
         [JsonIgnore]
         public virtual Customer Customer { get; set; }
     }

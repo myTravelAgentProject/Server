@@ -21,6 +21,13 @@ namespace DL
             return newHotel.Id;
         }
 
+        public async Task deleteHotel(int id)
+        {
+            Hotel HoteltoDelete = await myContext.Hotels.FindAsync(id);
+            myContext.Hotels.Remove(HoteltoDelete);
+            await myContext.SaveChangesAsync();
+        }
+
         public async Task<List<Hotel>> GetHotelsList()
         {
             return myContext.Hotels.ToList();

@@ -28,6 +28,7 @@ namespace Entity
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string Comments { get; set; }
+
         [JsonIgnore]
         public virtual ICollection<CustomerChild> CustomerChildren { get; set; }
         [JsonIgnore]

@@ -21,34 +21,34 @@ namespace MyTravelAgent.Controllers
         }
         // GET: api/<BookingController>
         [HttpGet ("updateOrders")]
-        public  async Task<List<Order>> updateOrders()
+        public  async Task updateOrders()
         {
-           return await  BookingBL.updateOrders();
+            await  BookingBL.updateOrders();
         }
 
-        // GET api/<BookingController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //// GET api/<BookingController>/5
+        //[HttpGet("{id}")]
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
-        // POST api/<BookingController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        //// POST api/<BookingController>
+        //[HttpPost]
+        //public void Post([FromBody] string value)
+        //{
+        //}
 
-        // PUT api/<BookingController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //// PUT api/<BookingController>/5
+        //[HttpPut("{id}")]
+        //public async Task Put(int id, [FromBody] string value)
+        //{
+        //}
 
-        // DELETE api/<BookingController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //// DELETE api/<BookingController>/5
+        //[HttpDelete("{id}")]
+        //public async Task Delete(int id)
+        //{
+        //}
     }
 }

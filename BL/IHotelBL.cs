@@ -11,5 +11,6 @@ namespace BL
     {
         public Task<int> addNewHotel(Hotel newHotel);
         public Task<List<Hotel>> GetHotelsList();
+        public Task deleteHotel(int id);
     }
 }

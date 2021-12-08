@@ -23,11 +23,11 @@ namespace DL
             return newOrder.Id;
         }
 
-        public void deleteOrder(int id)
+        public async Task deleteOrder(int id)
         {
-            Order ordertoDelete = myTravelAgentContext.Orders.Find(id);
+            Order ordertoDelete =await myTravelAgentContext.Orders.FindAsync(id);
             myTravelAgentContext.Orders.Remove(ordertoDelete);
-            myTravelAgentContext.SaveChanges();
+            await myTravelAgentContext.SaveChangesAsync();
 
         }
 
@@ -39,12 +39,11 @@ namespace DL
         public async Task<List<Order>> getOrsersToCheck(DateTime today)
         {
             return await myTravelAgentContext.Orders.Where(o => o.IsImportant == true || (o.CheckInDate > today && o.CheckInDate < today.AddMonths(2))).ToListAsync();
-
         }
 
         public async Task<List<Order>> getByBookingDate(DateTime bookingDate)
         {
-            return await myTravelAgentContext.Orders.Where(o => o.BookingDate == bookingDate).ToListAsync();
+            return await myTravelAgentContext.Orders.Where(o => o.BookingDate > bookingDate.AddDays(-7)).ToListAsync();
         }
 
         public async Task<List<Order>> getByCustomerId(int id)
@@ -69,7 +68,7 @@ namespace DL
                                    select new OrderForCalendar {
                                        orderId = o.Id,
                                        customerName=o.Customer.FirstName +" "+ o.Customer.LastName,
-                                    //    hotelName = o.Hotel.Name,
+                                       hotelName = o.Hotel.Name,
                                         checkInDate=o.CheckInDate,
                                         checkOutDate=o.CheckOutDate,
                                         earlyCheckIn=o.EarlyCheckIn,
@@ -88,6 +87,13 @@ namespace DL
         public async Task<List<Order>> getOrdetsBetweenDates(DateTime start, DateTime end)
         {
             return await myTravelAgentContext.Orders.Where(o => o.CheckInDate > start && o.CheckInDate < end).ToListAsync();
+        }
+
+        public async Task updateOrder(Order orderToUpdate,int id)
+        {
+            Order order = await myTravelAgentContext.Orders.FindAsync(id);
+            myTravelAgentContext.Entry(order).CurrentValues.SetValues(orderToUpdate);
+            await myTravelAgentContext.SaveChangesAsync();
         }
     }
 }

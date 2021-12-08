@@ -34,15 +34,17 @@ namespace MyTravelAgent.Controllers
         }
 
         // PUT api/<HotelController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //[HttpPut("{id}")]
+        //public async Task Put(int id, [FromBody] string value)
+        //{
+
+        //}
 
         // DELETE api/<HotelController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
+            await hotelBL.deleteHotel(id);
         }
     }
 }

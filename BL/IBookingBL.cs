@@ -9,6 +9,6 @@ namespace BL
 {
     public interface IBookingBL
     {
-        public Task<List<Order>> updateOrders();
+        public Task updateOrders();
     }
 }

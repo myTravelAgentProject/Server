@@ -42,16 +42,16 @@ namespace MyTravelAgent.Controllers
 
         //PUT api/<CustomerController>/5
         [HttpPut("{id}")]
-        public void Put(int id,[FromBody]Customer customerToUpdate)
+        public async Task Put(int id,[FromBody]Customer customerToUpdate)
         {
-            customerBL.updateCustomer(customerToUpdate,id);
+            await customerBL.updateCustomer(customerToUpdate,id);
         }
 
         // DELETE api/<CustomerController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            customerBL.deleteCustomer(id);
+             await customerBL.deleteCustomer(id);
         }
     }
 }

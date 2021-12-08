@@ -16,9 +16,9 @@ namespace BL
             this.alertDL = alertDL;
         }
 
-        public void deleteAlert(int id)
+        public async Task deleteAlert(int id)
         {
-            alertDL.deleteAlert(id);
+           await alertDL.deleteAlert(id);
         }
 
         public async Task<List<Alert>> getAlertsForCalender(DateTime start, DateTime end)
@@ -36,9 +36,9 @@ namespace BL
             return await alertDL.insertAlert(newAlert);
         }
 
-        public void updateAlert(Alert alertToUpdate)
+        public async Task updateAlert(int id, Alert alertToUpdate)
         {
-            alertDL.updateAlert(alertToUpdate);
+          await alertDL.updateAlert(id,alertToUpdate);
         }
     }
 }
