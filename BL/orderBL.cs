@@ -34,9 +34,9 @@ namespace BL
             return await orderDL.getOrsersToCheck(today);
         }
 
-        public async Task<List<Order>> getByBookingDate(DateTime bookingDate)
+        public async Task<List<Order>> getTheLastOrders()
         {
-            return await orderDL.getByBookingDate(bookingDate);
+            return await orderDL.getTheLastOrders();
         }
 
         public async Task<List<Order>> getByCustomerId(int id)

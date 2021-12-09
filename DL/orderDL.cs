@@ -41,9 +41,9 @@ namespace DL
             return await myTravelAgentContext.Orders.Where(o => o.IsImportant == true || (o.CheckInDate > today && o.CheckInDate < today.AddMonths(2))).ToListAsync();
         }
 
-        public async Task<List<Order>> getByBookingDate(DateTime bookingDate)
+        public async Task<List<Order>> getTheLastOrders()
         {
-            return await myTravelAgentContext.Orders.Where(o => o.BookingDate > bookingDate.AddDays(-7)).ToListAsync();
+            return await myTravelAgentContext.Orders.OrderByDescending(o=>o.BookingDate).Take(15).ToListAsync();
         }
 
         public async Task<List<Order>> getByCustomerId(int id)

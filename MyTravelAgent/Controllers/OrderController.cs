@@ -43,10 +43,10 @@ namespace MyTravelAgent.Controllers
         }
 
         //get by bookingDate
-        [HttpGet("{bookingDate}")]
-        public async Task<List<Order>> Get(DateTime bookingDate)
+        [HttpGet ("[action]")]
+        public async Task<List<Order>> getTheLastOrders()
         {
-            return await orderBL.getByBookingDate(bookingDate);
+            return await orderBL.getTheLastOrders();
         }
 
         ////get between two dates
