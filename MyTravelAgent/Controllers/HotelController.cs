@@ -19,28 +19,22 @@ namespace MyTravelAgent.Controllers
         {
             this.hotelBL = hotelBL;
         }
-        // GET: api/<HotelController>
+
+        // returns all the hotels list
         [HttpGet]
         public async Task<IList<Hotel>> Get()
         {
             return await hotelBL.GetHotelsList();
         }
 
-        //POST api/<HotelController>
+        //add new hotel
         [HttpPost]
         public async Task<int> Post([FromBody] Hotel newHotel)
         {
             return await hotelBL.addNewHotel(newHotel);
         }
 
-        // PUT api/<HotelController>/5
-        //[HttpPut("{id}")]
-        //public async Task Put(int id, [FromBody] string value)
-        //{
-
-        //}
-
-        // DELETE api/<HotelController>/5
+        //delete a hotel from the hotel table 
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {

@@ -9,8 +9,11 @@ namespace BL
 {
     public interface IHotelBL
     {
-        public Task<int> addNewHotel(Hotel newHotel);
+        //(get)
         public Task<List<Hotel>> GetHotelsList();
+        //(post)
+        public Task<int> addNewHotel(Hotel newHotel);
+        //(delete)
         public Task deleteHotel(int id);
     }
 }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyTravelAgent.Controllers
 {
+    //כתבתי הערות רק בקונטרולר ולא בבל ובדל....
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
@@ -19,14 +20,15 @@ namespace MyTravelAgent.Controllers
         {
             this.orderBL = orderBL;       
         }
-        //// get all the orders that their price had change
+
+        //return all the orders that their price had change (the 'change' filed is true)
         [HttpGet ("GetChangePriceOrders")]
         public async Task<List<Order>> GetChangePriceOrders()
         {
             return await orderBL.getAllChanges();
         }
 
-        // GET api/<OrderController>/5
+        // return a order according to its id
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<Order> getOrderById(int id)
@@ -34,7 +36,7 @@ namespace MyTravelAgent.Controllers
             return await orderBL.getOrderById(id);
         }
 
-        //get by customerId
+        //return a list of orders according to their customer id
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<List<Order>> getByCustomerId(int id)
@@ -42,35 +44,35 @@ namespace MyTravelAgent.Controllers
             return await orderBL.getByCustomerId(id);
         }
 
-        //get by bookingDate
+        /*return a list of 15 last taching orders*/
         [HttpGet ("[action]")]
         public async Task<List<Order>> getTheLastOrders()
         {
             return await orderBL.getTheLastOrders();
         }
 
-        ////get between two dates
+        //get orders between two dates
         [HttpGet("{start}/{end}")]
         public async Task<List<Order>> Get(DateTime start, DateTime end)
         {
             return await orderBL.getOrdetsBetweenDates(start, end);
         }
 
-        //// POST api/<OrderController>
+        //add a order
         [HttpPost]
         public async Task<int> Post([FromBody] Order newOrder)
         {
             return await orderBL.addNewOrder(newOrder);
         }
 
-        //// PUT api/<OrderController>/5
+        //update a order according to the given id
         [HttpPut("{id}")]
         public async Task Put(int id, [FromBody] Order orderToUpdate)
         {
             await orderBL.updateOrder(orderToUpdate,id);
         }
 
-        //// DELETE api/<OrderController>/5
+        //delete a order according to the id
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
