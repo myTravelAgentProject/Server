@@ -15,7 +15,7 @@ namespace DL
 
         public MyTravelAgentContext(DbContextOptions<MyTravelAgentContext> options)
             : base(options)
-        {
+        { 
         }
 
         public virtual DbSet<Admin> Admins { get; set; }
