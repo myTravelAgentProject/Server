@@ -29,6 +29,24 @@ namespace BL
             foreach(Order order in ordersToCheck)
             {
                 //check if order had change in booking and save the new price into newPrice
+                
+            var client = new HttpClient();
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri("https://booking-com.p.rapidapi.com/v1/hotels/search-filters?units=metric&filter_by_currency=AED&locale=en-gb&order_by=popularity&checkin_date=2022-05-09&checkout_date=2022-05-10&dest_type=city&dest_id=-553173&adults_number=2&room_number=1&children_number=2&page_number=0&include_adjacency=true&children_ages=5%2C0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1"),
+                Headers =
+    {
+        { "x-rapidapi-host", "booking-com.p.rapidapi.com" },
+        { "x-rapidapi-key", "16945ab38dmsh7cf2c60b016f2fep18d5c7jsna1ddd961ba77" },
+    },
+            };
+            using (var response = await client.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+                return body;
+            }
                 //update the order:
                 if (order.TotalPrice > newPrice)
                 {
