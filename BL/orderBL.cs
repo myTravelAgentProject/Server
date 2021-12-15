@@ -3,6 +3,7 @@ using System;
 using Entity;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using DTO;
 
 namespace BL
 {

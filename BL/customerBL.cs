@@ -1,4 +1,5 @@
 ﻿using DL;
+using DTO;
 using Entity;
 using System;
 using System.Collections.Generic;
@@ -17,25 +18,25 @@ namespace BL
         }
 
         //(get)
-        public async Task<List<Customer>> getAllCustomers()
+        public async Task<List<customerDTO>> getAllCustomers()
         {
             return await customerDL.getAllCustomers();
         }
 
         //(get {id})
-        public async Task<Customer> getCustomer(int id)
+        public async Task<customerDTO> getCustomer(int id)
         {
             return await customerDL.getCustomer(id);
         }
 
         //(post)
-        public async Task<int> addNewCustomer(Customer customerToAdd)
+        public async Task<int> addNewCustomer(customerDTO customerToAdd)
         {
             return await customerDL.addNewCustomer(customerToAdd);
         }
 
         //(put)
-        public async Task updateCustomer(Customer customerToUpdate, int id)
+        public async Task updateCustomer(customerDTO customerToUpdate, int id)
         {
             await customerDL.updateCustomer(customerToUpdate, id);
         }

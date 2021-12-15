@@ -1,4 +1,5 @@
 ﻿using BL;
+using DTO;
 using Entity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,7 +16,6 @@ namespace MyTravelAgent.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
-       
         IOrderBL orderBL;
         IAlertBL alertBL;
         public EventsController(IOrderBL orderBL, IAlertBL alertBL)
@@ -27,8 +27,7 @@ namespace MyTravelAgent.Controllers
         /*calculate the first and the last dates in the month,
          goes to orderBL and gets a list of all the orders between those two dates
         returns the list*/
-        [HttpGet]
-        [Route("[action]/{year}/{month}")]
+        [HttpGet("{year}/{month}/orders")]
         public async Task<List<OrderForCalendar>> getOrders( int year, int month)
         { 
             DateTime beginingOfMonth = new DateTime(year, month, 01);
@@ -41,8 +40,7 @@ namespace MyTravelAgent.Controllers
         /*calculate the first and the last dates in the week,
          goes to orderBL and gets a list of all the orders between those two dates
         returns the list*/
-        [HttpGet]
-        [Route("[action]/{date}")]
+        [HttpGet ("{date}/orders")]
         public async Task<List<OrderForCalendar>> getOrders(DateTime date)
         {
             int dayOfWeek = (int)date.DayOfWeek;
@@ -54,8 +52,7 @@ namespace MyTravelAgent.Controllers
         /*calculate the first and the last dates in the month,
          goes to alertBL and gets a list of all the alerts between those two dates
         returns the list*/
-        [HttpGet]
-        [Route("[action]/{year}/{month}")]
+        [HttpGet("{year}/{month}/alerts")]
         public async Task<List<Alert>> getAlerts(int year, int month)
         {
             DateTime beginingOfMonth = new DateTime(year, month, 01);
@@ -67,8 +64,7 @@ namespace MyTravelAgent.Controllers
         /*calculate the first and the last dates in the week,
          goes to alertBL and gets a list of all the alerts between those two dates
         returns the list*/
-        [HttpGet]
-        [Route("[action]/{date}")]
+        [HttpGet("{date}/alerts")]
         public async Task<List<Alert>> getAlerts(DateTime date)
         {
             int dayOfWeek = (int)date.DayOfWeek;

@@ -1,3 +1,4 @@
+using AutoMapper;
 using BL;
 using DL;
 using Microsoft.AspNetCore.Builder;
@@ -41,12 +42,13 @@ namespace MyTravelAgent
             services.AddScoped<IAdminBL, AdminBL>();
             services.AddScoped<IAdminDL,AdminDL>();
             services.AddControllers();
+            services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyTravelAgent", Version = "v1" });
             });
             services.AddDbContext<MyTravelAgentContext>(options => options.UseSqlServer(
-               "Server=srv2\\PUPILS;Database=MyTravelAgent;Trusted_Connection=True;"), ServiceLifetime.Scoped);
+                "Server=(LocalDB)\\MSSQLLocalDB;Database=M:\\good\\DL\\DB.mdf;Trusted_Connection=True;"), ServiceLifetime.Scoped);
 
         }
 

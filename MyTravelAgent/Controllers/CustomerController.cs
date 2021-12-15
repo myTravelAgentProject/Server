@@ -1,4 +1,5 @@
 ﻿using BL;
+using DTO;
 using Entity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,28 +23,28 @@ namespace MyTravelAgent.Controllers
 
         //returns a list of all the customers
         [HttpGet]
-        public async Task<List<Customer>> Get()
+        public async Task<List<customerDTO>> Get()
         {
             return await customerBL.getAllCustomers();
         }
 
         //returns a single customer according to his id
         [HttpGet("{id}")]
-        public async Task<Customer> Get(int id)
+        public async Task<customerDTO> Get(int id)
         {
             return await customerBL.getCustomer(id); 
         }
 
         //add a new customer
         [HttpPost]
-        public async Task<int> Post([FromBody] Customer customerToAdd)
+        public async Task<int> Post([FromBody] customerDTO customerToAdd)
         {
             return await customerBL.addNewCustomer(customerToAdd);
         }
 
         //update a customer
         [HttpPut("{id}")]
-        public async Task Put(int id,[FromBody]Customer customerToUpdate)
+        public async Task Put(int id,[FromBody] customerDTO customerToUpdate)
         {
             await customerBL.updateCustomer(customerToUpdate,id);
         }
