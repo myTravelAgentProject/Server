@@ -24,9 +24,9 @@ namespace MyTravelAgent.Controllers
          then updates the orders with the change*/
         [HttpGet]
         [Route("[action]")]
-        public  async Task updateOrders()
+        public  async Task<string> updateOrders()
         {
-            await  BookingBL.updateOrders();
+            return await  BookingBL.updateOrders();
         }
     }
 }
