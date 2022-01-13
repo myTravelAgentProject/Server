@@ -29,6 +29,7 @@ namespace BL
             ordersToCheck=await orderBL.getOrsersToCheck(DateTime.Now);
             foreach(Order order in ordersToCheck)
             {
+                //string url= "https://booking-com.p.rapidapi.com/v1/hotels/search-filters?"
                 //check if order had change in booking and save the new price into newPrice
                 //update the order:
                 if (order.TotalPrice > newPrice)
@@ -56,5 +57,6 @@ namespace BL
                 Console.WriteLine(body);
             }
         }
+        
     }
 }

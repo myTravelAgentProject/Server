@@ -1,4 +1,7 @@
-﻿using Entity;
+﻿using AutoMapper;
+using DTO;
+using Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,40 +13,48 @@ namespace DL
     public class customerDL: ICustomerDL
     {
         MyTravelAgentContext myTravelAgentContext;
-        public customerDL(MyTravelAgentContext myTravelAgentContext)
+        IMapper mapper;
+        public customerDL(MyTravelAgentContext myTravelAgentContext, IMapper mapper)
         {
             this.myTravelAgentContext = myTravelAgentContext;
+            this.mapper = mapper;
         }
 
         //(get) returns a list of all the customers
-        public async Task<List<Customer>> getAllCustomers()
+        public async Task<List<customerDTO>> getAllCustomers()
         { 
-            return myTravelAgentContext.Customers.ToList();
+            List<Customer> customers= await myTravelAgentContext.Customers.ToListAsync();
+            List<customerDTO> customerD = mapper.Map<List<Customer>, List<customerDTO>>(customers);
+            return customerD;
         }
 
         //(get {id}) returns a customer according to the id
-        public async Task<Customer> getCustomer(int id)
+        public async Task<customerDTO> getCustomer(int id)
         {
-            return await myTravelAgentContext.Customers.FindAsync(id);
+            Customer customer = await myTravelAgentContext.Customers.FindAsync(id);
+            customerDTO customerD= mapper.Map<Customer,customerDTO>(customer);
+            return customerD;
         }
 
         /*(post) adds the new customer to the table,
          save the changes
         returns the id of the new customer from the db*/
-        public async Task<int> addNewCustomer(Customer customerToAdd)
+        public async Task<int> addNewCustomer(customerDTO customerToAdd)
         {
-            await myTravelAgentContext.Customers.AddAsync(customerToAdd);
+            Customer customer = mapper.Map<customerDTO, Customer>(customerToAdd);
+            await myTravelAgentContext.Customers.AddAsync(customer);
             myTravelAgentContext.SaveChanges();
-            return customerToAdd.Id;
+            return customer.Id;
         }
 
         /*(put) finds the customer we want to change (according to the id),
          replace the customer with the new cuatomer (with the changes)
         save the changes*/
-        public async Task updateCustomer(Customer customerToUpdate, int id)
+        public async Task updateCustomer(customerDTO customerToUpdate, int id)
         {
+            Customer customerToUp = mapper.Map<customerDTO, Customer>(customerToUpdate);
             Customer customer = await myTravelAgentContext.Customers.FindAsync(id);
-            myTravelAgentContext.Entry(customer).CurrentValues.SetValues(customerToUpdate);
+            myTravelAgentContext.Entry(customer).CurrentValues.SetValues(customerToUp);
             await myTravelAgentContext.SaveChangesAsync();
         }
 

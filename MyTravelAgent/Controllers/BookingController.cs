@@ -23,10 +23,9 @@ namespace MyTravelAgent.Controllers
         /*checks the orders within two months (and the importents orders) if their prices in booking had change
          then updates the orders with the change*/
         [HttpGet]
-        [Route("[action]")]
-        public  async Task updateOrders()
+        public  async Task<string> updateOrders()
         {
-            await  BookingBL.updateOrders();
+            return await  BookingBL.updateOrders();
         }
     }
 }

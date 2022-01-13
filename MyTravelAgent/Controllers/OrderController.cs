@@ -22,37 +22,35 @@ namespace MyTravelAgent.Controllers
         }
 
         //return all the orders that their price had change (the 'change' filed is true)
-        [HttpGet ("GetChangePriceOrders")]
+        [HttpGet ("ChangedPriceOrders")]
         public async Task<List<Order>> GetChangePriceOrders()
         {
             return await orderBL.getAllChanges();
         }
 
         // return a order according to its id
-        [HttpGet]
-        [Route("[action]/{id}")]
+        [HttpGet("{id}")]
         public async Task<Order> getOrderById(int id)
         {
             return await orderBL.getOrderById(id);
         }
 
         //return a list of orders according to their customer id
-        [HttpGet]
-        [Route("[action]/{id}")]
-        public async Task<List<Order>> getByCustomerId(int id)
+        [HttpGet("customer/{Id}")]
+        public async Task<List<Order>> getByCustomerId(int Id)
         {
-            return await orderBL.getByCustomerId(id);
+            return await orderBL.getByCustomerId(Id);
         }
 
         /*return a list of 15 last taching orders*/
-        [HttpGet ("[action]")]
+        [HttpGet ("/lastOrders")]
         public async Task<List<Order>> getTheLastOrders()
         {
             return await orderBL.getTheLastOrders();
         }
 
         //get orders between two dates
-        [HttpGet("{start}/{end}")]
+        [HttpGet("{start}/{end}/orders")]
         public async Task<List<Order>> Get(DateTime start, DateTime end)
         {
             return await orderBL.getOrdetsBetweenDates(start, end);

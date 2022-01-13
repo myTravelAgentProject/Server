@@ -22,7 +22,7 @@ namespace MyTravelAgent.Controllers
 
         // returns all the hotels list
         [HttpGet]
-        public async Task<IList<Hotel>> Get()
+        public async Task<List<Hotel>> Get()
         {
             return await hotelBL.GetHotelsList();
         }

@@ -22,10 +22,10 @@ namespace MyTravelAgent.Controllers
         }
 
         //returns all the relevants alerts that their date passed
-        [HttpGet]
-        public async Task<List<Alert>> Get(DateTime today)
+        [HttpGet ("{date}")]
+        public async Task<List<Alert>> Get(DateTime date)
         {
-            return await alertBL.getRelevantAlerts(today);
+            return await alertBL.getRelevantAlerts(date);
         }
 
         //add new alert

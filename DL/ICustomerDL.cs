@@ -1,4 +1,5 @@
-﻿using Entity;
+﻿using DTO;
+using Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,13 @@ namespace DL
     public interface ICustomerDL
     {
         //(get)
-        public Task<List<Customer>> getAllCustomers();
+        public Task<List<customerDTO>> getAllCustomers();
         //(get {id})
-        public Task<Customer> getCustomer(int id);
+        public Task<customerDTO> getCustomer(int id);
         //(post)
-        public Task<int> addNewCustomer(Customer customerToAdd);
+        public Task<int> addNewCustomer(customerDTO customerToAdd);
         //(put)
-        public Task updateCustomer(Customer customerToUpdate, int id);
+        public Task updateCustomer(customerDTO customerToUpdate, int id);
         //(delete)
         public Task deleteCustomer(int id);
     }
