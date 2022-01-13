@@ -2,6 +2,7 @@
 using DTO;
 using Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +15,27 @@ namespace DL
     {
         MyTravelAgentContext myTravelAgentContext;
         IMapper mapper;
-        public customerDL(MyTravelAgentContext myTravelAgentContext, IMapper mapper)
+        ILogger<customerDL> logger;
+        public customerDL(MyTravelAgentContext myTravelAgentContext, IMapper mapper,ILogger<customerDL>logger)
         {
+            this.logger = logger;
             this.myTravelAgentContext = myTravelAgentContext;
             this.mapper = mapper;
         }
 
         //(get) returns a list of all the customers
         public async Task<List<customerDTO>> getAllCustomers()
-        { 
-            List<Customer> customers= await myTravelAgentContext.Customers.ToListAsync();
-            List<customerDTO> customerD = mapper.Map<List<Customer>, List<customerDTO>>(customers);
-            return customerD;
+        {
+            try {
+                List<Customer> customers = await myTravelAgentContext.Customers.ToListAsync();
+                List<customerDTO> customerD = mapper.Map<List<Customer>, List<customerDTO>>(customers);
+                return customerD;
+            }
+            catch(Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }return null;
+           
         }
 
         //(get {id}) returns a customer according to the id
