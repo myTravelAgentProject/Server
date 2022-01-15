@@ -23,5 +23,6 @@ namespace MyTravelAgent
                 {
                     webBuilder.UseStartup<Startup>();
                 }).UseNLog();
+      
     }
 }

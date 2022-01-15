@@ -10,8 +10,8 @@ namespace DL
 {
     public class AdminDL : IAdminDL
     {
-        MyTravelAgentContext myContext;
-        public AdminDL(MyTravelAgentContext myContext)
+        MyTravelAgent2Context myContext;
+        public AdminDL(MyTravelAgent2Context myContext)
         {
             this.myContext = myContext;
         }

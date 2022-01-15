@@ -30,6 +30,15 @@ namespace MyTravelAgent
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", p =>
+                {
+                    p.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
             services.AddScoped<IOrderBL,orderBL>();
             services.AddScoped<IOrderDL,orderDL>();
             services.AddScoped<ICustomerBL,customerBL>();
@@ -41,14 +50,16 @@ namespace MyTravelAgent
             services.AddScoped<IBookingBL, BookingBL>();
             services.AddScoped<IAdminBL, AdminBL>();
             services.AddScoped<IAdminDL,AdminDL>();
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
+            services.AddMvc().AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyTravelAgent", Version = "v1" });
             });
-            services.AddDbContext<MyTravelAgentContext>(options => options.UseSqlServer(
-               "Server=srv2\\PUPILS;Database=MyTravelAgent;Trusted_Connection=True;"), ServiceLifetime.Scoped);
+            services.AddDbContext<MyTravelAgent2Context>(options => options.UseSqlServer(
+            Configuration.GetConnectionString("MyTravelAgentInMyHome")));
+            //"Server=DESKTOP-R5RADSP;Database=MyTravelAgent2;Trusted_Connection=True;"), ServiceLifetime.Scoped);
             //(LocalDB)\\MSSQLLocalDB;Database=https:\\github.com\\myTravelAgentProject\\good.git\\DL\\DB.mdf
 
         }
@@ -64,11 +75,14 @@ namespace MyTravelAgent
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyTravelAgent v1"));
             }
 
+            app.UseCors("AllowAll");
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
+  
 
             app.UseEndpoints(endpoints =>
             {
