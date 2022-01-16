@@ -27,6 +27,7 @@ namespace MyTravelAgent.Controllers
             return await adminBL.login(name, password);
         }
 
+
         //insert a new admin (can be called only after sign in to the site)
         [HttpPost]
         public async Task<int> Post([FromBody] Admin adminToAdd)
