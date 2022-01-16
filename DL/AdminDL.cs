@@ -20,7 +20,7 @@ namespace DL
         rerurns the object or null*/
         public async Task<Admin> login(string name, string password)
         {
-            return await myContext.Admins.SingleOrDefaultAsync(a => a.Name == name && a.Password == password);
+           return await myContext.Admins.SingleOrDefaultAsync(a => a.Name == name && a.Password == password);
         }
 
         /*(post) add the new admin to the admin table

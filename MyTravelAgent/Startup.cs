@@ -58,7 +58,7 @@ namespace MyTravelAgent
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyTravelAgent", Version = "v1" });
             });
             services.AddDbContext<MyTravelAgent2Context>(options => options.UseSqlServer(
-            Configuration.GetConnectionString("MyTravelAgentInMyHome")));
+            Configuration.GetConnectionString("Seminary")));
             //"Server=DESKTOP-R5RADSP;Database=MyTravelAgent2;Trusted_Connection=True;"), ServiceLifetime.Scoped);
             //(LocalDB)\\MSSQLLocalDB;Database=https:\\github.com\\myTravelAgentProject\\good.git\\DL\\DB.mdf
 
@@ -66,7 +66,8 @@ namespace MyTravelAgent
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,ILogger<Startup>logger)
-        {
+        { 
+           
             logger.LogInformation("server is up:)");
             if (env.IsDevelopment())
             {
@@ -80,6 +81,20 @@ namespace MyTravelAgent
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseErrorsMiddleware();
+
+            //app.Map("/api", app2 =>
+            //{
+            //    app2.UseRatingMiddleware();
+            //    app2.UseAuthorization();
+
+            //    app2.UseEndpoints(endpoints =>
+            //    {
+            //        endpoints.MapControllers();
+            //    });
+            //});
+
 
             app.UseAuthorization();
   
