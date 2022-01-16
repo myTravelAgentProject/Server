@@ -9,8 +9,8 @@ namespace DL
 {
    public class HotelDL:IHotelDL
   {
-        MyTravelAgentContext myContext;
-        public HotelDL(MyTravelAgentContext myContext)
+        MyTravelAgent2Context myContext;
+        public HotelDL(MyTravelAgent2Context myContext)
         {
             this.myContext = myContext;
         }

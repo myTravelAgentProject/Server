@@ -13,10 +13,10 @@ namespace DL
 {
     public class customerDL: ICustomerDL
     {
-        MyTravelAgentContext myTravelAgentContext;
+        MyTravelAgent2Context myTravelAgentContext;
         IMapper mapper;
         ILogger<customerDL> logger;
-        public customerDL(MyTravelAgentContext myTravelAgentContext, IMapper mapper,ILogger<customerDL>logger)
+        public customerDL(MyTravelAgent2Context myTravelAgentContext, IMapper mapper,ILogger<customerDL>logger)
         {
             this.logger = logger;
             this.myTravelAgentContext = myTravelAgentContext;

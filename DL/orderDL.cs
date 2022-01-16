@@ -12,9 +12,9 @@ namespace DL
 {
     public class orderDL : IOrderDL
     {
-        MyTravelAgentContext myTravelAgentContext;
+        MyTravelAgent2Context myTravelAgentContext;
         IMapper mapper;
-        public orderDL(MyTravelAgentContext myTravelAgentContext, IMapper mapper)
+        public orderDL(MyTravelAgent2Context myTravelAgentContext, IMapper mapper)
         {
             this.myTravelAgentContext = myTravelAgentContext;
             this.mapper = mapper;

@@ -10,8 +10,8 @@ namespace DL
 {
     public class AlertDL:IAlertDL
     {
-        MyTravelAgentContext myContext;
-        public AlertDL(MyTravelAgentContext myContext)
+        MyTravelAgent2Context myContext;
+        public AlertDL(MyTravelAgent2Context myContext)
         {
             this.myContext = myContext;
         }

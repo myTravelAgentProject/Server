@@ -10,6 +10,6 @@ namespace BL
     public interface IBookingBL
     {
         //(updateOrders)
-        public Task<string> updateOrders();
+        public Task updateOrders();
     }
 }

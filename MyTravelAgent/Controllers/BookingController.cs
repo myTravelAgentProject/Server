@@ -22,10 +22,15 @@ namespace MyTravelAgent.Controllers
 
         /*checks the orders within two months (and the importents orders) if their prices in booking had change
          then updates the orders with the change*/
-        [HttpGet]
-        public  async Task<string> updateOrders()
-        {
-            return await  BookingBL.updateOrders();
-        }
+        //[HttpGet]
+        //public  async Task updateOrders()
+        //{
+        //    return await  BookingBL.updateOrders();
+        //}
+
+        //public IActionResult updateOrdersA()
+        //{
+        //    return Ok( BookingBL.updateOrders());
+        //}
     }
 }
