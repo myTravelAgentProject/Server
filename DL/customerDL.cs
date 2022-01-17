@@ -15,7 +15,7 @@ namespace DL
     {
         MyTravelAgent2Context myTravelAgentContext;
         IMapper mapper;
-        ILogger<customerDL> logger;
+       private readonly ILogger<customerDL> logger;
         public customerDL(MyTravelAgent2Context myTravelAgentContext, IMapper mapper,ILogger<customerDL>logger)
         {
             this.logger = logger;

@@ -58,7 +58,7 @@ namespace MyTravelAgent
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyTravelAgent", Version = "v1" });
             });
             services.AddDbContext<MyTravelAgent2Context>(options => options.UseSqlServer(
-            Configuration.GetConnectionString("Seminary")));
+            Configuration.GetConnectionString("Home")));
             //"Server=DESKTOP-R5RADSP;Database=MyTravelAgent2;Trusted_Connection=True;"), ServiceLifetime.Scoped);
             //(LocalDB)\\MSSQLLocalDB;Database=https:\\github.com\\myTravelAgentProject\\good.git\\DL\\DB.mdf
 
@@ -84,16 +84,17 @@ namespace MyTravelAgent
 
             app.UseErrorsMiddleware();
 
-            //app.Map("/api", app2 =>
-            //{
-            //    app2.UseRatingMiddleware();
-            //    app2.UseAuthorization();
+            app.Map("/api", app2 =>
+            {
+                app2.UseRouting();
+                app2.UseRatingMiddleware();
+                app2.UseAuthorization();
 
-            //    app2.UseEndpoints(endpoints =>
-            //    {
-            //        endpoints.MapControllers();
-            //    });
-            //});
+                app2.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
+            });
 
 
             app.UseAuthorization();
