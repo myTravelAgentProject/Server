@@ -27,7 +27,7 @@ namespace DL
         public async Task<int> addNewHotel(Hotel newHotel)
         {
             await myContext.Hotels.AddAsync(newHotel);
-            myContext.SaveChanges();
+             await  myContext.SaveChangesAsync();
             return newHotel.Id;
         }
 

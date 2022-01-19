@@ -23,7 +23,7 @@ namespace DL
         public async Task<int> addNewOrder(Order newOrder)
         {
             await myTravelAgentContext.Orders.AddAsync(newOrder);
-            myTravelAgentContext.SaveChanges();
+           await  myTravelAgentContext.SaveChangesAsync();
             return newOrder.Id;
         }
 

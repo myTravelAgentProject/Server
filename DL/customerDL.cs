@@ -53,7 +53,7 @@ namespace DL
         {
             Customer customer = mapper.Map<customerDTO, Customer>(customerToAdd);
             await myTravelAgentContext.Customers.AddAsync(customer);
-            myTravelAgentContext.SaveChanges();
+            await myTravelAgentContext.SaveChangesAsync();
             return customer.Id;
         }
 

@@ -29,7 +29,7 @@ namespace DL
         public async Task<int> insertAlert(Alert newAlert)
         {
             await myContext.Alerts.AddAsync(newAlert);
-            myContext.SaveChanges();
+           await myContext.SaveChangesAsync();
             return newAlert.Id;
         }
 

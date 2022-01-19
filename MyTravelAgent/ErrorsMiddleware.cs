@@ -26,7 +26,7 @@ namespace MyTravelAgent
             }
             catch (Exception ex)
             {
-                logger.LogInformation(ex.Message);
+                logger.LogError("Error from My MiddleWAre : "+ex.Message +"stack Trace is:"+ ex.StackTrace);
                 httpContext.Response.StatusCode = 500;
             }
            
