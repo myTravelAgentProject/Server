@@ -29,9 +29,15 @@ namespace DL
 
         public async Task deleteOrder(int id)
         {
+            try { 
             Order ordertoDelete =await myTravelAgentContext.Orders.FindAsync(id);
             myTravelAgentContext.Orders.Remove(ordertoDelete);
             await myTravelAgentContext.SaveChangesAsync();
+            }
+            catch
+            {
+                throw new Exception("There is no order with id " + id);
+            }
 
         }
 
