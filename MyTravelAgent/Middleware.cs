@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace MyTravelAgent
 {
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
-    public class Middleware
+    public class Middleware 
     {
         private readonly RequestDelegate _next;
 
