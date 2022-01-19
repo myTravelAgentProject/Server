@@ -45,7 +45,12 @@ namespace DL
             customerDTO customerD= mapper.Map<Customer,customerDTO>(customer);
             return customerD;
         }
-
+        //public async Task<List<Order>> getAllCustomerOrders(int id)
+        //{
+        //    var orders = myTravelAgentContext.Customers
+        //                          .Where(c => c.Id == id).Include(o => o.Orders).ToListAsync();
+        //    return await orders;
+        //}
         /*(post) adds the new customer to the table,
          save the changes
         returns the id of the new customer from the db*/
@@ -77,5 +82,7 @@ namespace DL
             myTravelAgentContext.Customers.Remove(toDelete);
             await myTravelAgentContext.SaveChangesAsync();
         }
+
+        
     }
 }

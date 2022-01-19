@@ -21,7 +21,7 @@ namespace MyTravelAgent.Controllers
         }
         //checks if has a admin with this email and password
         //returns the correct admin or null
-        [HttpGet("{name}/{password}")]
+        [HttpGet("{name}/{password}/admin")]
         public async Task<Admin> Get(string name,string password)
         {
             return await adminBL.login(name, password);

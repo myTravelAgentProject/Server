@@ -28,6 +28,11 @@ namespace BL
         {
             return await customerDL.getCustomer(id);
         }
+        //(get {id})
+        //public Task<List<Order>> getAllCustomerOrders(int id)
+        //{
+        //    return await customerDL.getAllCustomerOrders(id);
+        //}
 
         //(post)
         public async Task<int> addNewCustomer(customerDTO customerToAdd)
@@ -46,5 +51,7 @@ namespace BL
         {
              await customerDL.deleteCustomer(id);
         }
+
+        
     }
 }

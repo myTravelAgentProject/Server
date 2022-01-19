@@ -34,7 +34,11 @@ namespace MyTravelAgent.Controllers
         {
             return await customerBL.getCustomer(id); 
         }
-
+        //[HttpGet("{id}/Orders")]
+        //public async Task<Order> getAllCustomerOrders(int id)
+        //{
+        //    return await customerBL.getAllCustomerOrders(id);
+        //}
         //add a new customer
         [HttpPost]
         public async Task<int> Post([FromBody] customerDTO customerToAdd)

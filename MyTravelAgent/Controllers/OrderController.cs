@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyTravelAgent.Controllers
 { 
-    //כתבתי הערות רק בקונטרולר ולא בבל ובדל....
+    
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
@@ -36,14 +36,14 @@ namespace MyTravelAgent.Controllers
         }
 
         //return a list of orders according to their customer id
-        [HttpGet("customer/{Id}")]
-        public async Task<List<Order>> getByCustomerId(int Id)
+        [HttpGet("{CustomerId}/orders")]
+        public async Task<List<Order>> getByCustomerId(int CustomerId)
         {
-            return await orderBL.getByCustomerId(Id);
+            return await orderBL.getByCustomerId(CustomerId);
         }
 
         /*return a list of 15 last taching orders*/
-        [HttpGet ("/lastOrders")]
+        [HttpGet ("lastOrders")]
         public async Task<List<Order>> getTheLastOrders()
         {
             return await orderBL.getTheLastOrders();
