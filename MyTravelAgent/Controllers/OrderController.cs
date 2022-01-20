@@ -36,7 +36,7 @@ namespace MyTravelAgent.Controllers
         }
 
         //return a list of orders according to their customer id
-        [HttpGet("{CustomerId}/orders")]
+        [HttpGet("{CustomerId}")]
         public async Task<List<Order>> getByCustomerId(int CustomerId)
         {
             return await orderBL.getByCustomerId(CustomerId);
@@ -50,7 +50,7 @@ namespace MyTravelAgent.Controllers
         }
 
         //get orders between two dates
-        [HttpGet("{start}/{end}/orders")]
+        [HttpGet("{start}/{end}")]
         public async Task<List<Order>> Get(DateTime start, DateTime end)
         {
             return await orderBL.getOrdetsBetweenDates(start, end);
