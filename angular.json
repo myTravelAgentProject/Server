@@ -71,7 +71,8 @@
               "browserTarget": "MyTravelAgent-app:build:production"
             },
             "development": {
-              "browserTarget": "MyTravelAgent-app:build:development"
+              "browserTarget": "MyTravelAgent-app:build:development",
+              "proxyConfig": "src/proxy.config.json"
             }
           },
           "defaultConfiguration": "development"
