@@ -29,14 +29,10 @@ namespace DL
 
         public async Task deleteOrder(int id)
         {
-            try {
             Order ordertoDelete =await myTravelAgentContext.Orders.FindAsync(id);
-                myTravelAgentContext.Orders.Remove(ordertoDelete);
-                await myTravelAgentContext.SaveChangesAsync();
-            }
-            catch (Exception ex) {
-                throw new Exception("there is no order with the id "+id);
-            }
+            myTravelAgentContext.Orders.Remove(ordertoDelete);
+            await myTravelAgentContext.SaveChangesAsync();
+
         }
 
         public async Task<List<Order>> getAllChanges()
