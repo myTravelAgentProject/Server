@@ -68,8 +68,10 @@ namespace MyTravelAgent
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,ILogger<Startup>logger)
         { 
-           
             logger.LogInformation("server is up:)");
+
+            app.UseErrorsMiddleware();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -84,7 +86,7 @@ namespace MyTravelAgent
                     new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
                     {
                         Public = true,
-                        MaxAge = TimeSpan.FromSeconds(10)
+                        MaxAge = TimeSpan.FromSeconds(60)
                     };
                 context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
                     new string[] { "Accept-Encoding" };
@@ -98,7 +100,6 @@ namespace MyTravelAgent
 
             app.UseRouting();
 
-            app.UseErrorsMiddleware();
 
             app.Map("/api", app2 =>
             {

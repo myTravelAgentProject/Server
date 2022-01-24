@@ -13,8 +13,8 @@ namespace DTO
         public string HotelName { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
-        public TimeSpan? EarlyCheckIn { get; set; }
-        public TimeSpan? LateCheckOut { get; set; }
+        public DateTime? EarlyCheckIn { get; set; }
+        public DateTime? LateCheckOut { get; set; }
 
     }
 }

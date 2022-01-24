@@ -27,7 +27,7 @@ namespace MyTravelAgent.Controllers
         /*calculate the first and the last dates in the month,
          goes to orderBL and gets a list of all the orders between those two dates
         returns the list*/
-        [HttpGet("{year}/{month}/orders")]
+        [HttpGet("date/{year}/{month}/orders")]
         public async Task<List<OrderForCalendar>> getOrders( int year, int month)
         { 
             DateTime beginingOfMonth = new DateTime(year, month, 01);
@@ -40,7 +40,7 @@ namespace MyTravelAgent.Controllers
         /*calculate the first and the last dates in the week,
          goes to orderBL and gets a list of all the orders between those two dates
         returns the list*/
-        [HttpGet ("{date}/orders")]
+        [HttpGet ("date/{date}/orders")]
         public async Task<List<OrderForCalendar>> getOrders(DateTime date)
         {
             int dayOfWeek = (int)date.DayOfWeek;
@@ -52,7 +52,7 @@ namespace MyTravelAgent.Controllers
         /*calculate the first and the last dates in the month,
          goes to alertBL and gets a list of all the alerts between those two dates
         returns the list*/
-        [HttpGet("{year}/{month}/alerts")]
+        [HttpGet("date/{year}/{month}/alerts")]
         public async Task<List<Alert>> getAlerts(int year, int month)
         {
             DateTime beginingOfMonth = new DateTime(year, month, 01);
@@ -64,7 +64,7 @@ namespace MyTravelAgent.Controllers
         /*calculate the first and the last dates in the week,
          goes to alertBL and gets a list of all the alerts between those two dates
         returns the list*/
-        [HttpGet("{date}/alerts")]
+        [HttpGet("date/{date}/alerts")]
         public async Task<List<Alert>> getAlerts(DateTime date)
         {
             int dayOfWeek = (int)date.DayOfWeek;

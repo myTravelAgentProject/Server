@@ -13,8 +13,8 @@ namespace Entity
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
         public DateTime BookingDate { get; set; }
-        public TimeSpan? EarlyCheckIn { get; set; }
-        public TimeSpan? LateCheckOut { get; set; }
+        public DateTime? EarlyCheckIn { get; set; }
+        public DateTime? LateCheckOut { get; set; }
         public bool SeprateBeds { get; set; }
         public bool MultipleRooms { get; set; }
         public int? FloorHeight { get; set; }

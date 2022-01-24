@@ -33,7 +33,7 @@ namespace DL
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-R5RADSP;Database=MyTravelAgent2;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=srv2\\PUPILS;Database=MyTravelAgent2;Trusted_Connection=True;");
             }
         }
 
@@ -225,7 +225,9 @@ namespace DL
 
                 entity.Property(e => e.CustomerId).HasColumnName("CUSTOMER_ID");
 
-                entity.Property(e => e.EarlyCheckIn).HasColumnName("EARLY_CHECK_IN");
+                entity.Property(e => e.EarlyCheckIn)
+                    .HasColumnType("datetime")
+                    .HasColumnName("EARLY_CHECK_IN");
 
                 entity.Property(e => e.FloorHeight).HasColumnName("FLOOR_HEIGHT");
 
@@ -237,7 +239,9 @@ namespace DL
 
                 entity.Property(e => e.IsImportant).HasColumnName("IS_IMPORTANT");
 
-                entity.Property(e => e.LateCheckOut).HasColumnName("LATE_CHECK_OUT");
+                entity.Property(e => e.LateCheckOut)
+                    .HasColumnType("datetime")
+                    .HasColumnName("LATE_CHECK_OUT");
 
                 entity.Property(e => e.MultipleRooms).HasColumnName("MULTIPLE_ROOMS");
 

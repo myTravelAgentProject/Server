@@ -12,9 +12,11 @@ namespace BL
     public class customerBL : ICustomerBL
     {
         ICustomerDL customerDL;
-        public customerBL(ICustomerDL customerDL)
+        IOrderDL orderDL;
+        public customerBL(ICustomerDL customerDL,IOrderDL orderDL)
         {
             this.customerDL = customerDL;
+            this.orderDL = orderDL;
         }
 
         //(get)
@@ -29,10 +31,10 @@ namespace BL
             return await customerDL.getCustomer(id);
         }
         //(get {id})
-        //public Task<List<Order>> getAllCustomerOrders(int id)
-        //{
-        //    return await customerDL.getAllCustomerOrders(id);
-        //}
+        public async Task<List<Order>> getAllCustomerOrders(int id)
+        {
+            return await orderDL.getByCustomerId(id);
+        }
 
         //(post)
         public async Task<int> addNewCustomer(customerDTO customerToAdd)

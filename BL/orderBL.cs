@@ -40,11 +40,6 @@ namespace BL
             return await orderDL.getTheLastOrders();
         }
 
-        public async Task<List<Order>> getByCustomerId(int id)
-        {
-            return await orderDL.getByCustomerId(id);
-        }
-
         public async Task<List<OrderForCalendar>> getEventsForCalender(DateTime startDate, DateTime endDate)
         {
             return await orderDL.getEventsForCalender(startDate, endDate);

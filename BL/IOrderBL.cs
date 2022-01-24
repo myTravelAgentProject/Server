@@ -12,7 +12,6 @@ namespace BL
     {
         public Task<List<OrderForCalendar>> getEventsForCalender(DateTime startDate, DateTime endDate);
         public Task<Order> getOrderById(int id);
-        public Task<List<Order>> getByCustomerId(int id);
         public Task<int> addNewOrder(Order newOrder);
         public Task<List<Order>> getTheLastOrders();
          public Task<List<Order>> getAllChanges();
