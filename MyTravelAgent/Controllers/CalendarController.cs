@@ -14,11 +14,11 @@ namespace MyTravelAgent.Controllers
     
     [Route("api/[controller]")]
     [ApiController]
-    public class EventsController : ControllerBase
+    public class CalendarController : ControllerBase
     {
         IOrderBL orderBL;
         IAlertBL alertBL;
-        public EventsController(IOrderBL orderBL, IAlertBL alertBL)
+        public CalendarController(IOrderBL orderBL, IAlertBL alertBL)
         {
             this.alertBL = alertBL;
             this.orderBL = orderBL;

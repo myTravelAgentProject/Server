@@ -59,10 +59,10 @@ namespace MyTravelAgent
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyTravelAgent", Version = "v1" });
             });
             services.AddDbContext<MyTravelAgent2Context>(options => options.UseSqlServer(
-            Configuration.GetConnectionString("Home")));
+            Configuration.GetConnectionString("Seminary")));
             //"Server=DESKTOP-R5RADSP;Database=MyTravelAgent2;Trusted_Connection=True;"), ServiceLifetime.Scoped);
             //(LocalDB)\\MSSQLLocalDB;Database=https:\\github.com\\myTravelAgentProject\\good.git\\DL\\DB.mdf
-            services.AddResponseCaching();
+          //  services.AddResponseCaching();
 
         }
 
@@ -79,19 +79,19 @@ namespace MyTravelAgent
             }
             app.UseResponseCaching();
 
-            //app.Use(async (context, next) =>
-            //{
-            //    context.Response.GetTypedHeaders().CacheControl =
-            //        new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
-            //        {
-            //            Public = true,
-            //            MaxAge = TimeSpan.FromSeconds(10)
-            //        };
-            //    context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
-            //        new string[] { "Accept-Encoding" };
+            app.Use(async (context, next) =>
+            {
+                context.Response.GetTypedHeaders().CacheControl =
+                    new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+                    {
+                        Public = true,
+                        MaxAge = TimeSpan.FromSeconds(10)
+                    };
+                context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
+                    new string[] { "Accept-Encoding" };
 
-            //    await next();
-            //});
+                await next();
+            });
 
             app.UseCors("AllowAll");
 

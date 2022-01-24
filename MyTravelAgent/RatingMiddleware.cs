@@ -30,7 +30,9 @@ namespace MyTravelAgent
                 Host = httpContext.Request.Host.ToString(),
                 RecordDate = DateTime.Now,
                 Method = httpContext.Request.Method,
-                Path = httpContext.Request.Path
+                Path = httpContext.Request.Path.Value,
+                UserAgent = httpContext.Request.Headers["User-Agent"].ToString(),
+                Referer = httpContext.Request.Headers["Referer"]
             };
             await myTravelAgent.Ratings.AddAsync(r);
             await myTravelAgent.SaveChangesAsync();
