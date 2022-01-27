@@ -39,11 +39,10 @@ namespace DL
         }
 
         //(get {id}) returns a customer according to the id
-        public async Task<customerDTO> getCustomer(int id)
+        public async Task<Customer> getCustomer(int id)
         {
             Customer customer = await myTravelAgentContext.Customers.FindAsync(id);
-            customerDTO customerD= mapper.Map<Customer,customerDTO>(customer);
-            return customerD;
+            return customer;
         }
     
         /*(post) adds the new customer to the table,

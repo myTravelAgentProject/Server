@@ -30,7 +30,7 @@ namespace MyTravelAgent.Controllers
 
         //returns a single customer according to his id
         [HttpGet("{id}")]
-        public async Task<customerDTO> Get(int id)
+        public async Task<Customer> Get(int id)
         {
             return await customerBL.getCustomer(id); 
         }

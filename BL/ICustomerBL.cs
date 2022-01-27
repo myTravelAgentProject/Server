@@ -13,7 +13,7 @@ namespace BL
         //(get)
         public Task<List<customerDTO>> getAllCustomers();
         //(get {id})
-        public Task<customerDTO> getCustomer(int id);
+        public Task<Customer> getCustomer(int id);
         public Task<List<Order>> getAllCustomerOrders(int id);
         //(post)
         public Task<int> addNewCustomer(customerDTO customerToAdd);

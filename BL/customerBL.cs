@@ -26,7 +26,7 @@ namespace BL
         }
 
         //(get {id})
-        public async Task<customerDTO> getCustomer(int id)
+        public async Task<Customer> getCustomer(int id)
         {
             return await customerDL.getCustomer(id);
         }
