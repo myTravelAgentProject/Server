@@ -59,7 +59,7 @@ namespace MyTravelAgent
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyTravelAgent", Version = "v1" });
             });
             services.AddDbContext<MyTravelAgent2Context>(options => options.UseSqlServer(
-            Configuration.GetConnectionString("Home")));
+            Configuration.GetConnectionString("Seminary")));
             //"Server=DESKTOP-R5RADSP;Database=MyTravelAgent2;Trusted_Connection=True;"), ServiceLifetime.Scoped);
             //(LocalDB)\\MSSQLLocalDB;Database=https:\\github.com\\myTravelAgentProject\\good.git\\DL\\DB.mdf
             services.AddResponseCaching();

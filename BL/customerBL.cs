@@ -37,13 +37,13 @@ namespace BL
         }
 
         //(post)
-        public async Task<int> addNewCustomer(customerDTO customerToAdd)
+        public async Task<int> addNewCustomer(Customer customerToAdd)
         {
             return await customerDL.addNewCustomer(customerToAdd);
         }
 
         //(put)
-        public async Task updateCustomer(customerDTO customerToUpdate, int id)
+        public async Task updateCustomer(Customer customerToUpdate, int id)
         {
             await customerDL.updateCustomer(customerToUpdate, id);
         }

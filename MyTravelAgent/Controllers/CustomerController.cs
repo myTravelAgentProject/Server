@@ -43,14 +43,14 @@ namespace MyTravelAgent.Controllers
         }
         //add a new customer
         [HttpPost]
-        public async Task<int> Post([FromBody] customerDTO customerToAdd)
+        public async Task<int> Post([FromBody] Customer customerToAdd)
         {
             return await customerBL.addNewCustomer(customerToAdd);
         }
 
         //update a customer
         [HttpPut("{id}")]
-        public async Task Put(int id,[FromBody] customerDTO customerToUpdate)
+        public async Task Put(int id,[FromBody] Customer customerToUpdate)
         {
             await customerBL.updateCustomer(customerToUpdate,id);
         }

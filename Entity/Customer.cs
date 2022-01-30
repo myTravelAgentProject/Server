@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -23,13 +24,16 @@ namespace Entity
         public bool? Porch { get; set; }
         public bool? SeprateBeds { get; set; }
         public bool? MultipleRooms { get; set; }
-        public string EmailAddress { get; set; }
+        public string? EmailAddress { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
-        public string Comments { get; set; }
+        public string? Comments { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<CustomerChild> CustomerChildren { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Order> Orders { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Request> Requests { get; set; }
     }
 }

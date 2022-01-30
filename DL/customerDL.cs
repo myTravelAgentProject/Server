@@ -16,7 +16,7 @@ namespace DL
         MyTravelAgent2Context myTravelAgentContext;
         IMapper mapper;
        private readonly ILogger<customerDL> logger;
-        public customerDL(MyTravelAgent2Context myTravelAgentContext, IMapper mapper,ILogger<customerDL>logger)
+        public customerDL(MyTravelAgent2Context myTravelAgentContext, IMapper mapper, ILogger<customerDL> logger)
         {
             this.logger = logger;
             this.myTravelAgentContext = myTravelAgentContext;
@@ -48,22 +48,22 @@ namespace DL
         /*(post) adds the new customer to the table,
          save the changes
         returns the id of the new customer from the db*/
-        public async Task<int> addNewCustomer(customerDTO customerToAdd)
+        public async Task<int> addNewCustomer(Customer customerToAdd)
         {
-            Customer customer = mapper.Map<customerDTO, Customer>(customerToAdd);
-            await myTravelAgentContext.Customers.AddAsync(customer);
+            //Customer customer = mapper.Map<customerDTO, Customer>(customerToAdd);
+            await myTravelAgentContext.Customers.AddAsync(customerToAdd);
             await myTravelAgentContext.SaveChangesAsync();
-            return customer.Id;
+            return customerToAdd.Id;
         }
 
         /*(put) finds the customer we want to change (according to the id),
          replace the customer with the new cuatomer (with the changes)
         save the changes*/
-        public async Task updateCustomer(customerDTO customerToUpdate, int id)
+        public async Task updateCustomer(Customer customerToUpdate, int id)
         {
-            Customer customerToUp = mapper.Map<customerDTO, Customer>(customerToUpdate);
+            //Customer customerToUp = mapper.Map<customerDTO, Customer>(customerToUpdate);
             Customer customer = await myTravelAgentContext.Customers.FindAsync(id);
-            myTravelAgentContext.Entry(customer).CurrentValues.SetValues(customerToUp);
+            myTravelAgentContext.Entry(customer).CurrentValues.SetValues(customerToUpdate);
             await myTravelAgentContext.SaveChangesAsync();
         }
 
