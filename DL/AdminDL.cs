@@ -1,4 +1,5 @@
-﻿using Entity;
+﻿using DTO;
+using Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace DL
     public class AdminDL : IAdminDL
     {
         MyTravelAgent2Context myContext;
+        AdminDTO adminDTO=new AdminDTO();
         public AdminDL(MyTravelAgent2Context myContext)
         {
             this.myContext = myContext;
@@ -18,9 +20,13 @@ namespace DL
 
         /*(get) looks for a admin that his email and password maches to the variables
         rerurns the object or null*/
-        public async Task<Admin> login(string name, string password)
+        public async Task<AdminDTO> login(string name, string password)
         {
-           return await myContext.Admins.SingleOrDefaultAsync(a => a.Name == name && a.Password == password);
+            Admin admin= await myContext.Admins.FirstOrDefaultAsync(a => a.Name == name && a.Password == password);
+            adminDTO.Name = admin.Name;
+            adminDTO.Password = admin.Password;
+            adminDTO.Token = "we have to give token";
+            return adminDTO;
         }
 
         /*(post) add the new admin to the admin table

@@ -1,4 +1,5 @@
 ﻿using DL;
+using DTO;
 using Entity;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace BL
         }
 
         //(get)
-        public async Task<Admin> login(string name, string password)
+        public async Task<AdminDTO> login(string name, string password)
         {
             return await adminDL.login(name, password);
         }

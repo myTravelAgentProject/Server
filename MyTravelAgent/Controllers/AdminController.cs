@@ -1,4 +1,5 @@
 ﻿using BL;
+using DTO;
 using Entity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,10 +22,10 @@ namespace MyTravelAgent.Controllers
         }
         //checks if has a admin with this email and password
         //returns the correct admin or null
-        [HttpGet("{name}/{password}")]
-        public async Task<Admin> Get(string name,string password)
+        [HttpPost ("Login")]
+        public async Task<AdminDTO> post([FromBody] Admin admin)
         {
-            return await adminBL.login(name, password);
+            return await adminBL.login(admin.Name, admin.Password);
         }
 
 
