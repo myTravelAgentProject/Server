@@ -1,4 +1,5 @@
-﻿using Entity;
+﻿using DTO;
+using Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace BL
 {
     public interface IAdminBL
     {
-        //(get)
+        //(get by post)
         public Task<Admin> login(string name, string password);
         //(post)
         public Task<int> addNewAdmin(Admin adminToAdd);

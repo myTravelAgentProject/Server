@@ -1,4 +1,5 @@
 ﻿using BL;
+using DTO;
 using Entity;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -28,13 +29,16 @@ namespace MyTravelAgent.Controllers
   
         //checks if has a admin with this email and password
         //returns the correct admin or null
+        [HttpPost ("Login")]
         [AllowAnonymous]
-        [HttpPost("/Login")]
-        public async Task<AdminLoginDTO> Login([FromBody] Admin admin)
+        public async Task<ActionResult<Admin>> post([FromBody] AdminDTO loginAdmin)
         {
-            Admin adminLogin=await adminBL.login(admin.Name, admin.Password);
-            AdminLoginDTO adminDTO = mapper.Map<Admin, AdminLoginDTO>(adminLogin);
-            return adminDTO;
+            Admin admin= await adminBL.login(loginAdmin.Name, loginAdmin.Password);
+            if (admin == null)
+                return NoContent();
+            else
+                return Ok(admin);
+             
         }
 
 

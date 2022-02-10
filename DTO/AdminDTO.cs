@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-#nullable disable
-
-namespace Entity
+namespace DTO
 {
-    public partial class Admin
+   public class AdminDTO
     {
-        public int Id { get; set; }
-        [EmailAddress]
+        
         public string Name { get; set; }
-        [MinLength(8)]
+        
         public string Password { get; set; }
-        [NotMapped]
-        public string Token { get; set; }
+   
     }
 }

@@ -1,4 +1,5 @@
-﻿using Entity;
+﻿using DTO;
+using Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,8 @@ namespace DL
         rerurns the object or null*/
         public async Task<Admin> login(string name, string password)
         {
-           return await myContext.Admins.SingleOrDefaultAsync(a => a.Name == name && a.Password == password);
+            Admin admin= await myContext.Admins.FirstOrDefaultAsync(a => a.Name == name && a.Password == password);
+            return admin;
         }
 
         /*(post) add the new admin to the admin table
