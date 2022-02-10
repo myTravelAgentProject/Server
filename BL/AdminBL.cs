@@ -16,10 +16,12 @@ namespace BL
             this.adminDL = adminDL;
         }
 
-        //(get)
+        //(post)
         public async Task<Admin> login(string name, string password)
         {
-            return await adminDL.login(name, password);
+            Admin admin=await adminDL.login(name, password);
+            //להוסיף תוקן לאובייקט אדמין הזה
+            return admin;
         }
 
         //(post) 

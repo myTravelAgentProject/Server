@@ -1,10 +1,13 @@
 ﻿using BL;
 using Entity;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,19 +15,26 @@ namespace MyTravelAgent.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AdminController : ControllerBase
     {
+        IMapper mapper;
         IAdminBL adminBL;
-        public AdminController(IAdminBL adminBL)
+        public AdminController(IAdminBL adminBL, IMapper mapper)
         {
             this.adminBL = adminBL;
+            this.mapper = mapper;
         }
+  
         //checks if has a admin with this email and password
         //returns the correct admin or null
-        [HttpGet("{name}/{password}")]
-        public async Task<Admin> Get(string name,string password)
+        [AllowAnonymous]
+        [HttpPost("/Login")]
+        public async Task<AdminLoginDTO> Login([FromBody] Admin admin)
         {
-            return await adminBL.login(name, password);
+            Admin adminLogin=await adminBL.login(admin.Name, admin.Password);
+            AdminLoginDTO adminDTO = mapper.Map<Admin, AdminLoginDTO>(adminLogin);
+            return adminDTO;
         }
 
 

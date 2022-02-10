@@ -13,5 +13,6 @@ namespace Entity
         public string Name { get; set; }
         [MinLength(8)]
         public string Password { get; set; }
+        //public string Token { get; set; }
     }
 }

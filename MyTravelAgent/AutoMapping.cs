@@ -21,7 +21,7 @@ namespace MyTravelAgent
                 opt => opt.MapFrom(src => src.Hotel.Name)).ReverseMap();
 
             CreateMap<Customer, customerDTO>().ReverseMap();
-
+            CreateMap<Admin,AdminLoginDTO>().ReverseMap();
 
 
         }
