@@ -13,7 +13,7 @@ namespace MyTravelAgent.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class HotelController : ControllerBase
     {
         IHotelBL hotelBL;
