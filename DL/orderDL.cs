@@ -37,17 +37,24 @@ namespace DL
 
         public async Task<List<OrderDTO>> getAllChanges()
         {
-            return await myTravelAgentContext.Orders.Where(o => o.Change == true).ToListAsync();
+            List<Order> orders= await myTravelAgentContext.Orders.Where(o => o.Change == true).ToListAsync();
+            List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
+            return ordersDTO;
         }
 
         public async Task<List<OrderDTO>> getOrsersToCheck(DateTime today)
         {
-            return await myTravelAgentContext.Orders.Where(o => o.IsImportant == true || (o.CheckInDate > today && o.CheckInDate < today.AddMonths(2))).ToListAsync();
+            List<Order> orders = await myTravelAgentContext.Orders.Where(o => o.IsImportant == true || (o.CheckInDate > today && o.CheckInDate < today.AddMonths(2))).ToListAsync();
+            List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
+            return ordersDTO;
         }
 
         public async Task<List<OrderDTO>> getTheLastOrders()
         {
-            return await myTravelAgentContext.Orders.OrderByDescending(o=>o.BookingDate).Take(15).ToListAsync();
+
+            List<Order> orders = await myTravelAgentContext.Orders.OrderByDescending(o => o.BookingDate).Take(15).ToListAsync();
+            List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
+            return ordersDTO;
         }
 
         public async Task<List<OrderDTO>> getByCustomerId(int id)
