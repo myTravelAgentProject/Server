@@ -20,7 +20,7 @@ namespace DL
             this.mapper = mapper;
         }
 
-        public async Task<int> addNewOrder(Order newOrder)
+        public async Task<int> addNewOrder(OrderDTO newOrder)
         {
             await myTravelAgentContext.Orders.AddAsync(newOrder);
            await  myTravelAgentContext.SaveChangesAsync();
@@ -35,32 +35,32 @@ namespace DL
 
         }
 
-        public async Task<List<Order>> getAllChanges()
+        public async Task<List<OrderDTO>> getAllChanges()
         {
             return await myTravelAgentContext.Orders.Where(o => o.Change == true).ToListAsync();
         }
 
-        public async Task<List<Order>> getOrsersToCheck(DateTime today)
+        public async Task<List<OrderDTO>> getOrsersToCheck(DateTime today)
         {
             return await myTravelAgentContext.Orders.Where(o => o.IsImportant == true || (o.CheckInDate > today && o.CheckInDate < today.AddMonths(2))).ToListAsync();
         }
 
-        public async Task<List<Order>> getTheLastOrders()
+        public async Task<List<OrderDTO>> getTheLastOrders()
         {
             return await myTravelAgentContext.Orders.OrderByDescending(o=>o.BookingDate).Take(15).ToListAsync();
         }
 
-        public async Task<List<Order>> getByCustomerId(int id)
+        public async Task<List<OrderDTO>> getByCustomerId(int id)
         {
             return await myTravelAgentContext.Orders.Where(o => o.CustomerId == id).ToListAsync();
         }
 
-        public async Task<List<OrderForCalendar>> getEventsForCalender(DateTime startDate, DateTime endDate)
+        public async Task<List<OrderDTO>> getEventsForCalender(DateTime startDate, DateTime endDate)
         {
             List<Order> orders = await myTravelAgentContext.Orders.Where(o => o.CheckInDate >= startDate && o.CheckInDate <= endDate)
                 .Include(c=>c.Customer)
                 .Include(h=>h.Hotel).ToListAsync();
-            List<OrderForCalendar> ordersToShow = mapper.Map<List<Order>, List<OrderForCalendar>>(orders);
+            List<OrderDTO> ordersToShow = mapper.Map<List<Order>, List<OrderDTO>>(orders);
             return ordersToShow;
 
 
@@ -81,23 +81,26 @@ namespace DL
             //return  ordersToShow;
         }
 
-        public async Task<Order> getOrderById(int id)
+        public async Task<OrderDTO> getOrderById(int id)
         {
             return await myTravelAgentContext.Orders.FindAsync(id);
         }
 
-        public async Task<List<Order>> getOrdetsBetweenDates(DateTime start, DateTime end)
+        public async Task<List<OrderDTO>> getOrdetsBetweenDates(DateTime start, DateTime end)
         {
             return await myTravelAgentContext.Orders.Where(o => o.CheckInDate > start && o.CheckInDate < end).ToListAsync();
         }
 
-        public async Task updateOrder(Order orderToUpdate,int id)
+        public async Task updateOrder(OrderDTO orderToUpdate,int id)
         {
             Order order = await myTravelAgentContext.Orders.FindAsync(id);
             myTravelAgentContext.Entry(order).CurrentValues.SetValues(orderToUpdate);
             await myTravelAgentContext.SaveChangesAsync();
         }
 
-      
+        public Task updateOrder(Order orderToUpdate, int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

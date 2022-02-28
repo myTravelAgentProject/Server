@@ -25,7 +25,7 @@ namespace MyTravelAgent.Controllers
 
         //return all the orders that their price had change (the 'change' filed is true)
         [HttpGet ("ChangedPriceOrders")]
-        public async Task<List<Order>> GetChangePriceOrders()
+        public async Task<List<OrderDTO>> GetChangePriceOrders()
         {
             return await orderBL.getAllChanges();
         }

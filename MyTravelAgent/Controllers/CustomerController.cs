@@ -47,6 +47,7 @@ namespace MyTravelAgent.Controllers
         [HttpPost]
         public async Task<int> Post([FromBody] Customer customerToAdd)
         {
+            
             return await customerBL.addNewCustomer(customerToAdd);
         }
 
