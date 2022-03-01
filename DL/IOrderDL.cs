@@ -10,7 +10,7 @@ namespace DL
 {
     public interface IOrderDL
     {
-        public Task<List<OrderForCalendar>> getEventsForCalender(DateTime startDate, DateTime endDate);
+        public Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate);
         public Task<Order> getOrderById(int id);
         public Task<List<Order>> getByCustomerId(int id);
         public Task<int> addNewOrder(Order newOrder);

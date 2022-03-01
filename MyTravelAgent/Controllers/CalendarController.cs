@@ -1,4 +1,5 @@
-﻿using BL;
+﻿using AutoMapper;
+using BL;
 using DTO;
 using Entity;
 using Microsoft.AspNetCore.Authorization;
@@ -16,26 +17,31 @@ namespace MyTravelAgent.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
+    
     public class CalendarController : ControllerBase
     {
         IOrderBL orderBL;
         IAlertBL alertBL;
-        public CalendarController(IOrderBL orderBL, IAlertBL alertBL)
+        IMapper mapper;
+        public CalendarController(IOrderBL orderBL, IAlertBL alertBL,IMapper mapper)
         {
             this.alertBL = alertBL;
             this.orderBL = orderBL;
+            this.mapper = mapper;
         }
 
         /*calculate the first and the last dates in the month,
          goes to orderBL and gets a list of all the orders between those two dates
         returns the list*/
         [HttpGet("date/{year}/{month}/orders")]
-        public async Task<List<OrderForCalendar>> getOrders( int year, int month)
+        public async Task<List<OrderDTO>> getOrders( int year, int month)
         { 
             DateTime beginingOfMonth = new DateTime(year, month, 01);
             int days = DateTime.DaysInMonth(year, month);
             DateTime endOfMonth = new DateTime(year,month,days);
-            return await orderBL.getEventsForCalender(beginingOfMonth, endOfMonth);
+            List<Order> orders = await orderBL.getEventsForCalender(beginingOfMonth, endOfMonth);
+            List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
+            return ordersDTO;
            
         }
 
@@ -43,12 +49,14 @@ namespace MyTravelAgent.Controllers
          goes to orderBL and gets a list of all the orders between those two dates
         returns the list*/
         [HttpGet ("date/{date}/orders")]
-        public async Task<List<OrderForCalendar>> getOrders(DateTime date)
+        public async Task<List<OrderDTO>> getOrders(DateTime date)
         {
             int dayOfWeek = (int)date.DayOfWeek;
             DateTime beginingOfWeek = date.AddDays(-dayOfWeek+1);
             DateTime endOfWeek = beginingOfWeek.AddDays(6);
-            return await orderBL.getEventsForCalender(beginingOfWeek, endOfWeek);
+            List<Order> orders = await orderBL.getEventsForCalender(beginingOfWeek, endOfWeek);
+            List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
+            return ordersDTO;
         }
 
         /*calculate the first and the last dates in the month,

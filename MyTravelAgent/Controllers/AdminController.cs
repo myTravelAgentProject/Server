@@ -1,7 +1,6 @@
 ﻿using BL;
 using DTO;
 using Entity;
-using DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

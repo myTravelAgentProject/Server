@@ -37,31 +37,35 @@ namespace DL
 
         public async Task<List<Order>> getAllChanges()
         {
-            return await myTravelAgentContext.Orders.Where(o => o.Change == true).ToListAsync();
+            return await myTravelAgentContext.Orders.Where(o => o.Change == true)
+                .Include(c => c.Customer)
+                .Include(h => h.Hotel).ToListAsync();
         }
 
         public async Task<List<Order>> getOrsersToCheck(DateTime today)
         {
-            return await myTravelAgentContext.Orders.Where(o => o.IsImportant == true || (o.CheckInDate > today && o.CheckInDate < today.AddMonths(2))).ToListAsync();
+            return await myTravelAgentContext.Orders.Where(o => o.IsImportant == true || (o.CheckInDate > today && o.CheckInDate < today.AddMonths(2)))
+                .Include(c => c.Customer)
+                .Include(h => h.Hotel).ToListAsync();
         }
 
         public async Task<List<Order>> getTheLastOrders()
         {
-            return await myTravelAgentContext.Orders.OrderByDescending(o=>o.BookingDate).Take(15).ToListAsync();
+            return await myTravelAgentContext.Orders.OrderByDescending(o=>o.BookingDate).Take(15)
+                .Include(c=>c.Customer)
+                .Include(h=>h.Hotel).ToListAsync();
         }
 
         public async Task<List<Order>> getByCustomerId(int id)
         {
-            return await myTravelAgentContext.Orders.Where(o => o.CustomerId == id).ToListAsync();
+            return await myTravelAgentContext.Orders.Where(o => o.CustomerId == id).Include(c => c.Customer)
+                .Include(h => h.Hotel).ToListAsync(); 
         }
 
-        public async Task<List<OrderForCalendar>> getEventsForCalender(DateTime startDate, DateTime endDate)
+        public async Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate)
         {
-            List<Order> orders = await myTravelAgentContext.Orders.Where(o => o.CheckInDate >= startDate && o.CheckInDate <= endDate)
-                .Include(c=>c.Customer)
-                .Include(h=>h.Hotel).ToListAsync();
-            List<OrderForCalendar> ordersToShow = mapper.Map<List<Order>, List<OrderForCalendar>>(orders);
-            return ordersToShow;
+           return await myTravelAgentContext.Orders.Where(o => o.CheckInDate >= startDate && o.CheckInDate <= endDate).ToListAsync();
+         
 
 
             //ordersToShow = (
@@ -88,7 +92,8 @@ namespace DL
 
         public async Task<List<Order>> getOrdetsBetweenDates(DateTime start, DateTime end)
         {
-            return await myTravelAgentContext.Orders.Where(o => o.CheckInDate > start && o.CheckInDate < end).ToListAsync();
+            return await myTravelAgentContext.Orders.Where(o => o.CheckInDate > start && o.CheckInDate < end).Include(c => c.Customer)
+                .Include(h => h.Hotel).ToListAsync();
         }
 
         public async Task updateOrder(Order orderToUpdate,int id)

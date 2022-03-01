@@ -10,7 +10,7 @@ namespace BL
 {
    public interface IOrderBL
     {
-        public Task<List<OrderForCalendar>> getEventsForCalender(DateTime startDate, DateTime endDate);
+        public Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate);
         public Task<Order> getOrderById(int id);
         public Task<int> addNewOrder(Order newOrder);
         public Task<List<Order>> getTheLastOrders();
