@@ -40,7 +40,7 @@ namespace BL
             return await orderDL.getTheLastOrders();
         }
 
-        public async Task<List<OrderForCalendar>> getEventsForCalender(DateTime startDate, DateTime endDate)
+        public async Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate)
         {
             return await orderDL.getEventsForCalender(startDate, endDate);
         }

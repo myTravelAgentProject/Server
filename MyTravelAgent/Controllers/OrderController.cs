@@ -1,4 +1,6 @@
-﻿using BL;
+﻿using AutoMapper;
+using BL;
+using DTO;
 using Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,56 +16,69 @@ namespace MyTravelAgent.Controllers
     
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class OrderController : ControllerBase
     {
         IOrderBL orderBL;
-        public OrderController(IOrderBL orderBL)
+        IMapper mapper;
+        public OrderController(IOrderBL orderBL, IMapper mapper)
         {
-            this.orderBL = orderBL;       
+            this.orderBL = orderBL;
+            this.mapper = mapper;
         }
 
         //return all the orders that their price had change (the 'change' filed is true)
         [HttpGet ("ChangedPriceOrders")]
-        public async Task<List<Order>> GetChangePriceOrders()
+        public async Task<List<OrderDTO>> GetChangePriceOrders()
         {
-            return await orderBL.getAllChanges();
+            List<Order> orders=await orderBL.getAllChanges();
+            List<OrderDTO> ordersDTO= mapper.Map<List<Order>, List<OrderDTO>>(orders);
+            return ordersDTO;
         }
 
         // return a order according to its id
         [HttpGet("{id}")]
-        public async Task<Order> getOrderById(int id)
+        public async Task<OrderDTO> getOrderById(int id)
         {
-            return await orderBL.getOrderById(id);
+            Order order = await orderBL.getOrderById(id);
+            OrderDTO orderDTO = mapper.Map<Order, OrderDTO>(order);
+            return orderDTO;
         }
 
 
         /*return a list of 15 last taching orders*/
         [HttpGet ("lastOrders")]
-        public async Task<List<Order>> getTheLastOrders()
+        public async Task<List<OrderDTO>> getTheLastOrders()
         {
-            return await orderBL.getTheLastOrders();
+            List<Order> orders = await orderBL.getTheLastOrders();
+            List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
+            return ordersDTO;
         }
 
         //get orders between two dates
         [HttpGet("betweenDates/{start}/{end}")]
-        public async Task<List<Order>> Get(DateTime start, DateTime end)
+        public async Task<List<OrderDTO>> Get(DateTime start, DateTime end)
         {
-            return await orderBL.getOrdetsBetweenDates(start, end);
+            List<Order> orders = await orderBL.getOrdetsBetweenDates(start, end);
+            List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
+            return ordersDTO; 
         }
 
         //add a order
         [HttpPost]
-        public async Task<int> Post([FromBody] Order newOrder)
+        public async Task<int> Post([FromBody] OrderDTO newOrder)
         {
-            return await orderBL.addNewOrder(newOrder);
+            Order _order = mapper.Map<OrderDTO, Order>(newOrder);
+            return await orderBL.addNewOrder(_order);
         }
 
         //update a order according to the given id
         [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody] Order orderToUpdate)
+        public async Task Put(int id, [FromBody] OrderDTO orderToUpdate)
         {
-            await orderBL.updateOrder(orderToUpdate,id);
+
+            Order _orderToUpdate = mapper.Map<OrderDTO, Order>(orderToUpdate);
+            await orderBL.updateOrder(_orderToUpdate, id);
         }
 
         //delete a order according to the id
