@@ -12,7 +12,7 @@ namespace MyTravelAgent
     {
         public AutoMapping()
         {
-            CreateMap<Order, OrderForCalendar>()
+            CreateMap<Order, OrderDTO>()
                 .ForMember(dest =>
                 dest.CustomerName,
                 opt => opt.MapFrom(src => src.Customer.FirstName + " " + src.Customer.LastName))
