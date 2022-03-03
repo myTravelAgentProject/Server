@@ -16,10 +16,13 @@ namespace MyTravelAgent
                 .ForMember(dest =>
                 dest.CustomerName,
                 opt => opt.MapFrom(src => src.Customer.FirstName + " " + src.Customer.LastName))
+               .ForMember(dest=> dest.HotelId,
+                opt=> opt.MapFrom(src=>src.Hotel.Id))
                 .ForMember(dest =>
                 dest.HotelName,
-                opt => opt.MapFrom(src => src.Hotel.Name)).ReverseMap();
+                opt => opt.MapFrom(src => src.Hotel.Name));
 
+            CreateMap<OrderDTO, Order>();
             CreateMap<Customer, customerDTO>().ReverseMap();
             CreateMap<Admin,AdminLoginDTO>().ReverseMap();
 

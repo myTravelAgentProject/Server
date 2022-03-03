@@ -133,7 +133,7 @@ namespace MyTravelAgent
                     new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
                     {
                         Public = true,
-                        MaxAge = TimeSpan.FromSeconds(60)
+                        MaxAge = TimeSpan.FromSeconds(3)
                     };
                 context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
                     new string[] { "Accept-Encoding" };
