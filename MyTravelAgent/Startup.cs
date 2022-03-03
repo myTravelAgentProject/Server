@@ -106,7 +106,11 @@ namespace MyTravelAgent
                 });
             });
             services.AddDbContext<MyTravelAgent2Context>(options => options.UseSqlServer(
-            Configuration.GetConnectionString("Seminary")));
+<<<<<<< HEAD
+            Configuration.GetConnectionString("MichalHome")));
+=======
+            Configuration.GetConnectionString("Home")));
+>>>>>>> f28cf8eef45b77820c9412619c7f91b7f10a2f51
             //"Server=DESKTOP-R5RADSP;Database=MyTravelAgent2;Trusted_Connection=True;"), ServiceLifetime.Scoped);
             //(LocalDB)\\MSSQLLocalDB;Database=https:\\github.com\\myTravelAgentProject\\good.git\\DL\\DB.mdf
             services.AddResponseCaching();
@@ -133,7 +137,7 @@ namespace MyTravelAgent
                     new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
                     {
                         Public = true,
-                        MaxAge = TimeSpan.FromSeconds(3)
+                        MaxAge = TimeSpan.FromSeconds(1)
                     };
                 context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
                     new string[] { "Accept-Encoding" };
