@@ -20,7 +20,7 @@ namespace BL
         }
 
         //(get)
-        public async Task<List<customerDTO>> getAllCustomers()
+        public async Task<List<Customer>> getAllCustomers()
         {
             return await customerDL.getAllCustomers();
         }
