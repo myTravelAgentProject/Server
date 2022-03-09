@@ -25,7 +25,7 @@ namespace MyTravelAgent.Controllers
 
         //returns a list of all the customers
         [HttpGet]
-        public async Task<List<customerDTO>> Get()
+        public async Task<List<Customer>> Get()
         {
             return await customerBL.getAllCustomers();
         }

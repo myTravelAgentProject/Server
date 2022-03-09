@@ -11,7 +11,7 @@ namespace BL
     public interface ICustomerBL
     {
         //(get)
-        public Task<List<customerDTO>> getAllCustomers();
+        public Task<List<Customer>> getAllCustomers();
         //(get {id})
         public Task<Customer> getCustomer(int id);
         public Task<List<Order>> getAllCustomerOrders(int id);

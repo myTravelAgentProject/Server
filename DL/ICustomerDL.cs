@@ -11,7 +11,7 @@ namespace DL
     public interface ICustomerDL
     {
         //(get)
-        public Task<List<customerDTO>> getAllCustomers();
+        public Task<List<Customer>> getAllCustomers();
         //(get {id})
         public Task<Customer> getCustomer(int id);
         //(post)
