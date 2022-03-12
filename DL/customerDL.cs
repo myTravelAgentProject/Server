@@ -24,12 +24,11 @@ namespace DL
         }
 
         //(get) returns a list of all the customers
-        public async Task<List<customerDTO>> getAllCustomers()
+        public async Task<List<Customer>> getAllCustomers()
         {
             try {
-                List<Customer> customers = await myTravelAgentContext.Customers.ToListAsync();
-                List<customerDTO> customerD = mapper.Map<List<Customer>, List<customerDTO>>(customers);
-                return customerD;
+              return  await myTravelAgentContext.Customers.ToListAsync();
+                
             }
             catch(Exception ex)
             {

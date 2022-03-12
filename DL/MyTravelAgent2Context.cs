@@ -199,7 +199,7 @@ namespace DL
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.BookingDate)
-                    .HasColumnType("datetime")
+                    .HasColumnType("date")
                     .HasColumnName("BOOKING_DATE");
 
                 entity.Property(e => e.BookingId).HasColumnName("BOOKING_ID");
