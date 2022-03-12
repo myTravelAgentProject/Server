@@ -39,9 +39,9 @@ namespace MyTravelAgent.Controllers
 
         //return a list of orders according to their customer id
         [HttpGet("{id}/orders")]
-        public async Task<List<Order>> getByCustomerId(int CustomerId)
+        public async Task<List<Order>> getByCustomerId(int id)
         {
-            return await customerBL.getAllCustomerOrders(CustomerId);
+            return await customerBL.getAllCustomerOrders(id);
         }
         //add a new customer
         [HttpPost]
