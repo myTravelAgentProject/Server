@@ -77,7 +77,6 @@ namespace DL
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Address)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("ADDRESS");
 
