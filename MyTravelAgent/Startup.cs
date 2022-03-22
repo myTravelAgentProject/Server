@@ -106,7 +106,12 @@ namespace MyTravelAgent
                 });
             });
             services.AddDbContext<MyTravelAgent2Context>(options => options.UseSqlServer(
+<<<<<<< HEAD
         Configuration.GetConnectionString("Seminary")));
+=======
+            Configuration.GetConnectionString("Home")));
+
+>>>>>>> e67bade3058832164729c2d45ee7411a9ca4424f
             //"Server=DESKTOP-R5RADSP;Database=MyTravelAgent2;Trusted_Connection=True;"), ServiceLifetime.Scoped);
             //(LocalDB)\\MSSQLLocalDB;Database=https:\\github.com\\myTravelAgentProject\\good.git\\DL\\DB.mdf
             services.AddResponseCaching();          
