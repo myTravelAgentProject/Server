@@ -31,7 +31,7 @@ namespace Entity
         public bool? IsImportant { get; set; }
         public decimal HotelPrice { get; set; }
 
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual Customer Customer { get; set; }
         [JsonIgnore]
         public virtual Hotel Hotel { get; set; }

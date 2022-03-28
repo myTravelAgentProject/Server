@@ -64,7 +64,10 @@ namespace DL
 
         public async Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate)
         {
-            return await myTravelAgentContext.Orders.Where(o => o.CheckInDate >= startDate && o.CheckInDate <= endDate).ToListAsync();
+            return await myTravelAgentContext.Orders.Where(o => o.CheckInDate >= startDate && o.CheckInDate <= endDate||o.CheckOutDate >= startDate &&o.CheckOutDate <=endDate)
+                .Include(c=>c.Customer)
+                .Include(h=>h.Hotel)
+                .ToListAsync();
 
 
 
@@ -91,11 +94,12 @@ namespace DL
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<List<Order>> getOrdetsBetweenDates(DateTime start, DateTime end)
-        {
-            return await myTravelAgentContext.Orders.Where(o => o.CheckInDate > start && o.CheckInDate < end).Include(c => c.Customer)
-                .Include(h => h.Hotel).ToListAsync();
-        }
+        //public async Task<List<Order>> getOrdetsBetweenDates(DateTime start, DateTime end)
+        //{
+        //    return await myTravelAgentContext.Orders.Where(o => o.CheckInDate > start && o.CheckInDate < end)
+        //        .Include(c => c.Customer)
+        //        .Include(h => h.Hotel).ToListAsync();
+        //}
 
         public async Task updateOrder(Order orderToUpdate, int id)
         {
