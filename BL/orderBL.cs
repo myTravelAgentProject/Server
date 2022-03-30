@@ -50,10 +50,10 @@ namespace BL
             return await orderDL.getOrderById(id);
         }
 
-        public async Task<List<Order>> getOrdetsBetweenDates(DateTime start, DateTime end)
-        {
-            return await orderDL.getOrdetsBetweenDates(start, end);
-        }
+        //public async Task<List<Order>> getOrdetsBetweenDates(DateTime start, DateTime end)
+        //{
+        //    return await orderDL.getOrdetsBetweenDates(start, end);
+        //}
 
         public async Task updateOrder(Order orderToUpdate, int id)
         {
