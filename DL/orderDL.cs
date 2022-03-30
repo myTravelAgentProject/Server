@@ -93,7 +93,8 @@ namespace DL
 
         public async Task<List<Order>> getOrdetsBetweenDates(DateTime start, DateTime end)
         {
-            return await myTravelAgentContext.Orders.Where(o => o.CheckInDate > start && o.CheckInDate < end).Include(c => c.Customer)
+            return await myTravelAgentContext.Orders.Where(o => o.CheckInDate > start && o.CheckInDate < end)
+                  .Include(c => c.Customer)
                 .Include(h => h.Hotel).ToListAsync();
         }
 
