@@ -228,7 +228,7 @@ namespace DL
                     .HasColumnType("datetime")
                     .HasColumnName("EARLY_CHECK_IN");
 
-                entity.Property(e => e.HighFloor).HasColumnName("HIGH_FLOOR");
+                entity.Property(e => e.FloorHeight).HasColumnName("FLOOR_HEIGHT");
 
                 entity.Property(e => e.HotelId).HasColumnName("HOTEL_ID");
 
@@ -251,8 +251,6 @@ namespace DL
                 entity.Property(e => e.NumOfAdults).HasColumnName("NUM_OF_ADULTS");
 
                 entity.Property(e => e.NumOfKids).HasColumnName("NUM_OF_KIDS");
-
-                entity.Property(e => e.Porch).HasColumnName("PORCH");
 
                 entity.Property(e => e.SeprateBeds).HasColumnName("SEPRATE_BEDS");
 

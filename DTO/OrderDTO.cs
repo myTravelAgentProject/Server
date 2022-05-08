@@ -19,7 +19,7 @@ namespace DTO
         public DateTime BookingDate { get; set; }
         public bool SeprateBeds { get; set; }
         public bool MultipleRooms { get; set; }
-        public bool? HighFloor { get; set; }
+        public int? FloorHeight { get; set; }
         public decimal TotalPrice { get; set; }
         public decimal CostPrice { get; set; }
         public int? BookingId { get; set; }
@@ -33,7 +33,6 @@ namespace DTO
         public string Comments { get; set; }
         public bool? IsImportant { get; set; }
         public decimal HotelPrice { get; set; }
-        public bool? Porch { get; set; }
 
     }
 }
