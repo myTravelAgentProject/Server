@@ -1,5 +1,6 @@
 ﻿using DTO;
 using Entity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,7 @@ namespace DL
             Admin admin = await myContext.Admins.FindAsync(id);
             myContext.Entry(admin).CurrentValues.SetValues(adminToUpdate);
             await myContext.SaveChangesAsync();
+            
         }
     }
 }

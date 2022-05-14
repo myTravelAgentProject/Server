@@ -52,7 +52,8 @@ namespace MyTravelAgent.Controllers
         [HttpPut("{id}")]
         public async Task Put(int id, [FromBody] Admin adminToUpdate)
         {
-            await adminBL.updateAdmin(id,adminToUpdate);
+            
+             await adminBL.updateAdmin(id,adminToUpdate);
         }
     }
 }

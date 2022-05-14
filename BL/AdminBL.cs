@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BL
 {
@@ -49,6 +50,10 @@ namespace BL
         //(post) 
         public async Task<int> addNewAdmin(Admin adminToAdd)
         {
+            //Admin newAdmin = new Admin();
+            //newAdmin.Name = adminToAdd.Name;
+            //newAdmin.Password = adminToAdd.Password;
+            //newAdmin.Id = 0;
             return await adminDL.addNewAdmin(adminToAdd);
         }
 
