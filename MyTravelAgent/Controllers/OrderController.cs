@@ -16,7 +16,7 @@ namespace MyTravelAgent.Controllers
     
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class OrderController : ControllerBase
     {
         IOrderBL orderBL;
@@ -49,7 +49,7 @@ namespace MyTravelAgent.Controllers
         /*return a list of 15 last taching orders*/
         [HttpGet ("lastOrders")]
         public async Task<List<OrderDTO>> getTheLastOrders()
-        {
+         {
             List<Order> orders = await orderBL.getTheLastOrders();
             List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
             return ordersDTO;
