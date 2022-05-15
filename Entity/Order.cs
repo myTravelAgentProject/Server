@@ -17,8 +17,7 @@ namespace Entity
         public DateTime? LateCheckOut { get; set; }
         public bool SeprateBeds { get; set; }
         public bool MultipleRooms { get; set; }
-        public bool? HeighFloor { get; set; }
-        public bool? Porch { get; set; }
+        public bool? HighFloor { get; set; }
         public decimal TotalPrice { get; set; }
         public decimal CostPrice { get; set; }
         public int? BookingId { get; set; }
@@ -31,7 +30,7 @@ namespace Entity
         public string Comments { get; set; }
         public bool? IsImportant { get; set; }
         public decimal HotelPrice { get; set; }
-
+        public bool? Porch { get; set; }
         //[JsonIgnore]
         public virtual Customer Customer { get; set; }
         [JsonIgnore]

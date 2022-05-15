@@ -16,8 +16,8 @@ namespace MyTravelAgent.Controllers
     
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
-    
+    [Authorize]
+
     public class CalendarController : ControllerBase
     {
         IOrderBL orderBL;
