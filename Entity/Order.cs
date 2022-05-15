@@ -17,7 +17,8 @@ namespace Entity
         public DateTime? LateCheckOut { get; set; }
         public bool SeprateBeds { get; set; }
         public bool MultipleRooms { get; set; }
-        public int? FloorHeight { get; set; }
+        public bool? HeighFloor { get; set; }
+        public bool? Porch { get; set; }
         public decimal TotalPrice { get; set; }
         public decimal CostPrice { get; set; }
         public int? BookingId { get; set; }

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BL;
+﻿using BL;
 using DTO;
 using Entity;
 using Microsoft.AspNetCore.Authorization;
@@ -18,12 +17,10 @@ namespace MyTravelAgent.Controllers
     //[Authorize]
     public class CustomerController : ControllerBase
     {
-        ICustomerBL customerBL; 
-        IMapper mapper;
-        public CustomerController(ICustomerBL customerBL, IMapper mapper)
+        ICustomerBL customerBL;
+        public CustomerController(ICustomerBL customerBL)
         {
             this.customerBL = customerBL;
-            this.mapper = mapper;
         }
 
         //returns a list of all the customers
@@ -42,11 +39,9 @@ namespace MyTravelAgent.Controllers
 
         //return a list of orders according to their customer id
         [HttpGet("{id}/orders")]
-        public async Task<List<OrderDTO>> getByCustomerId(int id)
+        public async Task<List<Order>> getByCustomerId(int id)
         {
-            List<Order> orders = await customerBL.getAllCustomerOrders(id);
-            List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
-            return ordersDTO;
+            return await customerBL.getAllCustomerOrders(id);
         }
         //add a new customer
         [HttpPost]
