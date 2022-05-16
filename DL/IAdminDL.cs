@@ -11,7 +11,7 @@ namespace DL
     public interface IAdminDL
     {
         //(get)
-        public Task<Admin> login(string name, string password);
+        public Task<Admin> login(string name);
         //(post)
         public Task<int> addNewAdmin(Admin adminToAdd);
         //(put)

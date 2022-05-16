@@ -19,7 +19,7 @@ namespace DL
 
         /*(get) looks for a admin that his email and password maches to the variables
         rerurns the object or null*/
-        public async Task<Admin> login(string name, string password)
+        public async Task<Admin> login(string name)
         {
             Admin admin= await myContext.Admins.FirstOrDefaultAsync(a => a.Name == name && a.Password == password);
             return admin;
