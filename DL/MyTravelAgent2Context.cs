@@ -252,11 +252,11 @@ namespace DL
 
                 entity.Property(e => e.NumOfKids).HasColumnName("NUM_OF_KIDS");
 
-                entity.Property(e => e.Porch).HasColumnName("PORCH");
-
                 entity.Property(e => e.SeprateBeds).HasColumnName("SEPRATE_BEDS");
 
                 entity.Property(e => e.StatusCode).HasColumnName("STATUS_CODE");
+
+                entity.Property(e => e.Porch).HasColumnName("PORCH");
 
                 entity.Property(e => e.TotalPrice)
                     .HasColumnType("money")

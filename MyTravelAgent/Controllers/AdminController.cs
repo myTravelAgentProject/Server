@@ -15,7 +15,7 @@ namespace MyTravelAgent.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class AdminController : ControllerBase
     {
         IMapper mapper;
@@ -29,7 +29,7 @@ namespace MyTravelAgent.Controllers
         //checks if has a admin with this email and password
         //returns the correct admin or null
         [HttpPost ("Login")]
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public async Task<ActionResult<Admin>> post([FromBody] AdminDTO loginAdmin)
         {
             Admin admin= await adminBL.login(loginAdmin.Name, loginAdmin.Password);
