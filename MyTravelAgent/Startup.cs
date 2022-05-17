@@ -72,6 +72,7 @@ namespace MyTravelAgent
             services.AddScoped<IBookingBL, BookingBL>();
             services.AddScoped<IAdminBL, AdminBL>();
             services.AddScoped<IAdminDL,AdminDL>();
+            services.AddScoped<IPasswordHashHelper, PasswordHashHelper>();
             services.AddControllers().AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNameCaseInsensitive =true);
            // services.AddMvc().AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddAutoMapper(typeof(Startup));

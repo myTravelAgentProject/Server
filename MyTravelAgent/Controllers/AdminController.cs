@@ -15,7 +15,7 @@ namespace MyTravelAgent.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    Authorize]
     public class AdminController : ControllerBase
     {
         IMapper mapper;
