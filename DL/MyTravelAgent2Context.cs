@@ -57,6 +57,11 @@ namespace DL
                     .HasMaxLength(15)
                     .HasColumnName("PASSWORD")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.Salt)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("SALT");
             });
 
             modelBuilder.Entity<Alert>(entity =>
