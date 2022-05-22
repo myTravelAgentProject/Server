@@ -25,7 +25,7 @@ namespace DTO
         public int? BookingId { get; set; }
         public int NumOfAdults { get; set; }
         public int? NumOfKids { get; set; }
-        public int StatusCode { get; set; }
+        public bool Status { get; set; }
         public decimal? NewPrice { get; set; }
         public bool? Change { get; set; }
         public int HotelId { get; set; }

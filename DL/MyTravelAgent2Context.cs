@@ -26,7 +26,6 @@ namespace DL
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<Request> Requests { get; set; }
-        public virtual DbSet<Status> Statuses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -259,7 +258,7 @@ namespace DL
 
                 entity.Property(e => e.SeprateBeds).HasColumnName("SEPRATE_BEDS");
 
-                entity.Property(e => e.StatusCode).HasColumnName("STATUS_CODE");
+                entity.Property(e => e.Status).HasColumnName("STATUS");
 
                 entity.Property(e => e.Porch).HasColumnName("PORCH");
 
@@ -279,11 +278,6 @@ namespace DL
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Orders_Hotels");
 
-                entity.HasOne(d => d.StatusCodeNavigation)
-                    .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.StatusCode)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Orders_Status");
             });
 
             modelBuilder.Entity<Rating>(entity =>
@@ -341,18 +335,6 @@ namespace DL
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Requests_Customers");
-            });
-
-            modelBuilder.Entity<Status>(entity =>
-            {
-                entity.ToTable("Status");
-
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("DESCRIPTION");
             });
 
             OnModelCreatingPartial(modelBuilder);
