@@ -19,5 +19,6 @@ namespace BL
         public Task deleteOrder(int id);
         public Task updateOrder(Order orderToUpdate, int id);
         public Task<List<Order>> getOrsersToCheck(DateTime today);
+        Task<List<Order>> getOrdersByQeryParams(string hotelName, string customerName, string startDate=null, string endDate=null);
     }
 }

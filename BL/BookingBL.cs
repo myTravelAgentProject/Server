@@ -10,6 +10,8 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System.IO;
 using System.Reflection;
+using System.Threading;
+using System.Globalization;
 
 namespace BL
 {
@@ -53,8 +55,8 @@ namespace BL
                 //Google named their search box q. probably short for query.
                 //We are waiting until that appears but will wait no longer than 1 minute as defined above.
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Name("AccountName")));
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Name("Username")));
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Name("Password")));
+                //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Name("Username")));
+                //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Name("Password")));
                 //Find the Google Search Box now that it is visible and
                 //assign to the variable "googleSearchBox"
                 var AccountNameBox = chromeDriver.FindElement(By.Name("AccountName"));
@@ -71,11 +73,12 @@ namespace BL
                 UserNameBox.SendKeys("menucha");
                 PasswordBox.SendKeys("travel");
 
+                Thread.Sleep(3000);
+                //chromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
                 ////Wait until Google Search button is visible but don't wait more than 1 minute.
                 //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("disable-margin-bottom")));
                 ////Find "Google Search" button and assign to variable name "searchButton"
                 var submitButton = chromeDriver.FindElement(By.XPath("//button[contains(text(), 'Submit')]"));
-
                 //Click search button
                 submitButton.Click();
 
@@ -86,6 +89,25 @@ namespace BL
                 var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));
                 HotelsButton.Click();
 
+                List<Order> comparePriceOrders=await this.orderBL.getOrsersToCheck(DateTime.Now);
+                comparePriceOrders.ForEach(order =>
+                {
+                    string hotelName = order.Hotel.Name;
+                    string checkInDate = order.CheckInDate.ToString("MMMM dd,yyyy", CultureInfo.CreateSpecificCulture("en-US"));
+                    string checkOutDate = order.CheckOutDate.ToString("MMMM dd,yyyy", CultureInfo.CreateSpecificCulture("en-US"));
+
+                    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("input-group-field")));
+                    var HotelInputBox = chromeDriver.FindElement(By.ClassName("input-group-field"));
+                    //var checkIn = chromeDriver.FindElement(By.Name("startDate"));
+                    //var CheckInBox = chromeDriver.FindElement(By.ClassName("cell small-5 vertical-center-parent picker-txt"));
+                    HotelInputBox.Clear();
+                    //CheckInBox.Clear();
+                    //checkIn.Clear();
+                    HotelInputBox.SendKeys(hotelName+",Israel");
+                    //checkIn.SendKeys(checkInDate);
+
+
+                });
                 ////Confirm the stats contain the words About, results and seconds.
                 ////Example Result stats: "About 1,090,000 results (0.49 seconds)"
                 //Assert.IsTrue(resultStats.Text.Contains("About"));
