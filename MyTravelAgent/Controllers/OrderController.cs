@@ -55,6 +55,14 @@ namespace MyTravelAgent.Controllers
             return ordersDTO;
         }
 
+        [HttpGet]
+        public async Task<List<OrderDTO>> getOrdersByQeryParams(string customerName="",string hotelName = "", string startDate=null,string endDate=null)
+        {
+            List<Order> orders = await orderBL.getOrdersByQeryParams(customerName, hotelName,startDate,endDate);
+            List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
+            return ordersDTO;
+        }
+
         //get orders between two dates
         //[HttpGet("betweenDates/{start}/{end}")]
         //public async Task<List<OrderDTO>> Get(DateTime start, DateTime end)

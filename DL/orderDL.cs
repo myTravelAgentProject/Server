@@ -108,6 +108,24 @@ namespace DL
             await myTravelAgentContext.SaveChangesAsync();
         }
 
+        public async Task<List<Order>> getOrdersByQeryParams(string hotelName, string customerName)
+        {
+            return await myTravelAgentContext.Orders
+               .Include(c => c.Customer)
+               .Include(h => h.Hotel)
+               .Where(o=>o.Hotel.Name.Contains(hotelName) && (o.Customer.FirstName+" "+o.Customer.LastName).Contains(customerName))
+               .OrderByDescending(o => o.CheckOutDate).ToListAsync();
+        }
 
+        public async Task<List<Order>> getOrdersBetweenDates(string hotelName, string customerName, DateTime start, DateTime end)
+        {
+            return await myTravelAgentContext.Orders
+               .Include(c => c.Customer)
+               .Include(h => h.Hotel)
+               .Where(o => o.Hotel.Name.Contains(hotelName) 
+               && (o.Customer.FirstName + " " + o.Customer.LastName).Contains(customerName)
+               &&((o.CheckInDate >= start && o.CheckInDate <= end)||(o.CheckOutDate >= start && o.CheckOutDate<=end)))
+               .OrderByDescending(o => o.CheckOutDate).ToListAsync();
+        }
     }
 }

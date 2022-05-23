@@ -40,7 +40,6 @@ namespace MyTravelAgent.Controllers
              
         }
 
-
         //insert a new admin (can be called only after sign in to the site)
         [HttpPost]
         public async Task<int> Post([FromBody] Admin adminToAdd)
