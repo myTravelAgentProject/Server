@@ -51,7 +51,7 @@ namespace DL
 
         public async Task<List<Order>> getTheLastOrders()
         {
-            return await myTravelAgentContext.Orders.OrderByDescending(o => o.BookingDate).Take(15)
+            return await myTravelAgentContext.Orders.OrderByDescending(o => o.BookingDate).Take(20)
                 .Include(c => c.Customer)
                 .Include(h => h.Hotel).ToListAsync();
         }
