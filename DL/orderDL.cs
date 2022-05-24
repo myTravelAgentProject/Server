@@ -44,7 +44,7 @@ namespace DL
 
         public async Task<List<Order>> getOrsersToCheck(DateTime today)
         {
-            return await myTravelAgentContext.Orders.Where(o => o.IsImportant == true || (o.CheckInDate >= today && o.CheckInDate <= (today.AddMonths(2))))
+            return await myTravelAgentContext.Orders.Where(o => o.IsImportant == true || (o.CheckInDate > today && o.CheckInDate < (today.AddMonths(2))))
                 .Include(c => c.Customer)
                 .Include(h => h.Hotel).ToListAsync();
         }
