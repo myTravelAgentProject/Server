@@ -39,12 +39,22 @@ namespace BL
         //(post)
         public async Task<int> addNewCustomer(Customer customerToAdd)
         {
+            customerToAdd.FirstName = customerToAdd.FirstName.Trim();
+            customerToAdd.LastName = customerToAdd.LastName.Trim();
+            customerToAdd.EmailAddress = customerToAdd.EmailAddress.Trim();
+            customerToAdd.Address = customerToAdd.Address.Trim();
+            customerToAdd.Comments = customerToAdd.Comments.Trim();
             return await customerDL.addNewCustomer(customerToAdd);
         }
 
         //(put)
         public async Task updateCustomer(Customer customerToUpdate, int id)
         {
+            customerToUpdate.FirstName = customerToUpdate.FirstName.Trim();
+            customerToUpdate.LastName = customerToUpdate.LastName.Trim();
+            customerToUpdate.EmailAddress = customerToUpdate.EmailAddress.Trim();
+            customerToUpdate.Address = customerToUpdate.Address.Trim();
+            customerToUpdate.Comments = customerToUpdate.Comments.Trim();
             await customerDL.updateCustomer(customerToUpdate, id);
         }
 

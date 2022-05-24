@@ -18,6 +18,7 @@ namespace BL
 
         public async Task<int> addNewOrder(Order newOrder)
         {
+            newOrder.Comments = newOrder.Comments.Trim();
             return await orderDL.addNewOrder(newOrder);
         }
 
@@ -58,6 +59,7 @@ namespace BL
 
         public async Task updateOrder(Order orderToUpdate, int id)
         {
+            orderToUpdate.Comments = orderToUpdate.Comments.Trim();
             await orderDL.updateOrder(orderToUpdate,id);
         }
 
@@ -67,7 +69,7 @@ namespace BL
                 customerName = "";
             if (hotelName == null)
                 hotelName = "";
-            if (startDate!=null)
+            if (startDate!="null")
             {
                 DateTime start = DateTime.Parse(startDate);
                 DateTime end = DateTime.Parse(startDate);
