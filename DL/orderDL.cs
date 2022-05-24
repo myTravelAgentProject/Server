@@ -124,7 +124,7 @@ namespace DL
                .Include(h => h.Hotel)
                .Where(o => o.Hotel.Name.Contains(hotelName) 
                && (o.Customer.FirstName + " " + o.Customer.LastName).Contains(customerName)
-               &&((o.CheckInDate >= start && o.CheckInDate <= end)||(o.CheckOutDate >= start && o.CheckOutDate<=end)))
+               &&((o.CheckInDate <=end && o.CheckOutDate >= start)))
                .OrderByDescending(o => o.CheckOutDate).ToListAsync();
         }
     }
