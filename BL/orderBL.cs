@@ -17,6 +17,7 @@ namespace BL
 
         public async Task<int> addNewOrder(Order newOrder)
         {
+            newOrder.Comments = newOrder.Comments.Trim();
             return await orderDL.addNewOrder(newOrder);
         }
 
@@ -57,10 +58,24 @@ namespace BL
 
         public async Task updateOrder(Order orderToUpdate, int id)
         {
+            orderToUpdate.Comments = orderToUpdate.Comments.Trim();
             await orderDL.updateOrder(orderToUpdate,id);
         }
 
-       
+        public Task<List<Order>> getOrdersByQeryParams(string customerName,string hotelName, string startDate, string endDate)
+        {
+            if (customerName == null)
+                customerName = "";
+            if (hotelName == null)
+                hotelName = "";
+            if (startDate!="null")
+            {
+                DateTime start = DateTime.Parse(startDate);
+                DateTime end = DateTime.Parse(endDate);
+                return this.orderDL.getOrdersBetweenDates(hotelName, customerName, start, end);
+            }
+            return this.orderDL.getOrdersByQeryParams(hotelName, customerName);
+        }
     }
 
 }
