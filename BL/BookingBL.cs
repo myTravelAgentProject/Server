@@ -96,16 +96,25 @@ namespace BL
                     string checkInDate = order.CheckInDate.ToString("MMMM dd,yyyy", CultureInfo.CreateSpecificCulture("en-US"));
                     string checkOutDate = order.CheckOutDate.ToString("MMMM dd,yyyy", CultureInfo.CreateSpecificCulture("en-US"));
 
-                    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("input-group-field")));
+                    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//button[contains(text(), 'Submit')]")));
                     var HotelInputBox = chromeDriver.FindElement(By.ClassName("input-group-field"));
                     //var checkIn = chromeDriver.FindElement(By.Name("startDate"));
                     //var CheckInBox = chromeDriver.FindElement(By.ClassName("cell small-5 vertical-center-parent picker-txt"));
+                    var submitButton = chromeDriver.FindElement(By.XPath("//button[contains(text(), 'Submit')]"));
+
                     HotelInputBox.Clear();
                     //CheckInBox.Clear();
                     //checkIn.Clear();
                     HotelInputBox.SendKeys(hotelName+",Israel");
-                    //checkIn.SendKeys(checkInDate);
-
+                    //checkIn.SendKeys(checkInDate); callout small disable-margin-bottom
+                    //var selectDate = chromeDriver.FindElement(By.XPath("//span[@aria-controls='datetimepicker_dateview']"));
+                    var selectDate = chromeDriver.FindElement(By.ClassName("picker-grid"));
+                    selectDate.Click();
+                    var prevLink = chromeDriver.FindElement(By.ClassName("datepicker__month-button--prev"));
+                   // nextLink.Click();
+                    var nextLink = chromeDriver.FindElement(By.ClassName("datepicker__month-button--next"));
+                    nextLink.Click();
+                    //  var  = chromeDriver.FindElement(By.XPath("//div[@id='datetimepicker_dateview']//div[@class='k-header']//a[contains(@class,'k-nav-next')]"));
 
                 });
                 ////Confirm the stats contain the words About, results and seconds.
