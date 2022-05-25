@@ -36,6 +36,13 @@ namespace MyTravelAgent.Controllers
             return ordersDTO;
         }
 
+        [HttpGet("ordersToCheck")]
+        public async Task<List<OrderDTO>> GetOredersToCheck()
+        {
+            List<Order> orders=await orderBL.getOrsersToCheck(DateTime.Now);
+            List<OrderDTO> ordersDTO= mapper.Map<List<Order>, List<OrderDTO>>(orders);
+            return ordersDTO;
+        }
         // return a order according to its id
         [HttpGet("{id}")]
         public async Task<OrderDTO> getOrderById(int id)

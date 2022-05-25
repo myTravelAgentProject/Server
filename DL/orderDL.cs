@@ -51,7 +51,7 @@ namespace DL
 
         public async Task<List<Order>> getTheLastOrders()
         {
-            return await myTravelAgentContext.Orders.OrderByDescending(o => o.BookingDate).Take(15)
+            return await myTravelAgentContext.Orders.OrderByDescending(o => o.BookingDate).Take(20)
                 .Include(c => c.Customer)
                 .Include(h => h.Hotel).ToListAsync();
         }
@@ -124,7 +124,7 @@ namespace DL
                .Include(h => h.Hotel)
                .Where(o => o.Hotel.Name.Contains(hotelName) 
                && (o.Customer.FirstName + " " + o.Customer.LastName).Contains(customerName)
-               &&((o.CheckInDate >= start && o.CheckInDate <= end)||(o.CheckOutDate >= start && o.CheckOutDate<=end)))
+               &&((o.CheckInDate <=end && o.CheckOutDate >= start)))
                .OrderByDescending(o => o.CheckOutDate).ToListAsync();
         }
     }

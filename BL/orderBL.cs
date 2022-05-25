@@ -4,6 +4,7 @@ using Entity;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using DTO;
+using System.Globalization;
 
 namespace BL
 {
@@ -68,10 +69,12 @@ namespace BL
                 customerName = "";
             if (hotelName == null)
                 hotelName = "";
-            if (startDate!="null")
+            if (startDate!=null)
             {
                 DateTime start = DateTime.Parse(startDate);
                 DateTime end = DateTime.Parse(endDate);
+                //DateTime start = DateTime.ParseExact(startDate, "dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
+                //DateTime end = DateTime.ParseExact(endDate,"dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
                 return this.orderDL.getOrdersBetweenDates(hotelName, customerName, start, end);
             }
             return this.orderDL.getOrdersByQeryParams(hotelName, customerName);
