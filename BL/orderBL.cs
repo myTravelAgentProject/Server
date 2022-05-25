@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using DTO;
 using System.Globalization;
+using PagedList;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BL
 {
@@ -37,9 +39,9 @@ namespace BL
             return await orderDL.getOrsersToCheck(today);
         }
 
-        public async Task<List<Order>> getTheLastOrders()
+        public async Task<List<Order>> getTheLastOrders(int page)
         {
-            return await orderDL.getTheLastOrders();
+            return await orderDL.getTheLastOrders(page);
         }
 
         public async Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate)
@@ -63,7 +65,7 @@ namespace BL
             await orderDL.updateOrder(orderToUpdate,id);
         }
 
-        public Task<List<Order>> getOrdersByQeryParams(string customerName,string hotelName, string startDate, string endDate)
+        public Task<List<Order>> getOrdersByQeryParams(string customerName,string hotelName, string startDate, string endDate, int page)
         {
             if (customerName == null)
                 customerName = "";
@@ -75,10 +77,12 @@ namespace BL
                 DateTime end = DateTime.Parse(endDate);
                 //DateTime start = DateTime.ParseExact(startDate, "dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
                 //DateTime end = DateTime.ParseExact(endDate,"dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
-                return this.orderDL.getOrdersBetweenDates(hotelName, customerName, start, end);
+                return this.orderDL.getOrdersBetweenDates(hotelName, customerName, start, end,page);
             }
-            return this.orderDL.getOrdersByQeryParams(hotelName, customerName);
+            return this.orderDL.getOrdersByQeryParams(hotelName, customerName,page);
         }
     }
+
+ 
 
 }

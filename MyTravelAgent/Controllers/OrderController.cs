@@ -55,17 +55,17 @@ namespace MyTravelAgent.Controllers
 
         /*return a list of 15 last taching orders*/
         [HttpGet ("lastOrders")]
-        public async Task<List<OrderDTO>> getTheLastOrders()
+        public async Task<List<OrderDTO>> getTheLastOrders(int page=0)
          {
-            List<Order> orders = await orderBL.getTheLastOrders();
+            List<Order> orders = await orderBL.getTheLastOrders(page);
             List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
             return ordersDTO;
         }
 
         [HttpGet]
-        public async Task<List<OrderDTO>> getOrdersByQeryParams(string customerName="",string hotelName = "", string startDate=null,string endDate=null)
+        public async Task<List<OrderDTO>> getOrdersByQeryParams(string customerName="",string hotelName = "", string startDate=null,string endDate=null, int page = 0)
         {
-            List<Order> orders = await orderBL.getOrdersByQeryParams(customerName, hotelName,startDate,endDate);
+            List<Order> orders = await orderBL.getOrdersByQeryParams(customerName, hotelName,startDate,endDate,page);
             List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
             return ordersDTO;
         }
@@ -104,3 +104,4 @@ namespace MyTravelAgent.Controllers
         }
     }
 }
+

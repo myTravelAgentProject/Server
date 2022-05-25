@@ -14,6 +14,7 @@ namespace DL
     {
         MyTravelAgent2Context myTravelAgentContext;
         IMapper mapper;
+        int pageSize = 5;
         public orderDL(MyTravelAgent2Context myTravelAgentContext, IMapper mapper)
         {
             this.myTravelAgentContext = myTravelAgentContext;
@@ -49,9 +50,9 @@ namespace DL
                 .Include(h => h.Hotel).ToListAsync();
         }
 
-        public async Task<List<Order>> getTheLastOrders()
+        public async Task<List<Order>> getTheLastOrders(int page)
         {
-            return await myTravelAgentContext.Orders.OrderByDescending(o => o.BookingDate).Take(20)
+            return await myTravelAgentContext.Orders.OrderByDescending(o => o.BookingDate).Skip(pageSize*page).Take(pageSize)
                 .Include(c => c.Customer)
                 .Include(h => h.Hotel).ToListAsync();
         }
@@ -108,24 +109,25 @@ namespace DL
             await myTravelAgentContext.SaveChangesAsync();
         }
 
-        public async Task<List<Order>> getOrdersByQeryParams(string hotelName, string customerName)
+        public async Task<List<Order>> getOrdersByQeryParams(string hotelName, string customerName, int page)
         {
             return await myTravelAgentContext.Orders
-               .Include(c => c.Customer)
-               .Include(h => h.Hotel)
                .Where(o=>o.Hotel.Name.Contains(hotelName) && (o.Customer.FirstName+" "+o.Customer.LastName).Contains(customerName))
-               .OrderByDescending(o => o.CheckOutDate).ToListAsync();
+               .OrderByDescending(o => o.CheckOutDate).Skip(pageSize * page).Take(pageSize)
+               .Include(c => c.Customer)
+               .Include(h => h.Hotel).ToListAsync();
         }
 
-        public async Task<List<Order>> getOrdersBetweenDates(string hotelName, string customerName, DateTime start, DateTime end)
+        public async Task<List<Order>> getOrdersBetweenDates(string hotelName, string customerName, DateTime start, DateTime end, int page)
         {
             return await myTravelAgentContext.Orders
+                .Where(o => o.Hotel.Name.Contains(hotelName)
+               && (o.Customer.FirstName + " " + o.Customer.LastName).Contains(customerName)
+               && ((o.CheckInDate <= end && o.CheckOutDate >= start)))
+               .OrderByDescending(o => o.CheckOutDate).Skip(pageSize * page).Take(pageSize)
                .Include(c => c.Customer)
                .Include(h => h.Hotel)
-               .Where(o => o.Hotel.Name.Contains(hotelName) 
-               && (o.Customer.FirstName + " " + o.Customer.LastName).Contains(customerName)
-               &&((o.CheckInDate <=end && o.CheckOutDate >= start)))
-               .OrderByDescending(o => o.CheckOutDate).ToListAsync();
+               .ToListAsync();
         }
     }
 }
