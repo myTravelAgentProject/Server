@@ -14,7 +14,7 @@ namespace DL
     {
         MyTravelAgent2Context myTravelAgentContext;
         IMapper mapper;
-        int pageSize = 5;
+        int pageSize =20;
         public orderDL(MyTravelAgent2Context myTravelAgentContext, IMapper mapper)
         {
             this.myTravelAgentContext = myTravelAgentContext;
@@ -50,11 +50,12 @@ namespace DL
                 .Include(h => h.Hotel).ToListAsync();
         }
 
-        public async Task<List<Order>> getTheLastOrders(int page)
+        public async Task<List<Order>> getTheLastOrders()
         {
-            return await myTravelAgentContext.Orders.OrderByDescending(o => o.BookingDate).Skip(pageSize*page).Take(pageSize)
-                .Include(c => c.Customer)
-                .Include(h => h.Hotel).ToListAsync();
+            return await myTravelAgentContext.Orders
+                        .OrderByDescending(o => o.BookingDate)
+                        .Include(c => c.Customer)
+                        .Include(h => h.Hotel).ToListAsync();
         }
 
         public async Task<List<Order>> getByCustomerId(int id)

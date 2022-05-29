@@ -73,14 +73,14 @@ namespace BL
                 UserNameBox.SendKeys("menucha");
                 PasswordBox.SendKeys("travel");
 
-                Thread.Sleep(3000);
+                Thread.Sleep(5000);
                 //chromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
                 ////Wait until Google Search button is visible but don't wait more than 1 minute.
                 //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("disable-margin-bottom")));
                 ////Find "Google Search" button and assign to variable name "searchButton"
-                var submitButton = chromeDriver.FindElement(By.XPath("//button[contains(text(), 'Submit')]"));
+                var submitButton1 = chromeDriver.FindElement(By.XPath("//button[contains(text(), 'Submit')]"));
                 //Click search button
-                submitButton.Click();
+                submitButton1.Click();
 
                 //wait until search results stats appear which confirms that the search finished
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("info-box-child")));
@@ -90,8 +90,9 @@ namespace BL
                 HotelsButton.Click();
 
                 List<Order> comparePriceOrders=await this.orderBL.getOrsersToCheck(DateTime.Now);
-                comparePriceOrders.ForEach(order =>
-                {
+                //comparePriceOrders.ForEach(order =>
+                //{
+                var order = comparePriceOrders[0];
                     string hotelName = order.Hotel.Name;
                     string checkInDate = order.CheckInDate.ToString("MMMM dd,yyyy", CultureInfo.CreateSpecificCulture("en-US"));
                     string checkOutDate = order.CheckOutDate.ToString("MMMM dd,yyyy", CultureInfo.CreateSpecificCulture("en-US"));
@@ -112,11 +113,18 @@ namespace BL
                     selectDate.Click();
                     var prevLink = chromeDriver.FindElement(By.ClassName("datepicker__month-button--prev"));
                    // nextLink.Click();
-                    var nextLink = chromeDriver.FindElement(By.ClassName("datepicker__month-button--next"));
-                    nextLink.Click();
-                    //  var  = chromeDriver.FindElement(By.XPath("//div[@id='datetimepicker_dateview']//div[@class='k-header']//a[contains(@class,'k-nav-next')]"));
+                    var nextLinks = chromeDriver.FindElements(By.ClassName("datepicker__month-button--next"));
+                    var nextLinkdispaly = nextLinks.FirstOrDefault(n => n.Displayed && n.Enabled);
+                    if (nextLinkdispaly != null)
+                    {
+                        nextLinkdispaly.Click();
+                    }
+                var a = chromeDriver.FindElement(By.XPath("//option[@value='7']"));//.Click();
+                                                                                   //  var  = chromeDriver.FindElement(By.XPath("//div[@id='datetimepicker_dateview']//div[@class='k-header']//a[contains(@class,'k-nav-next')]"));
+                var b = chromeDriver.FindElement(By.XPath("//option[@value='7']"));//.Click();
 
-                });
+                //}
+                //);
                 ////Confirm the stats contain the words About, results and seconds.
                 ////Example Result stats: "About 1,090,000 results (0.49 seconds)"
                 //Assert.IsTrue(resultStats.Text.Contains("About"));
@@ -173,3 +181,8 @@ namespace BL
         }
     }
 }
+
+//public bool IsElementVisible(IWebElement element)
+//{
+//    return element.Displayed && element.Enabled;
+//}
