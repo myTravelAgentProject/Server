@@ -47,9 +47,9 @@ namespace BL
         {
             OrderDataList orderData = new OrderDataList();
             List<Order> data = await orderDL.getTheLastOrders();
-          //  orderData.TotslRows = data.Count;
+            orderData.TotalRows = data.Count;
             List<Order> dataFiltered = data.Skip(pageSize * page).Take(pageSize).ToList<Order>();
-            orderData.Orderes = mapper.Map<List<Order>, List<OrderDTO>>(dataFiltered);
+            orderData.Orders = mapper.Map<List<Order>, List<OrderDTO>>(dataFiltered);
             return orderData;
         }
 
@@ -74,21 +74,34 @@ namespace BL
             await orderDL.updateOrder(orderToUpdate,id);
         }
 
-        public Task<List<Order>> getOrdersByQeryParams(string customerName,string hotelName, string startDate, string endDate, int page)
+        public async Task<OrderDataList> getOrdersByQeryParams(string customerName, string hotelName, string startDate, string endDate, int page, int pageSize)
         {
+            OrderDataList orderData = new OrderDataList();
             if (customerName == null)
                 customerName = "";
             if (hotelName == null)
                 hotelName = "";
-            if (startDate!=null)
+            if (startDate != null)
             {
                 DateTime start = DateTime.Parse(startDate);
                 DateTime end = DateTime.Parse(endDate);
                 //DateTime start = DateTime.ParseExact(startDate, "dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
                 //DateTime end = DateTime.ParseExact(endDate,"dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
-                return this.orderDL.getOrdersBetweenDates(hotelName, customerName, start, end,page);
+
+                List<Order> data = await orderDL.getOrdersBetweenDates(hotelName, customerName, start, end); ;
+                orderData.TotalRows = data.Count;
+                List<Order> dataFiltered = data.Skip(pageSize * page).Take(pageSize).ToList<Order>();
+                orderData.Orders = mapper.Map<List<Order>, List<OrderDTO>>(dataFiltered);
+
             }
-            return this.orderDL.getOrdersByQeryParams(hotelName, customerName,page);
+            else
+            {
+                List<Order> data = await orderDL.getOrdersByQeryParams(hotelName, customerName);
+                orderData.TotalRows = data.Count;
+                List<Order> dataFiltered = data.Skip(pageSize * page).Take(pageSize).ToList<Order>();
+                orderData.Orders = mapper.Map<List<Order>, List<OrderDTO>>(dataFiltered);
+            }
+            return orderData;
         }
     }
 

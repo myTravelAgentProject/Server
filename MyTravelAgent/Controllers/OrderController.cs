@@ -70,11 +70,10 @@ namespace MyTravelAgent.Controllers
         //}
 
         [HttpGet]
-        public async Task<List<OrderDTO>> getOrdersByQeryParams([FromQuery] string customerName="",string hotelName = "", string startDate=null,string endDate=null, int page = 0)
-        {
-            List<Order> orders = await orderBL.getOrdersByQeryParams(customerName, hotelName,startDate,endDate,page);
-            List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
-            return ordersDTO;
+        public async Task<OrderDataList> getOrdersByQeryParams([FromQuery] string customerName="",string hotelName = "", string startDate=null,string endDate=null, int page = 0,int pageSize=10)
+            {
+           return await orderBL.getOrdersByQeryParams(customerName, hotelName,startDate,endDate,page,pageSize);
+            
         }
 
         //get orders between two dates

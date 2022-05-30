@@ -8,7 +8,7 @@ namespace DTO
 {
     public class OrderDataList
     {
-        public List<OrderDTO> Orderes = new List<OrderDTO>();
-       // public int TotslRows { get; set; }
+        public List<OrderDTO> Orders { get; set; }
+        public int TotalRows { get; set; }
     }
 }
