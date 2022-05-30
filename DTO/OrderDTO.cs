@@ -36,4 +36,6 @@ namespace DTO
         public bool? Porch { get; set; }
 
     }
+
+
 }

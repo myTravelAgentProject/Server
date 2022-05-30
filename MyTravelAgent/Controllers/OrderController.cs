@@ -54,16 +54,23 @@ namespace MyTravelAgent.Controllers
 
 
         /*return a list of 15 last taching orders*/
-        [HttpGet ("lastOrders")]
-        public async Task<List<OrderDTO>> getTheLastOrders(int page=0)
-         {
-            List<Order> orders = await orderBL.getTheLastOrders(page);
-            List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
-            return ordersDTO;
+        [HttpGet("lastOrders")]
+        public async Task<OrderDataList> getTheLastOrders([FromQuery] int page = 0,int pageSize=5)
+        {
+            OrderDataList orders = await orderBL.getTheLastOrders(page,pageSize);
+           // List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);
+            return orders;
         }
 
+        //[HttpGet("lastOrders")]
+        //public async OrderDataList getTheLastOrders([FromQuery] int page = 0, int pageSize = 20)
+        //{
+        //    var a = await orderBL.getTheLastOrders(page, pageSize);
+        //    return a;
+        //}
+
         [HttpGet]
-        public async Task<List<OrderDTO>> getOrdersByQeryParams(string customerName="",string hotelName = "", string startDate=null,string endDate=null, int page = 0)
+        public async Task<List<OrderDTO>> getOrdersByQeryParams([FromQuery] string customerName="",string hotelName = "", string startDate=null,string endDate=null, int page = 0)
         {
             List<Order> orders = await orderBL.getOrdersByQeryParams(customerName, hotelName,startDate,endDate,page);
             List<OrderDTO> ordersDTO = mapper.Map<List<Order>, List<OrderDTO>>(orders);

@@ -7,15 +7,19 @@ using DTO;
 using System.Globalization;
 using PagedList;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using System.Linq;
 
 namespace BL
 {
     public class orderBL : IOrderBL
     {
         IOrderDL orderDL;
-        public orderBL(IOrderDL orderDL)
+        IMapper mapper;
+        public orderBL(IOrderDL orderDL, IMapper imapper)
         {
             this.orderDL = orderDL;
+            mapper = imapper;
         }
 
         public async Task<int> addNewOrder(Order newOrder)
@@ -39,9 +43,14 @@ namespace BL
             return await orderDL.getOrsersToCheck(today);
         }
 
-        public async Task<List<Order>> getTheLastOrders(int page)
+        public async Task<OrderDataList> getTheLastOrders(int page, int pageSize)
         {
-            return await orderDL.getTheLastOrders(page);
+            OrderDataList orderData = new OrderDataList();
+            List<Order> data = await orderDL.getTheLastOrders();
+          //  orderData.TotslRows = data.Count;
+            List<Order> dataFiltered = data.Skip(pageSize * page).Take(pageSize).ToList<Order>();
+            orderData.Orderes = mapper.Map<List<Order>, List<OrderDTO>>(dataFiltered);
+            return orderData;
         }
 
         public async Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate)

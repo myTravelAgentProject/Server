@@ -13,7 +13,7 @@ namespace BL
         public Task<List<Order>> getEventsForCalender(DateTime startDate, DateTime endDate);
         public Task<Order> getOrderById(int id);
         public Task<int> addNewOrder(Order newOrder);
-        public Task<List<Order>> getTheLastOrders(int page);
+        public Task<OrderDataList> getTheLastOrders(int page, int pageSizeS);
          public Task<List<Order>> getAllChanges();
         //public Task<List<Order>> getOrdetsBetweenDates(DateTime start, DateTime end);
         public Task deleteOrder(int id);
