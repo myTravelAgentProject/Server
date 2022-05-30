@@ -119,9 +119,9 @@ namespace BL
                     {
                         nextLinkdispaly.Click();
                     }
-                var a = chromeDriver.FindElement(By.XPath("//option[@value='7']"));//.Click();
+                //var a = chromeDriver.FindElement(By.XPath("//option[@value='7']"));//.Click();
                                                                                    //  var  = chromeDriver.FindElement(By.XPath("//div[@id='datetimepicker_dateview']//div[@class='k-header']//a[contains(@class,'k-nav-next')]"));
-                var b = chromeDriver.FindElement(By.XPath("//option[@value='7']"));//.Click();
+                //var b = chromeDriver.FindElement(By.XPath("//option[@value='7']"));//.Click();
 
                 //}
                 //);
