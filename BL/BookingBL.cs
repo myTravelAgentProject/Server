@@ -113,7 +113,8 @@ namespace BL
                     var prevLink = chromeDriver.FindElement(By.ClassName("datepicker__month-button--prev"));
                    // nextLink.Click();
                     var nextLink = chromeDriver.FindElement(By.ClassName("datepicker__month-button--next"));
-                    nextLink.Click();
+                    //nextLink.Click();
+                    chromeDriver.FindElement(By.ClassName("datepicker__month-button--next")).Click();
                     //  var  = chromeDriver.FindElement(By.XPath("//div[@id='datetimepicker_dateview']//div[@class='k-header']//a[contains(@class,'k-nav-next')]"));
 
                 });
