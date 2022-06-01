@@ -1,17 +1,14 @@
 ﻿using Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
-using System.Globalization;
+using System.Threading.Tasks;
 
 namespace BL
 {
@@ -89,10 +86,10 @@ namespace BL
                 var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));
                 HotelsButton.Click();
 
-                List<Order> comparePriceOrders=await this.orderBL.getOrsersToCheck(DateTime.Now);
+                List<Order> comparePriceOrders = await this.orderBL.getOrsersToCheck(DateTime.Now);
                 //comparePriceOrders.ForEach(order =>
                 //{
-                var order = comparePriceOrders[5];
+                var order = comparePriceOrders[0];
                 string hotelName = order.Hotel.Name;
                 int checkInYear = order.CheckInDate.Year;
                 int checkOutYear = order.CheckOutDate.Year;
@@ -105,13 +102,13 @@ namespace BL
                 int month = currentDate.Month;
                 int day = currentDate.Day;
                 int monthToMove = 0;
-                if(year== checkInYear)
+                if (year == checkInYear)
                 {
                     monthToMove = checkInMonth - month;
                 }
                 else
                 {
-                    monthToMove = checkInMonth - month + ( 12 * ( checkInYear - year ) );
+                    monthToMove = checkInMonth - month + (12 * (checkInYear - year));
                 }
 
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//button[contains(text(), 'Submit')]")));
@@ -123,30 +120,46 @@ namespace BL
                 HotelInputBox.Clear();
                 //CheckInBox.Clear();
                 //checkIn.Clear();
-                HotelInputBox.SendKeys(hotelName+",Israel");
+                HotelInputBox.SendKeys(hotelName + ",Israel");
                 //checkIn.SendKeys(checkInDate); callout small disable-margin-bottom
                 //var selectDate = chromeDriver.FindElement(By.XPath("//span[@aria-controls='datetimepicker_dateview']"));
-                 var selectDate = chromeDriver.FindElement(By.ClassName("picker-grid"));
-                 selectDate.Click();
-               
-               // var prevLink = chromeDriver.FindElement(By.ClassName("datepicker__month-button--prev"));
-               
-               
-                // nextLink.Click();
-               for(int i=0; i < monthToMove; i++)
-                { 
-                var nextLinks = chromeDriver.FindElements(By.ClassName("datepicker__month-button--next"));
-                 
-                var nextLinkdispaly = nextLinks.FirstOrDefault(n => n.Displayed && n.Enabled);
+                var selectDate = chromeDriver.FindElement(By.ClassName("picker-grid"));
+                selectDate.Click();
 
+                // var prevLink = chromeDriver.FindElement(By.ClassName("datepicker__month-button--prev"));
+
+
+                // nextLink.Click();
+                for (int i = 0; i < monthToMove; i++)
+                {
+                    var nextLinks = chromeDriver.FindElements(By.ClassName("datepicker__month-button--next"));
+
+                    var nextLinkdispaly = nextLinks.FirstOrDefault(n => n.Displayed && n.Enabled);
+
+                    Thread.Sleep(2000);
                     if (nextLinkdispaly != null)
 
                     {
                         nextLinkdispaly.Click();
                     }
                 }
-               var dayToClick = chromeDriver.FindElement(By.TagName("td")).Click();
-                                                                                   //  var  = chromeDriver.FindElement(By.XPath("//div[@id='datetimepicker_dateview']//div[@class='k-header']//a[contains(@class,'k-nav-next')]"));
+
+
+                IList<IWebElement> listOfElements = chromeDriver.FindElements(By.TagName("td"));
+                DateTime firstDayOfTheMonth = new DateTime(checkInYear, checkInMonth, 1);
+                int dayOfTheFirstDate = (int)firstDayOfTheMonth.DayOfWeek;
+                int checkInDayToClick = dayOfTheFirstDate - 1 + checkInDay;
+                int checkOutDayToClick = dayOfTheFirstDate - 1 + checkOutDay;
+                if (checkInMonth != checkOutMonth)
+                {
+                    DateTime firstDayOfTheSecondMonth = new DateTime(checkOutYear, checkOutMonth, 1);
+                    int dayOfTheFirstDateOfTheCheckOutMonth = (int)firstDayOfTheSecondMonth.DayOfWeek;
+                    checkOutDayToClick = dayOfTheFirstDateOfTheCheckOutMonth + 34 + checkOutDay;
+                }
+                listOfElements[checkInDayToClick].Click();
+                listOfElements[checkOutDayToClick].Click();
+                //var dayToClick = chromeDriver.FindElement(By.TagName("td")).Click();
+                //  var  = chromeDriver.FindElement(By.XPath("//div[@id='datetimepicker_dateview']//div[@class='k-header']//a[contains(@class,'k-nav-next')]"));
                 //var b = chromeDriver.FindElement(By.XPath("//option[@value='7']"));//.Click();
 
                 //}
