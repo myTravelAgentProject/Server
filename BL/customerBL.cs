@@ -41,9 +41,9 @@ namespace BL
         {
             customerToAdd.FirstName = customerToAdd.FirstName.Trim();
             customerToAdd.LastName = customerToAdd.LastName.Trim();
-            customerToAdd.EmailAddress = customerToAdd.EmailAddress.Trim();
+         /*   customerToAdd.EmailAddress = customerToAdd.EmailAddress.Trim();
             customerToAdd.Address = customerToAdd.Address.Trim();
-            customerToAdd.Comments = customerToAdd.Comments.Trim();
+            customerToAdd.Comments = customerToAdd.Comments.Trim();*/
             return await customerDL.addNewCustomer(customerToAdd);
         }
 
@@ -52,9 +52,9 @@ namespace BL
         {
             customerToUpdate.FirstName = customerToUpdate.FirstName.Trim();
             customerToUpdate.LastName = customerToUpdate.LastName.Trim();
-            customerToUpdate.EmailAddress = customerToUpdate.EmailAddress.Trim();
-            customerToUpdate.Address = customerToUpdate.Address.Trim();
-            customerToUpdate.Comments = customerToUpdate.Comments.Trim();
+            //customerToUpdate.EmailAddress = customerToUpdate.EmailAddress.Trim();
+            //customerToUpdate.Address = customerToUpdate.Address.Trim();
+            //customerToUpdate.Comments = customerToUpdate.Comments.Trim();
             await customerDL.updateCustomer(customerToUpdate, id);
         }
 
