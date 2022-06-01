@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -83,14 +84,29 @@ namespace BL
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("info-box-child")));
 
                 //Find result stats and assign to variable name resultStats
-                var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));
-                HotelsButton.Click();
+                /*var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));*/
 
-                List<Order> comparePriceOrders = await this.orderBL.getOrsersToCheck(DateTime.Now);
+
+                List<Order> comparePriceOrders = await orderBL.getOrsersToCheck(DateTime.Now);
+                comparePriceOrders.ForEach(order =>
+                {
+
+
+                    var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));
+                    HotelsButton.Click();
+
+
                 //comparePriceOrders.ForEach(order =>
                 //{
-                var order = comparePriceOrders[0];
+                /*var order = comparePriceOrders[2];*/
                 string hotelName = order.Hotel.Name;
+                int hotelWordIndex = hotelName.IndexOf("Hotel");
+                if (hotelWordIndex != -1)
+                {
+                    hotelName = hotelName.Substring(0, hotelWordIndex);
+                }
+                string typeOfRoom = order.TypeOfRoom;
+                //string typeOfRoom = "Superior";
                 int checkInYear = order.CheckInDate.Year;
                 int checkOutYear = order.CheckOutDate.Year;
                 int checkInMonth = order.CheckInDate.Month;
@@ -156,65 +172,83 @@ namespace BL
                     int dayOfTheFirstDateOfTheCheckOutMonth = (int)firstDayOfTheSecondMonth.DayOfWeek;
                     checkOutDayToClick = dayOfTheFirstDateOfTheCheckOutMonth + 34 + checkOutDay;
                 }
+                Thread.Sleep(1000);
                 listOfElements[checkInDayToClick].Click();
                 listOfElements[checkOutDayToClick].Click();
-                //var dayToClick = chromeDriver.FindElement(By.TagName("td")).Click();
-                //  var  = chromeDriver.FindElement(By.XPath("//div[@id='datetimepicker_dateview']//div[@class='k-header']//a[contains(@class,'k-nav-next')]"));
-                //var b = chromeDriver.FindElement(By.XPath("//option[@value='7']"));//.Click();
+                var submitButton2 = chromeDriver.FindElement(By.XPath("//button[contains(text(), 'Submit')]"));
+                Thread.Sleep(2000);
+                submitButton2.Click();
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("search-result-item")));
+               // IWebElement divOfRoomType=
+                    chromeDriver.FindElement(By.XPath("//h5[contains(text(),'"+ typeOfRoom + "')]/following-sibling::div[1]/div")).Click();
+                //var a=divOfRoomType.FindElements(By.ClassName("grid-x"))
+                IWebElement price =chromeDriver.FindElement(By.ClassName("formatted-price"));
+                var p = price.GetAttribute("amount");
+                float np = float.Parse(p);
+                    int newPrice = (int)np;
 
-                //}
-                //);
-                ////Confirm the stats contain the words About, results and seconds.
-                ////Example Result stats: "About 1,090,000 results (0.49 seconds)"
-                //Assert.IsTrue(resultStats.Text.Contains("About"));
-                //Assert.IsTrue(resultStats.Text.Contains("results"));
-                //Assert.IsTrue(resultStats.Text.Contains("seconds"));
+                    //}
+                    //);
+                    ////Confirm the stats contain the words About, results and seconds.
+                    ////Example Result stats: "About 1,090,000 results (0.49 seconds)"
+                    //Assert.IsTrue(resultStats.Text.Contains("About"));
+                    //Assert.IsTrue(resultStats.Text.Contains("results"));
+                    //Assert.IsTrue(resultStats.Text.Contains("seconds"));
 
-                ////Find a search result in the list
-                //var results = chromeDriver.FindElement(By.ClassName("r"));
+                    ////Find a search result in the list
+                    //var results = chromeDriver.FindElement(By.ClassName("r"));
 
-                ////Confirm that the result text contains Selenium
-                //Assert.IsTrue(results.Text.Contains("Selenium"));
+                    ////Confirm that the result text contains Selenium
+                    //Assert.IsTrue(results.Text.Contains("Selenium"));
 
-                //close Chrome
-                chromeDriver.Close();
-
-
+                    //close Chrome
+                    //chromeDriver.Close();
 
 
 
 
 
-                //        ordersToCheck=await orderBL.getOrsersToCheck(DateTime.Now);
-                //        foreach(Order order in ordersToCheck)
-                //        {
-                //            //string url= "https://booking-com.p.rapidapi.com/v1/hotels/search-filters?"
-                //            //check if order had change in booking and save the new price into newPrice
-                //            //update the order:
-                //            if (order.TotalPrice > newPrice)
-                //            {
-                //                order.NewPrice = newPrice;
-                //                order.Change = true;
-                //                await orderBL.updateOrder(order, order.Id);
-                //            }
-                //        }
-                //        var client = new HttpClient();
-                //        var request = new HttpRequestMessage
-                //        {
-                //            Method = HttpMethod.Get,
-                //            RequestUri = new Uri("https://booking-com.p.rapidapi.com/v1/hotels/search?units=metric&order_by=popularity&checkout_date=2022-05-10&adults_number=2&checkin_date=2022-05-09&room_number=1&filter_by_currency=AED&dest_type=city&locale=en-gb&dest_id=-553173&include_adjacency=true&page_number=0&children_number=2&children_ages=5%2C0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1"),
-                //            Headers =
-                //{
-                //    { "x-rapidapi-host", "booking-com.p.rapidapi.com" },
-                //    { "x-rapidapi-key", "16945ab38dmsh7cf2c60b016f2fep18d5c7jsna1ddd961ba77" },
-                //},
-                //        };
-                //        using (var response = await client.SendAsync(request))
-                //        {
-                //            response.EnsureSuccessStatusCode();
-                //            var body = await response.Content.ReadAsStringAsync();
-                //            Console.WriteLine(body);
-                //        }
+
+
+                    //        ordersToCheck=await orderBL.getOrsersToCheck(DateTime.Now);
+                    //        foreach(Order order in ordersToCheck)
+                    //        {
+                    //            //string url= "https://booking-com.p.rapidapi.com/v1/hotels/search-filters?"
+                    //            //check if order had change in booking and save the new price into newPrice
+                    //            //update the order:
+                    //            if (order.TotalPrice > newPrice)
+                    //            {
+                    //                order.NewPrice = newPrice;
+                    //                order.Change = true;
+                    //                await orderBL.updateOrder(order, order.Id);
+                    //            }
+                    //        }
+                    //        var client = new HttpClient();
+                    //        var request = new HttpRequestMessage
+                    //        {
+                    //            Method = HttpMethod.Get,
+                    //            RequestUri = new Uri("https://booking-com.p.rapidapi.com/v1/hotels/search?units=metric&order_by=popularity&checkout_date=2022-05-10&adults_number=2&checkin_date=2022-05-09&room_number=1&filter_by_currency=AED&dest_type=city&locale=en-gb&dest_id=-553173&include_adjacency=true&page_number=0&children_number=2&children_ages=5%2C0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1"),
+                    //            Headers =
+                    //{
+                    //    { "x-rapidapi-host", "booking-com.p.rapidapi.com" },
+                    //    { "x-rapidapi-key", "16945ab38dmsh7cf2c60b016f2fep18d5c7jsna1ddd961ba77" },
+                    //},
+                    //        };
+                    //        using (var response = await client.SendAsync(request))
+                    //        {
+                    //            response.EnsureSuccessStatusCode();
+                    //            var body = await response.Content.ReadAsStringAsync();
+                    //            Console.WriteLine(body);
+                    //        }
+
+                    if (order.CostPrice - newPrice > order.CostPrice / 10)
+                    {
+                        order.NewPrice = newPrice;
+                        order.Change = true;
+                        orderBL.updateOrder(order, order.Id);
+                    }
+                });
+
             }
 
         }
