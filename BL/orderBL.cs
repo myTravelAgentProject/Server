@@ -48,7 +48,7 @@ namespace BL
             OrderDataList orderData = new OrderDataList();
             List<Order> data = await orderDL.getTheLastOrders();
             orderData.TotalRows = data.Count;
-            List<Order> dataFiltered = data.Skip(pageSize * page).Take(pageSize).ToList<Order>();
+            List<Order> dataFiltered = data.Skip(pageSize * page).Take(pageSize).ToList();
             orderData.Orders = mapper.Map<List<Order>, List<OrderDTO>>(dataFiltered);
             return orderData;
         }
@@ -88,9 +88,9 @@ namespace BL
                 //DateTime start = DateTime.ParseExact(startDate, "dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
                 //DateTime end = DateTime.ParseExact(endDate,"dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
 
-                List<Order> data = await orderDL.getOrdersBetweenDates(hotelName, customerName, start, end); ;
+                List<Order> data = await orderDL.getOrdersBetweenDates(hotelName, customerName, start, end); 
                 orderData.TotalRows = data.Count;
-                List<Order> dataFiltered = data.Skip(pageSize * page).Take(pageSize).ToList<Order>();
+                List<Order> dataFiltered = data.Skip(pageSize * page).Take(pageSize).ToList();
                 orderData.Orders = mapper.Map<List<Order>, List<OrderDTO>>(dataFiltered);
 
             }
@@ -98,7 +98,7 @@ namespace BL
             {
                 List<Order> data = await orderDL.getOrdersByQeryParams(hotelName, customerName);
                 orderData.TotalRows = data.Count;
-                List<Order> dataFiltered = data.Skip(pageSize * page).Take(pageSize).ToList<Order>();
+                List<Order> dataFiltered = data.Skip(pageSize * page).Take(pageSize).ToList();
                 orderData.Orders = mapper.Map<List<Order>, List<OrderDTO>>(dataFiltered);
             }
             return orderData;

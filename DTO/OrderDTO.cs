@@ -35,6 +35,8 @@ namespace DTO
         public decimal HotelPrice { get; set; }
         public bool? Porch { get; set; }
 
+        public string? TypeOfRoom { get; set; }
+
     }
 
 

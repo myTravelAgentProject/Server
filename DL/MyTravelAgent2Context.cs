@@ -262,6 +262,10 @@ namespace DL
 
                 entity.Property(e => e.Porch).HasColumnName("PORCH");
 
+                entity.Property(e => e.TypeOfRoom)
+                  .HasMaxLength(50)
+                  .HasColumnName("TYPE_OF_ROOM");
+
                 entity.Property(e => e.TotalPrice)
                     .HasColumnType("money")
                     .HasColumnName("TOTAL_PRICE");
