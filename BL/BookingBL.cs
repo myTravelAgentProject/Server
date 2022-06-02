@@ -91,6 +91,11 @@ namespace BL
                 //{
                 var order = comparePriceOrders[0];
                 string hotelName = order.Hotel.Name;
+                int hotelNameINdex = hotelName.IndexOf("Hotel");
+                if (hotelNameINdex!=-1)
+                {
+                    hotelName = hotelName.Substring(0, hotelNameINdex);
+                }
                 int checkInYear = order.CheckInDate.Year;
                 int checkOutYear = order.CheckOutDate.Year;
                 int checkInMonth = order.CheckInDate.Month;
