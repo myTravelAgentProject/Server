@@ -107,7 +107,7 @@ namespace MyTravelAgent
                 });
             });
             services.AddDbContext<MyTravelAgent2Context>(options => options.UseSqlServer(
-            Configuration.GetConnectionString("Seminary")));
+            Configuration.GetConnectionString("Home")));
             //"Server=DESKTOP-R5RADSP;Database=MyTravelAgent2;Trusted_Connection=True;"), ServiceLifetime.Scoped);
             //(LocalDB)\\MSSQLLocalDB;Database=https:\\github.com\\myTravelAgentProject\\good.git\\DL\\DB.mdf
             services.AddResponseCaching();          
@@ -139,9 +139,16 @@ namespace MyTravelAgent
                 context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
                     new string[] { "Accept-Encoding" };
 
+                context.Response.Headers.Add(
+                    "Content-Security-Policy",
+                    "script-src 'self'; " +
+                    "style-src 'self' ; " +
+                    "img-src 'self'");
+
                 await next();
             });
 
+            app.UseStaticFiles();
             app.UseCors("AllowAll");
 
             app.UseHttpsRedirection();

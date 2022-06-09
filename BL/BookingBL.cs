@@ -47,7 +47,7 @@ namespace BL
                 chromeDriver.Navigate().GoToUrl(url);
 
                 //Create new wait timer and set it to 1 minute
-                var wait = new WebDriverWait(chromeDriver, new TimeSpan(0, 0, 1, 0));
+                var wait = new WebDriverWait(chromeDriver, new TimeSpan(0, 0, 2, 0));
 
                 //Wait until an element on the page with the name q is visible.
                 //Google named their search box q. probably short for query.
@@ -85,20 +85,20 @@ namespace BL
 
                 //Find result stats and assign to variable name resultStats
                 /*var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));*/
+                var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));
+                HotelsButton.Click();
 
 
                 List<Order> comparePriceOrders = await orderBL.getOrsersToCheck(DateTime.Now);
-                comparePriceOrders.ForEach(order =>
-                {
+                /* comparePriceOrders.ForEach(order =>
+                 {*/
 
 
-                    var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));
-                    HotelsButton.Click();
 
 
                 //comparePriceOrders.ForEach(order =>
                 //{
-                /*var order = comparePriceOrders[2];*/
+                var order = comparePriceOrders[2];
                 string hotelName = order.Hotel.Name;
                 int hotelWordIndex = hotelName.IndexOf("Hotel");
                 if (hotelWordIndex != -1)
@@ -172,19 +172,7 @@ namespace BL
                     int dayOfTheFirstDateOfTheCheckOutMonth = (int)firstDayOfTheSecondMonth.DayOfWeek;
                     checkOutDayToClick = dayOfTheFirstDateOfTheCheckOutMonth + 34 + checkOutDay;
                 }
-
-
-                IList<IWebElement> listOfElements = chromeDriver.FindElements(By.TagName("td"));
-                DateTime firstDayOfTheMonth = new DateTime(checkInYear, checkInMonth, 1);
-                int dayOfTheFirstDate = (int)firstDayOfTheMonth.DayOfWeek;
-                int checkInDayToClick = dayOfTheFirstDate - 1 + checkInDay;
-                int checkOutDayToClick = dayOfTheFirstDate - 1 + checkOutDay;
-                if (checkInMonth != checkOutMonth)
-                {
-                    DateTime firstDayOfTheSecondMonth = new DateTime(checkOutYear, checkOutMonth, 1);
-                    int dayOfTheFirstDateOfTheCheckOutMonth = (int)firstDayOfTheSecondMonth.DayOfWeek;
-                    checkOutDayToClick = dayOfTheFirstDateOfTheCheckOutMonth + 34 + checkOutDay;
-                }
+              
                 Thread.Sleep(1000);
                 listOfElements[checkInDayToClick].Click();
                 listOfElements[checkOutDayToClick].Click();
@@ -260,11 +248,11 @@ namespace BL
                         order.Change = true;
                         orderBL.updateOrder(order, order.Id);
                     }
-                });
-
-            }
+           /* });*/
 
         }
+
+    }
     }
 }
 
