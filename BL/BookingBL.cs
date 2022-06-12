@@ -86,19 +86,19 @@ namespace BL
                 //Find result stats and assign to variable name resultStats
                 /*var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));*/
 
-
-                List<Order> comparePriceOrders = await orderBL.getOrsersToCheck(DateTime.Now);
-                comparePriceOrders.ForEach(order =>
-                {
-
-
                     var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));
                     HotelsButton.Click();
+
+                List<Order> comparePriceOrders = await orderBL.getOrsersToCheck(DateTime.Now);
+                /*comparePriceOrders.ForEach(order =>
+                {*/
+
+
 
 
                 //comparePriceOrders.ForEach(order =>
                 //{
-                /*var order = comparePriceOrders[2];*/
+                var order = comparePriceOrders[2];
                 string hotelName = order.Hotel.Name;
                 int hotelWordIndex = hotelName.IndexOf("Hotel");
                 if (hotelWordIndex != -1)
@@ -247,7 +247,7 @@ namespace BL
                         order.Change = true;
                         orderBL.updateOrder(order, order.Id);
                     }
-                });
+               // });
 
             }
 
