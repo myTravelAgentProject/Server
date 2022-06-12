@@ -98,7 +98,7 @@ namespace BL
 
                 //comparePriceOrders.ForEach(order =>
                 //{
-                var order = comparePriceOrders[2];
+                var order = comparePriceOrders[1];
                 string hotelName = order.Hotel.Name;
                 int hotelWordIndex = hotelName.IndexOf("Hotel");
                 if (hotelWordIndex != -1)
