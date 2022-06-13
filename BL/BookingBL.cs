@@ -47,7 +47,7 @@ namespace BL
                 chromeDriver.Navigate().GoToUrl(url);
 
                 //Create new wait timer and set it to 1 minute
-                var wait = new WebDriverWait(chromeDriver, new TimeSpan(0, 0, 1, 0));
+                var wait = new WebDriverWait(chromeDriver, new TimeSpan(0, 0, 2, 0));
 
                 //Wait until an element on the page with the name q is visible.
                 //Google named their search box q. probably short for query.
@@ -85,9 +85,11 @@ namespace BL
 
                 //Find result stats and assign to variable name resultStats
                 /*var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));*/
+                var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));
+                HotelsButton.Click();
 
-                    var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));
-                    HotelsButton.Click();
+                    var HotelsButton1 = chromeDriver.FindElement(By.LinkText("Hotels"));
+                    HotelsButton1.Click();
 
                 List<Order> comparePriceOrders = await orderBL.getOrsersToCheck(DateTime.Now);
                 /*comparePriceOrders.ForEach(order =>
@@ -172,6 +174,7 @@ namespace BL
                     int dayOfTheFirstDateOfTheCheckOutMonth = (int)firstDayOfTheSecondMonth.DayOfWeek;
                     checkOutDayToClick = dayOfTheFirstDateOfTheCheckOutMonth + 34 + checkOutDay;
                 }
+              
                 Thread.Sleep(1000);
                 listOfElements[checkInDayToClick].Click();
                 listOfElements[checkOutDayToClick].Click();
@@ -249,9 +252,9 @@ namespace BL
                     }
                // });
 
-            }
-
         }
+
+    }
     }
 }
 
