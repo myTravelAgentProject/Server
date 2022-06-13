@@ -88,9 +88,6 @@ namespace BL
                 var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));
                 HotelsButton.Click();
 
-                    var HotelsButton1 = chromeDriver.FindElement(By.LinkText("Hotels"));
-                    HotelsButton1.Click();
-
                 List<Order> comparePriceOrders = await orderBL.getOrsersToCheck(DateTime.Now);
                 /*comparePriceOrders.ForEach(order =>
                 {*/
@@ -100,7 +97,7 @@ namespace BL
 
                 //comparePriceOrders.ForEach(order =>
                 //{
-                var order = comparePriceOrders[1];
+                var order = comparePriceOrders[4];
                 string hotelName = order.Hotel.Name;
                 int hotelWordIndex = hotelName.IndexOf("Hotel");
                 if (hotelWordIndex != -1)
@@ -182,9 +179,10 @@ namespace BL
                 Thread.Sleep(2000);
                 submitButton2.Click();
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("search-result-item")));
-               // IWebElement divOfRoomType=
-                    chromeDriver.FindElement(By.XPath("//h5[contains(text(),'"+ typeOfRoom + "')]/following-sibling::div[1]/div")).Click();
+                // IWebElement divOfRoomType=
+               IList< IWebElement> typeOfRommDiv = chromeDriver.FindElements(By.XPath("//h5[contains(text(),'" + typeOfRoom + "')]/following-sibling::div[1]/div"));
                 //var a=divOfRoomType.FindElements(By.ClassName("grid-x"))
+
                 IWebElement price =chromeDriver.FindElement(By.ClassName("formatted-price"));
                 var p = price.GetAttribute("amount");
                 float np = float.Parse(p);
@@ -205,7 +203,7 @@ namespace BL
                     //Assert.IsTrue(results.Text.Contains("Selenium"));
 
                     //close Chrome
-                    //chromeDriver.Close();
+                    chromeDriver.Close();
 
 
 
@@ -213,38 +211,38 @@ namespace BL
 
 
 
-                    //        ordersToCheck=await orderBL.getOrsersToCheck(DateTime.Now);
-                    //        foreach(Order order in ordersToCheck)
-                    //        {
-                    //            //string url= "https://booking-com.p.rapidapi.com/v1/hotels/search-filters?"
-                    //            //check if order had change in booking and save the new price into newPrice
-                    //            //update the order:
-                    //            if (order.TotalPrice > newPrice)
-                    //            {
-                    //                order.NewPrice = newPrice;
-                    //                order.Change = true;
-                    //                await orderBL.updateOrder(order, order.Id);
-                    //            }
-                    //        }
-                    //        var client = new HttpClient();
-                    //        var request = new HttpRequestMessage
-                    //        {
-                    //            Method = HttpMethod.Get,
-                    //            RequestUri = new Uri("https://booking-com.p.rapidapi.com/v1/hotels/search?units=metric&order_by=popularity&checkout_date=2022-05-10&adults_number=2&checkin_date=2022-05-09&room_number=1&filter_by_currency=AED&dest_type=city&locale=en-gb&dest_id=-553173&include_adjacency=true&page_number=0&children_number=2&children_ages=5%2C0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1"),
-                    //            Headers =
-                    //{
-                    //    { "x-rapidapi-host", "booking-com.p.rapidapi.com" },
-                    //    { "x-rapidapi-key", "16945ab38dmsh7cf2c60b016f2fep18d5c7jsna1ddd961ba77" },
-                    //},
-                    //        };
-                    //        using (var response = await client.SendAsync(request))
-                    //        {
-                    //            response.EnsureSuccessStatusCode();
-                    //            var body = await response.Content.ReadAsStringAsync();
-                    //            Console.WriteLine(body);
-                    //        }
-
-                    if (order.CostPrice - newPrice > order.CostPrice / 10)
+                //        ordersToCheck=await orderBL.getOrsersToCheck(DateTime.Now);
+                //        foreach(Order order in ordersToCheck)
+                //        {
+                //            //string url= "https://booking-com.p.rapidapi.com/v1/hotels/search-filters?"
+                //            //check if order had change in booking and save the new price into newPrice
+                //            //update the order:
+                //            if (order.TotalPrice > newPrice)
+                //            {
+                //                order.NewPrice = newPrice;
+                //                order.Change = true;
+                //                await orderBL.updateOrder(order, order.Id);
+                //            }
+                //        }
+                //        var client = new HttpClient();
+                //        var request = new HttpRequestMessage
+                //        {
+                //            Method = HttpMethod.Get,
+                //            RequestUri = new Uri("https://booking-com.p.rapidapi.com/v1/hotels/search?units=metric&order_by=popularity&checkout_date=2022-05-10&adults_number=2&checkin_date=2022-05-09&room_number=1&filter_by_currency=AED&dest_type=city&locale=en-gb&dest_id=-553173&include_adjacency=true&page_number=0&children_number=2&children_ages=5%2C0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1"),
+                //            Headers =
+                //{
+                //    { "x-rapidapi-host", "booking-com.p.rapidapi.com" },
+                //    { "x-rapidapi-key", "16945ab38dmsh7cf2c60b016f2fep18d5c7jsna1ddd961ba77" },
+                //},
+                //        };
+                //        using (var response = await client.SendAsync(request))
+                //        {
+                //            response.EnsureSuccessStatusCode();
+                //            var body = await response.Content.ReadAsStringAsync();
+                //            Console.WriteLine(body);
+                //        }
+             
+                    if ((order.CostPrice - newPrice) > (order.CostPrice / 10))
                     {
                         order.NewPrice = newPrice;
                         order.Change = true;
