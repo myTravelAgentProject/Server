@@ -49,7 +49,7 @@ namespace BL
                 chromeDriver.Navigate().GoToUrl(url);
 
                 //Create new wait timer and set it to 1 minute
-                var wait = new WebDriverWait(chromeDriver, new TimeSpan(0, 0, 2, 0));
+                var wait = new WebDriverWait(chromeDriver, new TimeSpan(0, 0, 1, 0));
 
                 //Wait until an element on the page with the name q is visible.
                 //Google named their search box q. probably short for query.
@@ -81,16 +81,16 @@ namespace BL
                 var submitButton1 = chromeDriver.FindElement(By.XPath("//button[contains(text(), 'Submit')]"));
                 //Click search button
                 submitButton1.Click();
-             /* var error= chromeDriver.FindElement(By.Id("IDa0830f96-c7ab-c9dd-6d57-9ad5e71b704f"));
-                if(error!=null)*/
+                /* var error= chromeDriver.FindElement(By.Id("IDa0830f96-c7ab-c9dd-6d57-9ad5e71b704f"));
+                   if(error!=null)*/
 
                 //wait until search results stats appear which confirms that the search finished
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("info-box-child")));
                 List<Order> comparePriceOrders = await orderBL.getOrsersToCheck(DateTime.Now);
 
-                for(int j=8;j< comparePriceOrders.Count();j++)
+                for (int j = 1; j < comparePriceOrders.Count(); j++)
                 {
-                    
+
                     //Find result stats and assign to variable name resultStats
                     /*var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));*/
                     var HotelsButton = chromeDriver.FindElement(By.LinkText("Hotels"));
@@ -175,109 +175,125 @@ namespace BL
                     listOfElements[checkInDayToClick].Click();
                     listOfElements[checkOutDayToClick].Click();
                     var submitButton2 = chromeDriver.FindElement(By.XPath("//button[contains(text(), 'Submit')]"));
-                    Thread.Sleep(2000);
                     submitButton2.Click();
+                    Thread.Sleep(2000);
+                    //IDd35b80cd-72f4-0c89-e088-dded9c2037a2
                     try
                     {
-                        wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("search-result-item")));
+                        //   Could not find destination
+                        //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("IDd35b80cd-72f4-0c89-e088-dded9c2037a2")));
+                        //chromeDriver.FindElement(By.Id("IDd35b80cd-72f4-0c89-e088-dded9c2037a2"));
+                        var hotelNotFoundMessage=chromeDriver.FindElement(By.XPath("//button[contains(text(), 'Close')]"));
+                        if(hotelNotFoundMessage!=null)
+                        {
+                            hotelNotFoundMessage.Click();
+                        }
+                        //continue;
                     }
                     catch
                     {
-                        continue;
-                    }
-                    //if ()
-                        //  We are sorry, but there are no results available that match your search criteria.Please try changing your filters or expand your search criteria to include more options and click the search button again. 
-                      //  wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(), 'We are sorry, but there are no results available that match your search criteria.Please try changing your filters or expand your search criteria to include more options and click the search button again.')]|| //div[@class='search-result-item]'")));
-                 //   wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("search-result-item")));
-                    // IWebElement divOfRoomType=
-                    //IList< IWebElement> typeOfRommDiv = chromeDriver.FindElements(By.XPath("//h5[contains(text(),'" + typeOfRoom + "')]/following-sibling::div[1]/div/span/[@class='formatted-price']"));
-                    //var a=divOfRoomType.FindElements(By.ClassName("grid-x"))
-                    IList<IWebElement> priceAtrribute = chromeDriver.FindElements(By.XPath("//h5[contains(text(),'" + typeOfRoom + "')]//parent::div//span[@class='formatted-price']"));
-
-                    //IWebElement price =chromeDriver.FindElement(By.ClassName("formatted-price"));
-                    //var p = price.GetAttribute("amount");
-                    var price = priceAtrribute[0].GetAttribute("amount");
-                    float np = float.Parse(price);
-                    int newPrice = (int)np;
-
-
-                    //close Chrome
-                    //chromeDriver.Close();
-
-                    if ((order.CostPrice - newPrice) > (order.CostPrice / 10))
-                    {
-                        order.NewPrice = newPrice;
-                        order.Change = true;
-                        orderBL.updateOrder(order, order.Id); //checking if the student already got a mail
-
-                        //send a mail
-                        MailMessage message = new MailMessage();
-                        message.From = new MailAddress("mytravelProject22@gmail.com");
-                        message.To.Add(new MailAddress("mytravelProject22@gmail.com"));
-                        message.Subject = "New Discount on order number";
-                        //string mailbody = ;
-                        message.Subject = "We have good News For You:)";
-                        message.Body = "We are happy to tell you about a discount on the price of the order you placed Of a customer:" + order.Customer.FirstName + "\n" + order.Customer.LastName + "\n Hotel name: \n" + order.Hotel.Name + "\n Order dates:\n " + order.CheckInDate + " - " + order.CheckOutDate + "\n The new price is: " + newPrice;
-                        message.BodyEncoding = Encoding.UTF8;
-                        message.IsBodyHtml = true;
-                        SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
-                        System.Net.NetworkCredential basicCredential1 = new
-                        System.Net.NetworkCredential("mytravelProject22@gmail.com", "kxbfxdziccmrcweo");
-                        client.EnableSsl = true;
-                        client.UseDefaultCredentials = false;
-                        client.Credentials = basicCredential1;
                         try
                         {
-                            client.Send(message);
+                            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("search-result-item")));
                         }
-
-                        catch (Exception ex)
+                        catch
                         {
-                            throw ex;
+                            continue;
                         }
-                    }
+                        //if ()
+                        //  We are sorry, but there are no results available that match your search criteria.Please try changing your filters or expand your search criteria to include more options and click the search button again. 
+                        //  wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(), 'We are sorry, but there are no results available that match your search criteria.Please try changing your filters or expand your search criteria to include more options and click the search button again.')]|| //div[@class='search-result-item]'")));
+                        //   wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("search-result-item")));
+                        // IWebElement divOfRoomType=
+                        //IList< IWebElement> typeOfRommDiv = chromeDriver.FindElements(By.XPath("//h5[contains(text(),'" + typeOfRoom + "')]/following-sibling::div[1]/div/span/[@class='formatted-price']"));
+                        //var a=divOfRoomType.FindElements(By.ClassName("grid-x"))
+                        IList<IWebElement> priceAtrribute = chromeDriver.FindElements(By.XPath("//h5[contains(text(),'" + typeOfRoom + "')]//parent::div//span[@class='formatted-price']"));
+
+                        //IWebElement price =chromeDriver.FindElement(By.ClassName("formatted-price"));
+                        //var p = price.GetAttribute("amount");
+                        var price = priceAtrribute[0].GetAttribute("amount");
+                        float np = float.Parse(price);
+                        int newPrice = (int)np;
+
+
+                        //close Chrome
+                        //chromeDriver.Close();
+
+                        if ((order.CostPrice - newPrice) > (order.CostPrice / 10))
+                        {
+                            order.NewPrice = newPrice;
+                            order.Change = true;
+                            orderBL.updateOrder(order, order.Id); //checking if the student already got a mail
+
+                            //send a mail
+                            MailMessage message = new MailMessage();
+                            message.From = new MailAddress("mytravelProject22@gmail.com");
+                            message.To.Add(new MailAddress("mytravelProject22@gmail.com"));
+                            message.Subject = "New Discount on order number";
+                            //string mailbody = ;
+                            message.Subject = "We have good News For You:)";
+                            message.Body = "We are happy to tell you about a discount on the price of the order you placed Of a customer:" + order.Customer.FirstName + "\n" + order.Customer.LastName + "\n Hotel name: \n" + order.Hotel.Name + "\n Order dates:\n " + order.CheckInDate + " - " + order.CheckOutDate + "\n The new price is: " + newPrice;
+                            message.BodyEncoding = Encoding.UTF8;
+                            message.IsBodyHtml = true;
+                            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
+                            System.Net.NetworkCredential basicCredential1 = new
+                            System.Net.NetworkCredential("mytravelProject22@gmail.com", "kxbfxdziccmrcweo");
+                            client.EnableSsl = true;
+                            client.UseDefaultCredentials = false;
+                            client.Credentials = basicCredential1;
+                            try
+                            {
+                                client.Send(message);
+                            }
+
+                            catch (Exception ex)
+                            {
+                                throw ex;
+                            }
+                        }
 
 
 
 
-                    //        ordersToCheck=await orderBL.getOrsersToCheck(DateTime.Now);
-                    //        foreach(Order order in ordersToCheck)
-                    //        {
-                    //            //string url= "https://booking-com.p.rapidapi.com/v1/hotels/search-filters?"
-                    //            //check if order had change in booking and save the new price into newPrice
-                    //            //update the order:
-                    //            if (order.TotalPrice > newPrice)
-                    //            {
-                    //                order.NewPrice = newPrice;
-                    //                order.Change = true;
-                    //                await orderBL.updateOrder(order, order.Id);
-                    //            }
-                    //        }
-                    //        var client = new HttpClient();
-                    //        var request = new HttpRequestMessage
-                    //        {
-                    //            Method = HttpMethod.Get,
-                    //            RequestUri = new Uri("https://booking-com.p.rapidapi.com/v1/hotels/search?units=metric&order_by=popularity&checkout_date=2022-05-10&adults_number=2&checkin_date=2022-05-09&room_number=1&filter_by_currency=AED&dest_type=city&locale=en-gb&dest_id=-553173&include_adjacency=true&page_number=0&children_number=2&children_ages=5%2C0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1"),
-                    //            Headers =
-                    //{
-                    //    { "x-rapidapi-host", "booking-com.p.rapidapi.com" },
-                    //    { "x-rapidapi-key", "16945ab38dmsh7cf2c60b016f2fep18d5c7jsna1ddd961ba77" },
-                    //},
-                    //        };
-                    //        using (var response = await client.SendAsync(request))
-                    //        {
-                    //            response.EnsureSuccessStatusCode();
-                    //            var body = await response.Content.ReadAsStringAsync();
-                    //            Console.WriteLine(body);
-                    //        }
+                        //        ordersToCheck=await orderBL.getOrsersToCheck(DateTime.Now);
+                        //        foreach(Order order in ordersToCheck)
+                        //        {
+                        //            //string url= "https://booking-com.p.rapidapi.com/v1/hotels/search-filters?"
+                        //            //check if order had change in booking and save the new price into newPrice
+                        //            //update the order:
+                        //            if (order.TotalPrice > newPrice)
+                        //            {
+                        //                order.NewPrice = newPrice;
+                        //                order.Change = true;
+                        //                await orderBL.updateOrder(order, order.Id);
+                        //            }
+                        //        }
+                        //        var client = new HttpClient();
+                        //        var request = new HttpRequestMessage
+                        //        {
+                        //            Method = HttpMethod.Get,
+                        //            RequestUri = new Uri("https://booking-com.p.rapidapi.com/v1/hotels/search?units=metric&order_by=popularity&checkout_date=2022-05-10&adults_number=2&checkin_date=2022-05-09&room_number=1&filter_by_currency=AED&dest_type=city&locale=en-gb&dest_id=-553173&include_adjacency=true&page_number=0&children_number=2&children_ages=5%2C0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1"),
+                        //            Headers =
+                        //{
+                        //    { "x-rapidapi-host", "booking-com.p.rapidapi.com" },
+                        //    { "x-rapidapi-key", "16945ab38dmsh7cf2c60b016f2fep18d5c7jsna1ddd961ba77" },
+                        //},
+                        //        };
+                        //        using (var response = await client.SendAsync(request))
+                        //        {
+                        //            response.EnsureSuccessStatusCode();
+                        //            var body = await response.Content.ReadAsStringAsync();
+                        //            Console.WriteLine(body);
+                        //        }
 
-                };
+                    };
+                }
                 chromeDriver.Close();
             }
-            }
-
         }
+
     }
+}
 
 
 //public bool IsElementVisible(IWebElement element)
